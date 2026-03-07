@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { useTheme } from "./useTheme";
@@ -72,9 +72,26 @@ const copy = {
       process: "Process",
       mock: "Free mock",
       quote: "Quote",
+      work: "Work",
       faq: "FAQ"
     },
-    contactLabel: "Contact"
+    contactLabel: "Contact",
+    workTitle: "Work",
+    workLead: "Sites I've designed and built.",
+    work: {
+      ciavaglia: {
+        title: "Ciavaglia Timepieces",
+        description: "Custom luxury watches, Montreal. E-commerce with an interactive configurator — design dial, case, movement, and strap with live pricing.",
+        viewSite: "View website",
+        visitLabel: "Visit website"
+      },
+      studysession: {
+        title: "StudySession.io",
+        description: "Study planning and productivity for students.",
+        viewSite: "View site",
+        visitLabel: "Visit website"
+      }
+    }
   },
   fr: {
     badge: "Qualité boutique · Prix accessibles",
@@ -142,11 +159,32 @@ const copy = {
       process: "Méthode",
       mock: "Maquette",
       quote: "Soumission",
+      work: "Travaux",
       faq: "FAQ"
     },
-    contactLabel: "Contact"
+    contactLabel: "Contact",
+    workTitle: "Travaux",
+    workLead: "Sites que j'ai conçus et réalisés.",
+    work: {
+      ciavaglia: {
+        title: "Ciavaglia Timepieces",
+        description: "Montres de luxe sur mesure, Montréal. E-commerce avec configurateur — cadran, boîtier, mouvement et bracelet, avec prix en direct.",
+        viewSite: "Voir le site",
+        visitLabel: "Visiter le site"
+      },
+      studysession: {
+        title: "StudySession.io",
+        description: "Planification et productivité pour les études.",
+        viewSite: "Voir le site",
+        visitLabel: "Visiter le site"
+      }
+    }
   }
 } satisfies Record<Lang, any>;
+
+/* Site icons (like Apple link previews) — official logo/favicon from each site */
+const PREVIEW_CIAVAGLIA = "https://www.ciavagliatimepieces.ca/images/logo.png";
+const PREVIEW_STUDYSESSION = "https://studysession.io/logo.png";
 
 const initialForm = {
   name: "",
@@ -358,6 +396,7 @@ export default function HomePage() {
             <a href="#process" onClick={() => setMenuOpen(false)}>{t.nav.process}</a>
             <a href="#mock" onClick={() => setMenuOpen(false)}>{t.nav.mock}</a>
             <a href="#quote" className="nav-cta" onClick={() => setMenuOpen(false)}>{t.nav.quote}</a>
+            <a href="#work" onClick={() => setMenuOpen(false)}>{t.nav.work}</a>
             <a href="/faq" onClick={() => setMenuOpen(false)}>{t.nav.faq}</a>
             <a href="/blog" onClick={() => setMenuOpen(false)}>Blog</a>
             <button
@@ -435,6 +474,61 @@ export default function HomePage() {
       <section id="mock">
         <h2 className="reveal">{t.mockTitle}</h2>
         <p className="lead reveal" style={{ transitionDelay: "90ms" }}>{t.mockLead}</p>
+      </section>
+
+      <section id="work">
+        <h2 className="reveal">{t.workTitle}</h2>
+        <p className="lead reveal" style={{ transitionDelay: "90ms" }}>{t.workLead}</p>
+        <div className="work-row reveal" style={{ transitionDelay: "120ms" }}>
+          <div className="work-row-item">
+            <a
+              href="https://ciavagliatimepieces.ca"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="work-preview-link"
+              aria-label={t.work.ciavaglia.viewSite}
+            >
+              <img
+                src={PREVIEW_CIAVAGLIA}
+                alt="Ciavaglia Timepieces"
+                loading="lazy"
+                className="work-preview-img work-preview-icon"
+              />
+            </a>
+            <a
+              href="https://ciavagliatimepieces.ca"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="work-visit"
+            >
+              {t.work.ciavaglia.visitLabel}
+            </a>
+          </div>
+          <div className="work-row-item">
+            <a
+              href="https://studysession.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="work-preview-link"
+              aria-label={t.work.studysession.viewSite}
+            >
+              <img
+                src={PREVIEW_STUDYSESSION}
+                alt="StudySession.io"
+                loading="lazy"
+                className="work-preview-img work-preview-icon"
+              />
+            </a>
+            <a
+              href="https://studysession.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="work-visit"
+            >
+              {t.work.studysession.visitLabel}
+            </a>
+          </div>
+        </div>
       </section>
 
       <section className="scroll-image" aria-hidden="true">

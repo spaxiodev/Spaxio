@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680">
+  <defs>
+    <linearGradient id="ciavaglia-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1612"/>
+      <stop offset="100%" style="stop-color:#2d2620"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="680" fill="url(#ciavaglia-bg)"/>
+  <!-- Browser chrome -->
+  <rect x="0" y="0" width="1200" height="44" fill="#2a2520"/>
+  <circle cx="24" cy="22" r="6" fill="#4a4540"/>
+  <circle cx="48" cy="22" r="6" fill="#4a4540"/>
+  <circle cx="72" cy="22" r="6" fill="#4a4540"/>
+  <rect x="96" y="12" width="400" height="20" rx="4" fill="#3a3530"/>
+  <text x="296" y="27" font-family="system-ui, sans-serif" font-size="12" fill="#888" text-anchor="middle">ciavagliatimepieces.ca</text>
+  <!-- Content area -->
+  <rect x="40" y="64" width="1120" height="596" rx="6" fill="#1f1c18" stroke="#3d3630" stroke-width="1"/>
+  <text x="600" y="340" font-family="Georgia, serif" font-size="28" fill="#c9a962" text-anchor="middle" font-weight="600">Ciavaglia Timepieces</text>
+  <text x="600" y="380" font-family="system-ui, sans-serif" font-size="15" fill="#6b6560" text-anchor="middle">Custom luxury watches ? Montreal</text>
+</svg>
