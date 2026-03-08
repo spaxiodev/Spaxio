@@ -248,17 +248,22 @@ export default function HomePage() {
       items.forEach((el) => {
         const rect = el.getBoundingClientRect();
         const offset = rect.top - vh * 0.5;
-        el.style.setProperty("--parallax-offset", `${offset * -0.2}px`);
+        const value = `${offset * -0.2}px`;
+        el.style.setProperty("--parallax-offset", value);
+        const img = el.querySelector<HTMLElement>("img");
+        const videos = el.querySelectorAll<HTMLElement>(".hero-video");
+        if (img) img.style.setProperty("--parallax-offset", value);
+        videos.forEach((v) => v.style.setProperty("--parallax-offset", value));
       });
     };
     onScroll();
-      window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", onScroll);
-      return () => {
-        window.removeEventListener("scroll", onScroll);
-        window.removeEventListener("resize", onScroll);
-      };
-    }, []);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const header = document.querySelector<HTMLElement>(".overlay-header");
@@ -463,6 +468,14 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="scroll-image" aria-hidden="true">
+        <img
+          src="/pexels-hitarth-jadhav-57415-220357.jpg"
+          alt="Team collaborating on a high-end digital experience"
+          loading="lazy"
+        />
+      </section>
+
       <section id="mock">
         <h2 className="reveal">{t.mockTitle}</h2>
         <p className="lead reveal" style={{ transitionDelay: "90ms" }}>{t.mockLead}</p>
@@ -522,6 +535,15 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <section className="scroll-image" aria-hidden="true">
+        <img
+          src="/pexels-pixabay-37347.jpg"
+          alt="Luxury-inspired workspace for digital product strategy"
+          loading="lazy"
+        />
+      </section>
+
       <section id="process">
         <h2 className="reveal">{t.processTitle}</h2>
         <div className="cards">
