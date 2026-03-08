@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { useTheme } from "./useTheme";
@@ -424,25 +424,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="scroll-image" aria-hidden="true">
-        <img
-          src="/pexels-hitarth-jadhav-57415-220357.jpg"
-          alt="Team collaborating on a high-end digital experience"
-          loading="lazy"
-        />
-      </section>
-
       <section id="mock">
         <h2 className="reveal">{t.mockTitle}</h2>
         <p className="lead reveal" style={{ transitionDelay: "90ms" }}>{t.mockLead}</p>
-      </section>
-
-      <section className="scroll-image" aria-hidden="true">
-        <img
-          src="/pexels-pixabay-37347.jpg"
-          alt="Luxury-inspired workspace for digital product strategy"
-          loading="lazy"
-        />
       </section>
 
       <section id="process">
@@ -549,7 +533,7 @@ export default function HomePage() {
           <span className="label">{t.contactLabel}</span>
           <a href="tel:+15145160515">+1 514-516-0515</a>
           <span className="dot">·</span>
-          <a href="mailto:info@spaxio.ca">info@spaxio.ca</a>
+          <a href="mailto:polidorispaxio@gmail.com">polidorispaxio@gmail.com</a>
         </div>
       </footer>
       <a
