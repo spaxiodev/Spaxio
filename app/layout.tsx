@@ -1,4 +1,5 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { Playfair_Display, Space_Grotesk } from "next/font/google";
 
@@ -60,7 +61,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${display.variable} ${sans.variable}`}>{children}</body>
+      <body className={`${display.variable} ${sans.variable}`}>
+        {children}
+        <Script
+          src="http://localhost:3000/widget.js"
+          data-widget-id="dc7ae936-13ff-423c-afc8-2b2cd2dfe715"
+          strategy="afterInteractive"
+        />
+      </body>
     </html>
   );
 }
