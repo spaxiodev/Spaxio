@@ -65,7 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <Script
           src="http://localhost:3000/widget.js"
-          data-widget-id="b4005988-7b71-4aac-8140-723c1a58dd74"
+          data-widget-id="2f329396-be12-42f1-968b-b8c8dd04ce68"
           strategy="afterInteractive"
         />
       </body>
