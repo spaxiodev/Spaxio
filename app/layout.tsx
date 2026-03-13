@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 import { Playfair_Display, Space_Grotesk } from "next/font/google";
 
@@ -63,11 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${display.variable} ${sans.variable}`}>
         {children}
-        <Script
-          src="<script src="https://spaxioassistant.com/widget.js" data-widget-id="2f329396-be12-42f1-968b-b8c8dd04ce68"></script>"
-          data-widget-id="2f329396-be12-42f1-968b-b8c8dd04ce68"
-          strategy="afterInteractive"
-        />
+        <script src="https://www.spaxioassistant.com/widget.js" data-widget-id="2f329396-be12-42f1-968b-b8c8dd04ce68"></script>
       </body>
     </html>
   );
