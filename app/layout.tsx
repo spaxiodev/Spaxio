@@ -64,7 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${display.variable} ${sans.variable}`}>
         {children}
         <Script
-          src="http://localhost:3000/widget.js"
+          src="https://spaxio-assistant-iftshtvxj-stefanos-projects-288c2243.vercel.app/widget.js"
           data-widget-id="2f329396-be12-42f1-968b-b8c8dd04ce68"
           strategy="afterInteractive"
         />

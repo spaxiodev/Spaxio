@@ -10,7 +10,7 @@ const copy = {
     badge: "Boutique quality · Accessible pricing",
     headline: "Tailored websites with the precision of a luxury atelier — at budget-friendly rates.",
     heroLead:
-      "I craft sites with the obsessive detail of high horology and lean, efficient workflows. Expect elegant visuals and conversion-focused UX — priced to win without cutting corners.",
+      "I craft sites with the obsessive detail of high horology and lean, efficient workflows. Expect elegant visuals, conversion-focused UX, and smart AI automation and AI integration — priced to win without cutting corners.",
     ctaQuote: "Get a quote",
     ctaMock: "Request a free mock",
     ribbon: "Free mock website within 48 hours. Only pay when you love it.",
@@ -21,7 +21,7 @@ const copy = {
       },
       {
         title: "Automation ready",
-        body: "Need forms, scheduling, CRM handoff, or simple automations? I'll wire the essentials so leads flow smoothly."
+        body: "Need AI automation, AI integration, forms, scheduling, CRM handoff, or simple workflows? I'll wire the essentials so leads flow smoothly."
       },
       {
         title: "Luxury polish",
@@ -97,7 +97,7 @@ const copy = {
     badge: "Qualité boutique · Prix accessibles",
     headline: "Sites sur mesure avec la précision d'un atelier de luxe — à des tarifs abordables.",
     heroLead:
-      "Je conçois des sites avec le souci du détail horloger et des processus efficaces. Attendez-vous à des visuels élégants et une UX orientée conversion — sans sacrifier le budget.",
+      "Je conçois des sites avec le souci du détail horloger et des processus efficaces. Attendez-vous à des visuels élégants, une UX orientée conversion, ainsi qu'à l'automatisation IA et à l'intégration IA — sans sacrifier le budget.",
     ctaQuote: "Obtenir une soumission",
     ctaMock: "Demander une maquette gratuite",
     ribbon: "Maquette gratuite en 48 heures. Vous ne payez que si vous l’adoptez.",
@@ -108,7 +108,7 @@ const copy = {
       },
       {
         title: "Prêt pour l'automatisation",
-        body: "Formulaires, prises de rendez-vous, transfert CRM ou petites automatisations : j'installe l'essentiel pour que vos leads circulent sans friction."
+        body: "Automatisation IA, intégration IA, formulaires, prises de rendez-vous, transfert CRM ou petites automatisations : j'installe l'essentiel pour que vos leads circulent sans friction."
       },
       {
         title: "Finition luxe",
