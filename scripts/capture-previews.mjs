@@ -19,8 +19,8 @@ const CAPTURES = [
     path: join(publicDir, "preview-ciavaglia.jpg"),
   },
   {
-    url: "https://studysession.io",
-    path: join(publicDir, "preview-studysession.jpg"),
+    url: "https://www.spaxioassistant.com",
+    path: join(publicDir, "preview-spaxioassistant.jpg"),
   },
 ];
 

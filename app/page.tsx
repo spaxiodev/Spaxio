@@ -85,9 +85,9 @@ const copy = {
         viewSite: "View website",
         visitLabel: "Visit website"
       },
-      studysession: {
-        title: "StudySession.io",
-        description: "Study planning and productivity for students.",
+      spaxioassistant: {
+        title: "Spaxio Assistant",
+        description: "AI assistant widget for websites — embed on any site to offer instant support and guidance.",
         viewSite: "View site",
         visitLabel: "Visit website"
       }
@@ -172,9 +172,9 @@ const copy = {
         viewSite: "Voir le site",
         visitLabel: "Visiter le site"
       },
-      studysession: {
-        title: "StudySession.io",
-        description: "Planification et productivité pour les études.",
+      spaxioassistant: {
+        title: "Spaxio Assistant",
+        description: "Widget d'assistant IA pour sites web — à intégrer sur n'importe quel site pour offrir support et conseils instantanés.",
         viewSite: "Voir le site",
         visitLabel: "Visiter le site"
       }
@@ -184,7 +184,7 @@ const copy = {
 
 /* Site icons (like Apple link previews) — official logo/favicon from each site */
 const PREVIEW_CIAVAGLIA = "https://www.ciavagliatimepieces.ca/images/logo.png";
-const PREVIEW_STUDYSESSION = "https://studysession.io/logo.png";
+const PREVIEW_SPAXIOASSISTANT = "https://www.spaxioassistant.com/logo.png";
 
 const initialForm = {
   name: "",
@@ -511,26 +511,26 @@ export default function HomePage() {
           </div>
           <div className="work-row-item">
             <a
-              href="https://studysession.io"
+              href="https://www.spaxioassistant.com"
               target="_blank"
               rel="noopener noreferrer"
               className="work-preview-link"
-              aria-label={t.work.studysession.viewSite}
+              aria-label={t.work.spaxioassistant.viewSite}
             >
               <img
-                src={PREVIEW_STUDYSESSION}
-                alt="StudySession.io"
+                src={PREVIEW_SPAXIOASSISTANT}
+                alt="Spaxio Assistant"
                 loading="lazy"
                 className="work-preview-img work-preview-icon"
               />
             </a>
             <a
-              href="https://studysession.io"
+              href="https://www.spaxioassistant.com"
               target="_blank"
               rel="noopener noreferrer"
               className="work-visit"
             >
-              {t.work.studysession.visitLabel}
+              {t.work.spaxioassistant.visitLabel}
             </a>
           </div>
         </div>
