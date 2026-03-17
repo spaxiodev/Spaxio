@@ -401,6 +401,9 @@ export default function HomePage() {
             <a href="#process" onClick={() => setMenuOpen(false)}>{t.nav.process}</a>
             <a href="#mock" onClick={() => setMenuOpen(false)}>{t.nav.mock}</a>
             <a href="#quote" className="nav-cta" onClick={() => setMenuOpen(false)}>{t.nav.quote}</a>
+            <a href="/quotes" onClick={() => setMenuOpen(false)}>
+              {lang === "fr" ? "Soumissions" : "Quotes"}
+            </a>
             <a href="#work" onClick={() => setMenuOpen(false)}>{t.nav.work}</a>
             <a href="/faq" onClick={() => setMenuOpen(false)}>{t.nav.faq}</a>
             <a href="/blog" onClick={() => setMenuOpen(false)}>Blog</a>
