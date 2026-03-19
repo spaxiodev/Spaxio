@@ -400,7 +400,7 @@ export default function HomePage() {
             <a href="#hero" onClick={() => setMenuOpen(false)}>{t.nav.hero}</a>
             <a href="#process" onClick={() => setMenuOpen(false)}>{t.nav.process}</a>
             <a href="#mock" onClick={() => setMenuOpen(false)}>{t.nav.mock}</a>
-            <a href="#quote" className="nav-cta" onClick={() => setMenuOpen(false)}>{t.nav.quote}</a>
+            <a href="/quote" className="nav-cta" onClick={() => setMenuOpen(false)}>{t.nav.quote}</a>
             <a href="#work" onClick={() => setMenuOpen(false)}>{t.nav.work}</a>
             <a href="/faq" onClick={() => setMenuOpen(false)}>{t.nav.faq}</a>
             <a href="/blog" onClick={() => setMenuOpen(false)}>Blog</a>
@@ -448,7 +448,7 @@ export default function HomePage() {
             <h1 className="tagline">{t.headline}</h1>
             <p className="lead">{t.heroLead}</p>
             <div className="cta-row">
-              <a className="button" href="#quote">{t.ctaQuote}</a>
+              <a className="button" href="/quote">{t.ctaQuote}</a>
               <a className="button secondary" href="#mock">{t.ctaMock}</a>
             </div>
             <div className="ribbon reveal" style={{ transitionDelay: "120ms" }}>{t.ribbon}</div>
@@ -653,7 +653,7 @@ export default function HomePage() {
       </footer>
       <a
         className={`button floating-quote ${headerHidden ? "hidden" : ""}`}
-        href="#quote"
+        href="/quote"
       >
         {lang === "en" ? "Get Quote" : "Obtenir une soumission"}
       </a>
