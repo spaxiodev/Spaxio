@@ -1,4 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tailwind / shadcn tokens — HSL components for hsl(var(--*)); legacy --muted/--border unchanged */
 :root {
+  --radius: 0.75rem;
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --tw-muted: 220 14% 96%;
+  --tw-muted-foreground: 215 16% 47%;
+  --tw-border: 214 32% 91%;
   --bg: #ffffff;
   --bg-soft: #ffffff;
   --card: #ffffff;
@@ -12,6 +23,11 @@
 }
 
 :root[data-theme="dark"] {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 96%;
+  --tw-muted: 215 14% 16%;
+  --tw-muted-foreground: 215 20% 65%;
+  --tw-border: 215 14% 22%;
   --bg: #000000;
   --bg-soft: #000000;
   --card: #0b0b0b;
@@ -98,7 +114,16 @@ main.page {
   left: 16px;
   transform: translate(0, 0);
   width: auto;
+  max-width: calc(100vw - 32px);
   align-items: flex-start;
+  /* Inner pages put links outside .nav; base overlay-header is pointer-events: none */
+  pointer-events: auto;
+  /* Sit above third-party embeds/iframes */
+  z-index: 100;
+}
+
+.quote-hero {
+  padding-top: clamp(72px, 12vw, 120px);
 }
 
 .overlay-header .logo-banner img {

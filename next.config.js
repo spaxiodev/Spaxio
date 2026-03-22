@@ -2,8 +2,14 @@
 const nextConfig = {
   reactStrictMode: true,
   typedRoutes: true,
-  async redirects() {
-    return [{ source: "/quote", destination: "/#quote", permanent: true }];
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**"
+      }
+    ]
   }
 };
 

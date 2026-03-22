@@ -1,14 +1,20 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import HeroNavCards from "@/components/HeroNavCards";
+import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
 import { useTheme } from "./useTheme";
+
+/** Full-bleed background for scroll hero (Next/Image remotePatterns). */
+const HERO_SCROLL_BG =
+  "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80";
 
 type Lang = "en" | "fr";
 
 const copy = {
   en: {
-    badge: "Boutique quality · Accessible pricing",
-    headline: "Tailored websites with the precision of a luxury atelier — at budget-friendly rates.",
+    badge: "Boutique quality ·\nAccessible pricing",
+    headline: "Websites built with luxe attention to detail — priced for brands that are scaling.",
     heroLead:
       "I craft sites with the obsessive detail of high horology and lean, efficient workflows. Expect elegant visuals, conversion-focused UX, and smart AI automation and AI integration — priced to win without cutting corners.",
     ctaQuote: "Get a quote",
@@ -48,25 +54,8 @@ const copy = {
     ],
     formTitle: "Get a quote",
     formLead: "Tell me about your project. I'll reply with pricing, a delivery window, and a link to your free mock.",
-    labels: {
-      name: "Name",
-      email: "Email",
-      budget: "Budget range",
-      projectType: "Project type",
-      notes: "Project notes"
-    },
-    placeholders: {
-      name: "Ava Martinez",
-      email: "you@brand.com",
-      notes: "Goals, pages, references, features to include..."
-    },
-    budgetOptions: ["$500 – $1,500", "$1,500 – $3,000", "$3,000 – $6,000", "Above $6,000"],
-    projectOptions: ["Marketing site", "Ecommerce", "Web app", "Landing page sprint", "Other"],
-    submit: "Send quote request",
-    submitting: "Sending...",
-    statusSuccess: "Sent. I will reply with a scoped price and a free mock link.",
-    statusError: "Something went wrong. Try again in a moment.",
     copyright: "© 2026 Spaxio. All rights reserved.",
+    scrollToExpand: "Scroll to continue",
     nav: {
       hero: "Home",
       process: "Process",
@@ -74,6 +63,11 @@ const copy = {
       quote: "Quote",
       work: "Work",
       faq: "FAQ"
+    },
+    heroNav: {
+      process: { description: "Discovery, scope, and timeline", date: "Section" },
+      mock: { description: "Clickable preview before you commit", date: "48h" },
+      quote: { description: "Pricing and delivery window", date: "Chat" }
     },
     contactLabel: "Contact",
     workTitle: "Work",
@@ -94,8 +88,8 @@ const copy = {
     }
   },
   fr: {
-    badge: "Qualité boutique · Prix accessibles",
-    headline: "Sites sur mesure avec la précision d'un atelier de luxe — à des tarifs abordables.",
+    badge: "Qualité boutique ·\nPrix accessibles",
+    headline: "Sites au niveau luxe — pensés pour les marques en croissance.",
     heroLead:
       "Je conçois des sites avec le souci du détail horloger et des processus efficaces. Attendez-vous à des visuels élégants, une UX orientée conversion, ainsi qu'à l'automatisation IA et à l'intégration IA — sans sacrifier le budget.",
     ctaQuote: "Obtenir une soumission",
@@ -135,25 +129,8 @@ const copy = {
     ],
     formTitle: "Obtenir une soumission",
     formLead: "Parlez-moi de votre projet. Je répondrai avec le prix, l’échéancier et un lien vers votre maquette gratuite.",
-    labels: {
-      name: "Nom",
-      email: "Courriel",
-      budget: "Fourchette budgétaire",
-      projectType: "Type de projet",
-      notes: "Notes sur le projet"
-    },
-    placeholders: {
-      name: "Camille Leduc",
-      email: "vous@marque.com",
-      notes: "Objectifs, pages, références, fonctionnalités à inclure..."
-    },
-    budgetOptions: ["500 $ – 1 500 $", "1 500 $ – 3 000 $", "3 000 $ – 6 000 $", "Plus de 6 000 $"],
-    projectOptions: ["Site marketing", "Commerce en ligne", "Application web", "Sprint page d'atterrissage", "Autre"],
-    submit: "Envoyer la demande",
-    submitting: "Envoi...",
-    statusSuccess: "Envoyé. Je répondrai avec un prix détaillé et le lien de maquette gratuite.",
-    statusError: "Un problème est survenu. Réessayez dans un instant.",
     copyright: "© 2026 Spaxio. Tous droits réservés.",
+    scrollToExpand: "Faites défiler pour continuer",
     nav: {
       hero: "Accueil",
       process: "Méthode",
@@ -161,6 +138,11 @@ const copy = {
       quote: "Soumission",
       work: "Travaux",
       faq: "FAQ"
+    },
+    heroNav: {
+      process: { description: "Portée, délais et méthode", date: "Section" },
+      mock: { description: "Aperçu cliquable sans engagement", date: "48h" },
+      quote: { description: "Tarif et échéancier", date: "Chat" }
     },
     contactLabel: "Contact",
     workTitle: "Travaux",
@@ -185,14 +167,6 @@ const copy = {
 /* Site icons (like Apple link previews) — official logo/favicon from each site */
 const PREVIEW_CIAVAGLIA = "https://www.ciavagliatimepieces.ca/images/logo.png";
 const PREVIEW_SPAXIOASSISTANT = "https://www.spaxioassistant.com/logo.png";
-
-const initialForm = {
-  name: "",
-  email: "",
-  budget: "",
-  projectType: "",
-  message: ""
-};
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -224,9 +198,6 @@ const structuredData = {
 
 export default function HomePage() {
   const [lang, setLang] = useState<Lang>("en");
-  const [form, setForm] = useState(initialForm);
-  const [status, setStatus] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [headerHidden, setHeaderHidden] = useState(false);
   const { isDark, toggleTheme } = useTheme();
@@ -237,7 +208,6 @@ export default function HomePage() {
     "/5495845-hd_1920_1080_30fps.mp4"
   ];
   const [heroVideoIndex, setHeroVideoIndex] = useState(0);
-  const heroVideoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const t = useMemo(() => copy[lang], [lang]);
 
@@ -322,66 +292,13 @@ export default function HomePage() {
     return () => window.clearInterval(id);
   }, [heroVideos.length]);
 
-  useEffect(() => {
-    const activeVideo = heroVideoRefs.current[heroVideoIndex];
-    if (!activeVideo) return;
-    try {
-      activeVideo.currentTime = 0;
-      const playPromise = activeVideo.play();
-      if (playPromise && typeof playPromise.catch === "function") {
-        playPromise.catch(() => null);
-      }
-    } catch {
-      // Ignore playback reset errors.
-    }
-  }, [heroVideoIndex]);
-
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setLoading(true);
-    setStatus(null);
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form)
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data?.error || t.statusError);
-      setStatus(t.statusSuccess);
-      setForm(initialForm);
-    } catch (err: any) {
-      setStatus(err.message || t.statusError);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   return (
     <main className="page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <section className="top-visual">
-        <div className="scroll-image top" aria-hidden="true">
-          {heroVideos.map((src, idx) => (
-            <video
-              key={src}
-              className={`hero-video ${idx === heroVideoIndex ? "active" : ""}`}
-              src={src}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              ref={(el) => {
-                heroVideoRefs.current[idx] = el;
-              }}
-            />
-          ))}
-        </div>
+      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen max-w-[100vw] shrink-0">
         <header className="overlay-header">
           <div className="logo-banner">
             <img src={logoSrc} alt="Spaxio logo" />
@@ -400,7 +317,9 @@ export default function HomePage() {
             <a href="#hero" onClick={() => setMenuOpen(false)}>{t.nav.hero}</a>
             <a href="#process" onClick={() => setMenuOpen(false)}>{t.nav.process}</a>
             <a href="#mock" onClick={() => setMenuOpen(false)}>{t.nav.mock}</a>
-            <a href="/quote" className="nav-cta" onClick={() => setMenuOpen(false)}>{t.nav.quote}</a>
+            <a href="/quote" className="nav-cta" onClick={() => setMenuOpen(false)}>
+              {t.nav.quote}
+            </a>
             <a href="#work" onClick={() => setMenuOpen(false)}>{t.nav.work}</a>
             <a href="/faq" onClick={() => setMenuOpen(false)}>{t.nav.faq}</a>
             <a href="/blog" onClick={() => setMenuOpen(false)}>Blog</a>
@@ -439,34 +358,43 @@ export default function HomePage() {
             </button>
           </div>
         </header>
-      </section>
 
-      <section className="hero" id="hero">
-        <div className="badge reveal">{t.badge}</div>
-        <div className="hero-grid">
-          <div className="reveal" style={{ transitionDelay: "60ms" }}>
-            <h1 className="tagline">{t.headline}</h1>
-            <p className="lead">{t.heroLead}</p>
-            <div className="cta-row">
-              <a className="button" href="/quote">{t.ctaQuote}</a>
-              <a className="button secondary" href="#mock">{t.ctaMock}</a>
-            </div>
-            <div className="ribbon reveal" style={{ transitionDelay: "120ms" }}>{t.ribbon}</div>
-          </div>
-          <div className="cards">
-            {t.cards.map((card: any, idx: number) => (
-              <div
-                className="card reveal"
-                style={{ transitionDelay: `${140 + idx * 70}ms` }}
-                key={card.title}
-              >
-                <h3>{card.title}</h3>
-                <p>{card.body}</p>
+        <ScrollExpandMedia
+          mediaType="video"
+          mediaSrc={heroVideos[heroVideoIndex]}
+          bgImageSrc={HERO_SCROLL_BG}
+          title={t.headline}
+          date={t.badge}
+          scrollToExpand={t.scrollToExpand}
+          textBlend
+        >
+          <div className="hero max-w-[1320px] mx-auto w-full" id="hero">
+            <h1 className="sr-only">{t.headline}</h1>
+            <div className="hero-grid">
+              <div className="reveal" style={{ transitionDelay: "60ms" }}>
+                <p className="lead">{t.heroLead}</p>
+                <div className="cta-row">
+                  <a className="button" href="/quote">
+                    {t.ctaQuote}
+                  </a>
+                  <a className="button secondary" href="#mock">{t.ctaMock}</a>
+                </div>
+                <div className="ribbon reveal" style={{ transitionDelay: "120ms" }}>{t.ribbon}</div>
               </div>
-            ))}
+              <div className="hero-nav-wrap reveal min-w-0" style={{ transitionDelay: "140ms" }}>
+                <HeroNavCards
+                  titles={{
+                    process: t.nav.process,
+                    mock: t.nav.mock,
+                    quote: t.nav.quote
+                  }}
+                  heroNav={t.heroNav}
+                />
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </ScrollExpandMedia>
+      </div>
 
       <section className="scroll-image" aria-hidden="true">
         <img
@@ -564,81 +492,11 @@ export default function HomePage() {
         <div className="form-shell">
           <h2 className="reveal">{t.formTitle}</h2>
           <p className="lead reveal" style={{ transitionDelay: "90ms" }}>{t.formLead}</p>
-          <form onSubmit={handleSubmit}>
-            <label>
-              {t.labels.name}
-              <input
-                required
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                placeholder={t.placeholders.name}
-                name="name"
-              />
-            </label>
-            <label>
-              {t.labels.email}
-              <input
-                required
-                type="email"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                placeholder={t.placeholders.email}
-                name="email"
-              />
-            </label>
-            <label>
-              {t.labels.budget}
-              <select
-                required
-                value={form.budget}
-                onChange={(e) => setForm({ ...form, budget: e.target.value })}
-                name="budget"
-              >
-                <option value="" disabled>
-                  {lang === "en" ? "Choose a range" : "Choisissez une fourchette"}
-                </option>
-                {t.budgetOptions.map((opt: string) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              {t.labels.projectType}
-              <select
-                required
-                value={form.projectType}
-                onChange={(e) => setForm({ ...form, projectType: e.target.value })}
-                name="projectType"
-              >
-                <option value="" disabled>
-                  {lang === "en" ? "Select one" : "Sélectionnez"}
-                </option>
-                {t.projectOptions.map((opt: string) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="full">
-              {t.labels.notes}
-              <textarea
-                required
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                placeholder={t.placeholders.notes}
-                name="message"
-              />
-            </label>
-            <div className="form-footer">
-              <button className="button" type="submit" disabled={loading}>
-                {loading ? t.submitting : t.submit}
-              </button>
-              {status && <span className="status">{status}</span>}
-            </div>
-          </form>
+          <div className="reveal" style={{ transitionDelay: "140ms" }}>
+            <a className="button" href="/quote">
+              {t.ctaQuote}
+            </a>
+          </div>
         </div>
       </section>
 

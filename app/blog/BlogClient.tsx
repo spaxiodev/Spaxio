@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { openSpaxioChatWidget } from "../openSpaxioWidget";
 import { useTheme } from "../useTheme";
 
 type Lang = "en" | "fr";
@@ -86,7 +87,14 @@ export default function BlogClient() {
             <h1 className="tagline">{t.title}</h1>
             <p className="lead">{t.lead}</p>
             <div className="cta-row">
-              <a className="button" href="/#quote">
+              <a
+                className="button"
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openSpaxioChatWidget({ locale: lang });
+                }}
+              >
                 {t.ctaPrimary}
               </a>
               <a className="button secondary" href="/#mock">
