@@ -1,6 +1,7 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import Script from "next/script";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTheme } from "./useTheme";
 
 type Lang = "en" | "fr";
@@ -48,24 +49,6 @@ const copy = {
     ],
     formTitle: "Get a quote",
     formLead: "Tell me about your project. I'll reply with pricing, a delivery window, and a link to your free mock.",
-    labels: {
-      name: "Name",
-      email: "Email",
-      budget: "Budget range",
-      projectType: "Project type",
-      notes: "Project notes"
-    },
-    placeholders: {
-      name: "Ava Martinez",
-      email: "you@brand.com",
-      notes: "Goals, pages, references, features to include..."
-    },
-    budgetOptions: ["$500 – $1,500", "$1,500 – $3,000", "$3,000 – $6,000", "Above $6,000"],
-    projectOptions: ["Marketing site", "Ecommerce", "Web app", "Landing page sprint", "Other"],
-    submit: "Send quote request",
-    submitting: "Sending...",
-    statusSuccess: "Sent. I will reply with a scoped price and a free mock link.",
-    statusError: "Something went wrong. Try again in a moment.",
     copyright: "© 2026 Spaxio. All rights reserved.",
     nav: {
       hero: "Home",
@@ -135,24 +118,6 @@ const copy = {
     ],
     formTitle: "Obtenir une soumission",
     formLead: "Parlez-moi de votre projet. Je répondrai avec le prix, l’échéancier et un lien vers votre maquette gratuite.",
-    labels: {
-      name: "Nom",
-      email: "Courriel",
-      budget: "Fourchette budgétaire",
-      projectType: "Type de projet",
-      notes: "Notes sur le projet"
-    },
-    placeholders: {
-      name: "Camille Leduc",
-      email: "vous@marque.com",
-      notes: "Objectifs, pages, références, fonctionnalités à inclure..."
-    },
-    budgetOptions: ["500 $ – 1 500 $", "1 500 $ – 3 000 $", "3 000 $ – 6 000 $", "Plus de 6 000 $"],
-    projectOptions: ["Site marketing", "Commerce en ligne", "Application web", "Sprint page d'atterrissage", "Autre"],
-    submit: "Envoyer la demande",
-    submitting: "Envoi...",
-    statusSuccess: "Envoyé. Je répondrai avec un prix détaillé et le lien de maquette gratuite.",
-    statusError: "Un problème est survenu. Réessayez dans un instant.",
     copyright: "© 2026 Spaxio. Tous droits réservés.",
     nav: {
       hero: "Accueil",
@@ -186,14 +151,6 @@ const copy = {
 const PREVIEW_CIAVAGLIA = "https://www.ciavagliatimepieces.ca/images/logo.png";
 const PREVIEW_SPAXIOASSISTANT = "https://www.spaxioassistant.com/logo.png";
 
-const initialForm = {
-  name: "",
-  email: "",
-  budget: "",
-  projectType: "",
-  message: ""
-};
-
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -224,9 +181,6 @@ const structuredData = {
 
 export default function HomePage() {
   const [lang, setLang] = useState<Lang>("en");
-  const [form, setForm] = useState(initialForm);
-  const [status, setStatus] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [headerHidden, setHeaderHidden] = useState(false);
   const { isDark, toggleTheme } = useTheme();
@@ -336,28 +290,6 @@ export default function HomePage() {
     }
   }, [heroVideoIndex]);
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setLoading(true);
-    setStatus(null);
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form)
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data?.error || t.statusError);
-      setStatus(t.statusSuccess);
-      setForm(initialForm);
-    } catch (err: any) {
-      setStatus(err.message || t.statusError);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   return (
     <main className="page">
       <script
@@ -400,7 +332,7 @@ export default function HomePage() {
             <a href="#hero" onClick={() => setMenuOpen(false)}>{t.nav.hero}</a>
             <a href="#process" onClick={() => setMenuOpen(false)}>{t.nav.process}</a>
             <a href="#mock" onClick={() => setMenuOpen(false)}>{t.nav.mock}</a>
-            <a href="/quote" className="nav-cta" onClick={() => setMenuOpen(false)}>{t.nav.quote}</a>
+            <a href="#quote" className="nav-cta" onClick={() => setMenuOpen(false)}>{t.nav.quote}</a>
             <a href="#work" onClick={() => setMenuOpen(false)}>{t.nav.work}</a>
             <a href="/faq" onClick={() => setMenuOpen(false)}>{t.nav.faq}</a>
             <a href="/blog" onClick={() => setMenuOpen(false)}>Blog</a>
@@ -448,7 +380,7 @@ export default function HomePage() {
             <h1 className="tagline">{t.headline}</h1>
             <p className="lead">{t.heroLead}</p>
             <div className="cta-row">
-              <a className="button" href="/quote">{t.ctaQuote}</a>
+              <a className="button" href="#quote">{t.ctaQuote}</a>
               <a className="button secondary" href="#mock">{t.ctaMock}</a>
             </div>
             <div className="ribbon reveal" style={{ transitionDelay: "120ms" }}>{t.ribbon}</div>
@@ -564,81 +496,14 @@ export default function HomePage() {
         <div className="form-shell">
           <h2 className="reveal">{t.formTitle}</h2>
           <p className="lead reveal" style={{ transitionDelay: "90ms" }}>{t.formLead}</p>
-          <form onSubmit={handleSubmit}>
-            <label>
-              {t.labels.name}
-              <input
-                required
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                placeholder={t.placeholders.name}
-                name="name"
-              />
-            </label>
-            <label>
-              {t.labels.email}
-              <input
-                required
-                type="email"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                placeholder={t.placeholders.email}
-                name="email"
-              />
-            </label>
-            <label>
-              {t.labels.budget}
-              <select
-                required
-                value={form.budget}
-                onChange={(e) => setForm({ ...form, budget: e.target.value })}
-                name="budget"
-              >
-                <option value="" disabled>
-                  {lang === "en" ? "Choose a range" : "Choisissez une fourchette"}
-                </option>
-                {t.budgetOptions.map((opt: string) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              {t.labels.projectType}
-              <select
-                required
-                value={form.projectType}
-                onChange={(e) => setForm({ ...form, projectType: e.target.value })}
-                name="projectType"
-              >
-                <option value="" disabled>
-                  {lang === "en" ? "Select one" : "Sélectionnez"}
-                </option>
-                {t.projectOptions.map((opt: string) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="full">
-              {t.labels.notes}
-              <textarea
-                required
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                placeholder={t.placeholders.notes}
-                name="message"
-              />
-            </label>
-            <div className="form-footer">
-              <button className="button" type="submit" disabled={loading}>
-                {loading ? t.submitting : t.submit}
-              </button>
-              {status && <span className="status">{status}</span>}
-            </div>
-          </form>
+          <div id="spaxio-form-a248ea56-6561-4e50-aa9a-193c5141e5a5" />
+          <Script
+            src="https://www.spaxioassistant.com/embed/form.js"
+            strategy="afterInteractive"
+            data-form-id="a248ea56-6561-4e50-aa9a-193c5141e5a5"
+            data-container="#spaxio-form-a248ea56-6561-4e50-aa9a-193c5141e5a5"
+            data-theme="auto"
+          />
         </div>
       </section>
 
@@ -653,7 +518,7 @@ export default function HomePage() {
       </footer>
       <a
         className={`button floating-quote ${headerHidden ? "hidden" : ""}`}
-        href="/quote"
+        href="#quote"
       >
         {lang === "en" ? "Get Quote" : "Obtenir une soumission"}
       </a>

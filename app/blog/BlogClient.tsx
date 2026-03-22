@@ -86,7 +86,7 @@ export default function BlogClient() {
             <h1 className="tagline">{t.title}</h1>
             <p className="lead">{t.lead}</p>
             <div className="cta-row">
-              <a className="button" href="/quote">
+              <a className="button" href="/#quote">
                 {t.ctaPrimary}
               </a>
               <a className="button secondary" href="/#mock">
