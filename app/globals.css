@@ -116,6 +116,7 @@ main.page {
   width: auto;
   max-width: calc(100vw - 32px);
   align-items: flex-start;
+<<<<<<< HEAD
   /* Inner pages put links outside .nav; base overlay-header is pointer-events: none */
   pointer-events: auto;
   /* Sit above third-party embeds/iframes */
@@ -124,6 +125,9 @@ main.page {
 
 .quote-hero {
   padding-top: clamp(72px, 12vw, 120px);
+=======
+  pointer-events: auto;
+>>>>>>> 6fa17ce (COntact form)
 }
 
 .overlay-header .logo-banner img {
@@ -689,6 +693,11 @@ footer {
     display: none;
   }
 
+  /* FAQ/quote pages: keep nav visible (no hamburger) */
+  .overlay-header.faq-header .nav {
+    display: flex;
+  }
+
   .overlay-header .nav.open {
     display: flex;
     flex-direction: column;
@@ -701,6 +710,19 @@ footer {
     height: 72vh;
     min-height: 320px;
   }
+}
+
+/* Chat widget — remove full-viewport transparent overlay */
+#spaxio-widget-host {
+  position: fixed !important;
+  inset: auto !important;
+  top: auto !important;
+  left: auto !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: visible !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
