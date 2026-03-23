@@ -1,13 +1,9 @@
 "use client";
 
-<<<<<<< HEAD
 import { useEffect, useMemo, useState } from "react";
 import HeroNavCards from "@/components/HeroNavCards";
 import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
-=======
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import Script from "next/script";
->>>>>>> 6fa17ce (COntact form)
 import { useTheme } from "./useTheme";
 
 /** Full-bleed background for scroll hero (Next/Image remotePatterns). */

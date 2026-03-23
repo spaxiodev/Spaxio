@@ -1,10 +1,6 @@
 "use client";
 
-<<<<<<< HEAD
 import Script from "next/script";
-=======
-import Link from "next/link";
->>>>>>> 6fa17ce (COntact form)
 import { useMemo, useState } from "react";
 import { useTheme } from "../useTheme";
 
@@ -50,7 +46,6 @@ export default function QuoteClient() {
   return (
     <>
       <header className="overlay-header faq-header">
-<<<<<<< HEAD
         <a href="/" className="logo-banner" aria-label="Spaxio home">
           <img src={logoSrc} alt="Spaxio logo" />
         </a>
@@ -125,15 +120,6 @@ export default function QuoteClient() {
           >
             {lang === "en" ? (isDark ? "Light mode" : "Dark mode") : isDark ? "Mode clair" : "Mode sombre"}
           </button>
-=======
-        <div className="nav" style={{ flexDirection: "column", alignItems: "flex-start" }}>
-          <Link href="/" className="logo-banner" aria-label={t.backToHome}>
-            <img src={logoSrc} alt="Spaxio logo" />
-          </Link>
-          <Link className="button secondary" href="/">
-            {t.backToHome}
-          </Link>
->>>>>>> 6fa17ce (COntact form)
         </div>
       </header>
 

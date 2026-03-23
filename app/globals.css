@@ -116,7 +116,6 @@ main.page {
   width: auto;
   max-width: calc(100vw - 32px);
   align-items: flex-start;
-<<<<<<< HEAD
   /* Inner pages put links outside .nav; base overlay-header is pointer-events: none */
   pointer-events: auto;
   /* Sit above third-party embeds/iframes */
@@ -125,9 +124,6 @@ main.page {
 
 .quote-hero {
   padding-top: clamp(72px, 12vw, 120px);
-=======
-  pointer-events: auto;
->>>>>>> 6fa17ce (COntact form)
 }
 
 .overlay-header .logo-banner img {
