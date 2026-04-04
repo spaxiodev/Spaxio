@@ -504,8 +504,6 @@ export default function HomePage() {
         <p style={{ marginTop: "8px", color: "var(--muted)" }}>{t.copyright}</p>
         <div className="footer-contact">
           <span className="label">{t.contactLabel}</span>
-          <a href="tel:+15145160515">+1 514-516-0515</a>
-          <span className="dot">·</span>
           <a href="mailto:polidorispaxio@gmail.com">polidorispaxio@gmail.com</a>
         </div>
       </footer>
