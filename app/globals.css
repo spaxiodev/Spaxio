@@ -689,6 +689,11 @@ footer {
     display: none;
   }
 
+  /* FAQ/quote pages: keep nav visible (no hamburger) */
+  .overlay-header.faq-header .nav {
+    display: flex;
+  }
+
   .overlay-header .nav.open {
     display: flex;
     flex-direction: column;
@@ -701,6 +706,19 @@ footer {
     height: 72vh;
     min-height: 320px;
   }
+}
+
+/* Chat widget — remove full-viewport transparent overlay */
+#spaxio-widget-host {
+  position: fixed !important;
+  inset: auto !important;
+  top: auto !important;
+  left: auto !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: visible !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

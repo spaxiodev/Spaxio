@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import HeroNavCards from "@/components/HeroNavCards";
 import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
+import Script from "next/script";
 import { useTheme } from "./useTheme";
 
 /** Full-bleed background for scroll hero (Next/Image remotePatterns). */
@@ -498,6 +499,17 @@ export default function HomePage() {
             </a>
           </div>
         </div>
+      </section>
+
+      <section id="contact">
+        <div id="spaxio-form-3a6a74a3-e227-48d8-8d38-6e8623124ee2" />
+        <Script
+          src="https://www.spaxioassistant.com/embed/form.js"
+          data-form-id="3a6a74a3-e227-48d8-8d38-6e8623124ee2"
+          data-container="#spaxio-form-3a6a74a3-e227-48d8-8d38-6e8623124ee2"
+          data-theme="inherit"
+          strategy="afterInteractive"
+        />
       </section>
 
       <footer>
