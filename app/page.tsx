@@ -1,530 +1,346 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import HeroNavCards from "@/components/HeroNavCards";
-import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
-import Script from "next/script";
-import { useTheme } from "./useTheme";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { useEffect, useMemo, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
 
-/** Full-bleed background for scroll hero (Next/Image remotePatterns). */
-const HERO_SCROLL_BG =
-  "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80";
+const WorldScene = dynamic(() => import("@/components/WorldScene"), { ssr: false });
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Lang = "en" | "fr";
 
 const copy = {
   en: {
-    badge: "Boutique quality ·\nAccessible pricing",
-    headline: "Websites built with luxe attention to detail — priced for brands that are scaling.",
-    heroLead:
-      "I craft sites with the obsessive detail of high horology and lean, efficient workflows. Expect elegant visuals, conversion-focused UX, and smart AI automation and AI integration — priced to win without cutting corners.",
-    ctaQuote: "Get a quote",
-    ctaMock: "Request a free mock",
-    ribbon: "Free mock website within 48 hours. Only pay when you love it.",
-    cards: [
-      {
-        title: "Priced to win",
-        body: "Lean, streamlined production means bespoke builds typically 30-50% below agency rates."
-      },
-      {
-        title: "Automation ready",
-        body: "Need AI automation, AI integration, forms, scheduling, CRM handoff, or simple workflows? I'll wire the essentials so leads flow smoothly."
-      },
-      {
-        title: "Luxury polish",
-        body: "Layout cues, typography, and motion borrow from modern luxury — bold hero, precise grids, and warm gold accents."
-      }
-    ],
-    mockTitle: "Free mock website",
-    mockLead:
-      "I'll design a clickable mock tailored to your brand — no commitment. Use it to align on tone and structure before any build costs start. If you approve it, we ship fast and keep costs predictable.",
-    processTitle: "How I work",
-    process: [
-      {
-        title: "01. Discovery & quote",
-        body: "Share your goals, budget, and must-haves. I return a scoped quote and timeline within 24 hours."
-      },
-      {
-        title: "02. Design & build sprint",
-        body: "Structured sprints combine design craft with fast production to draft copy, variants, and data-informed UX tweaks."
-      },
-      {
-        title: "03. Launch & automation",
-        body: "Ship to Vercel, wire SMTP for leads, and add light automations to qualify and route inbound messages."
-      }
-    ],
-    formTitle: "Get a quote",
-    formLead: "Tell me about your project. I'll reply with pricing, a delivery window, and a link to your free mock.",
-    copyright: "© 2026 Spaxio. All rights reserved.",
-    scrollToExpand: "Scroll to continue",
-    nav: {
-      hero: "Home",
-      process: "Process",
-      mock: "Free mock",
-      quote: "Quote",
-      work: "Work",
-      faq: "FAQ"
+    hero: {
+      name: "Spaxio",
+      tagline: "Luxury Web Development",
+      sub: "We build websites that look like a million bucks — at prices that make sense.",
     },
-    heroNav: {
-      process: { description: "Discovery, scope, and timeline", date: "Section" },
-      mock: { description: "Clickable preview before you commit", date: "48h" },
-      quote: { description: "Pricing and delivery window", date: "Chat" }
+    about: {
+      title: "About",
+      lines: [
+        "Founded in Montreal, 2026.",
+        "One developer. Zero bloat.",
+        "",
+        "Obsessive attention to detail meets lean, efficient production.",
+        "Luxury watchmaking precision — applied to web development.",
+        "",
+        "Stack: Next.js, React, Vercel, AI",
+        "Clients across Canada & U.S.",
+      ],
     },
-    contactLabel: "Contact",
-    workTitle: "Work",
-    workLead: "Sites I've designed and built.",
-    work: {
-      ciavaglia: {
-        title: "Ciavaglia Timepieces",
-        description: "Custom luxury watches, Montreal. E-commerce with an interactive configurator — design dial, case, movement, and strap with live pricing.",
-        viewSite: "View website",
-        visitLabel: "Visit website"
-      },
-      spaxioassistant: {
-        title: "Spaxio Assistant",
-        description: "AI assistant widget for websites — embed on any site to offer instant support and guidance.",
-        viewSite: "View site",
-        visitLabel: "Visit website"
-      }
-    }
+    skills: {
+      title: "Tech Stack",
+      items: ["Next.js", "React", "TypeScript", "Node.js", "Tailwind CSS", "Three.js", "Vercel", "AI / LLM"],
+    },
+    services: {
+      title: "What I Build",
+      items: [
+        { title: "Web Design & Dev", body: "Custom sites from scratch with Next.js. No templates — clean code, sharp design." },
+        { title: "Launch & Support", body: "Deployed on Vercel with SMTP, analytics, and SEO baked in." },
+      ],
+      work: [
+        { title: "Ciavaglia Timepieces", url: "https://ciavagliatimepieces.ca" },
+        { title: "Spaxio Assistant", url: "https://www.spaxioassistant.com" },
+      ],
+    },
+    contact: {
+      title: "New Message",
+      name: "Name", email: "Email", projectType: "Project Type", budget: "Budget",
+      message: "What can I build for you?", send: "Send Message", sending: "Sending...",
+      success: "Message sent successfully",
+      error: "Failed to send. Please try again.",
+      projectTypes: ["Website", "E-commerce", "Landing page", "Redesign", "Other"],
+      budgets: ["Under $2k", "$2k – $5k", "$5k – $10k", "$10k+", "Not sure yet"],
+      emailAddr: "polidorispaxio@gmail.com",
+    },
+    footer: "© 2026 Spaxio",
+    privacy: "Privacy Policy",
+    scrollHint: "Scroll to explore",
   },
   fr: {
-    badge: "Qualité boutique ·\nPrix accessibles",
-    headline: "Sites au niveau luxe — pensés pour les marques en croissance.",
-    heroLead:
-      "Je conçois des sites avec le souci du détail horloger et des processus efficaces. Attendez-vous à des visuels élégants, une UX orientée conversion, ainsi qu'à l'automatisation IA et à l'intégration IA — sans sacrifier le budget.",
-    ctaQuote: "Obtenir une soumission",
-    ctaMock: "Demander une maquette gratuite",
-    ribbon: "Maquette gratuite en 48 heures. Vous ne payez que si vous l’adoptez.",
-    cards: [
-      {
-        title: "Tarifs avantageux",
-        body: "Une production optimisée permet des sites sur mesure souvent 30 à 50 % moins chers qu'en agence."
-      },
-      {
-        title: "Prêt pour l'automatisation",
-        body: "Automatisation IA, intégration IA, formulaires, prises de rendez-vous, transfert CRM ou petites automatisations : j'installe l'essentiel pour que vos leads circulent sans friction."
-      },
-      {
-        title: "Finition luxe",
-        body: "Mise en page, typographie et motion inspirées du luxe moderne — hero audacieux, grilles précises et accents dorés chaleureux."
-      }
-    ],
-    mockTitle: "Maquette gratuite",
-    mockLead:
-      "Je crée une maquette cliquable adaptée à votre marque — sans engagement. Elle sert à valider le ton et la structure avant tout coût. Si vous l'approuvez, on livre rapidement avec un budget maîtrisé.",
-    processTitle: "Ma méthode",
-    process: [
-      {
-        title: "01. Découverte & soumission",
-        body: "Vous partagez objectifs, budget et requis. Je renvoie une soumission détaillée et un délai en moins de 24 h."
-      },
-      {
-        title: "02. Sprint design & build",
-        body: "Des sprints structurés allient design soigné et production rapide pour rédiger les textes, variantes et ajustements UX."
-      },
-      {
-        title: "03. Mise en ligne & automatisation",
-        body: "Mise en ligne sur Vercel, configuration SMTP pour les leads et automatisations légères pour qualifier et router les messages entrants."
-      }
-    ],
-    formTitle: "Obtenir une soumission",
-    formLead: "Parlez-moi de votre projet. Je répondrai avec le prix, l’échéancier et un lien vers votre maquette gratuite.",
-    copyright: "© 2026 Spaxio. Tous droits réservés.",
-    scrollToExpand: "Faites défiler pour continuer",
-    nav: {
-      hero: "Accueil",
-      process: "Méthode",
-      mock: "Maquette",
-      quote: "Soumission",
-      work: "Travaux",
-      faq: "FAQ"
+    hero: {
+      name: "Spaxio",
+      tagline: "Développement Web de Luxe",
+      sub: "On crée des sites qui ont l'air d'un million — à des prix qui ont du sens.",
     },
-    heroNav: {
-      process: { description: "Portée, délais et méthode", date: "Section" },
-      mock: { description: "Aperçu cliquable sans engagement", date: "48h" },
-      quote: { description: "Tarif et échéancier", date: "Chat" }
+    about: {
+      title: "À propos",
+      lines: [
+        "Fondé à Montréal, 2026.",
+        "Un développeur. Zéro surplus.",
+        "",
+        "Un souci obsessif du détail avec une production lean et efficace.",
+        "Précision horlogère — appliquée au développement web.",
+        "",
+        "Stack: Next.js, React, Vercel, IA",
+        "Clients au Canada et aux États-Unis.",
+      ],
     },
-    contactLabel: "Contact",
-    workTitle: "Travaux",
-    workLead: "Sites que j'ai conçus et réalisés.",
-    work: {
-      ciavaglia: {
-        title: "Ciavaglia Timepieces",
-        description: "Montres de luxe sur mesure, Montréal. E-commerce avec configurateur — cadran, boîtier, mouvement et bracelet, avec prix en direct.",
-        viewSite: "Voir le site",
-        visitLabel: "Visiter le site"
-      },
-      spaxioassistant: {
-        title: "Spaxio Assistant",
-        description: "Widget d'assistant IA pour sites web — à intégrer sur n'importe quel site pour offrir support et conseils instantanés.",
-        viewSite: "Voir le site",
-        visitLabel: "Visiter le site"
-      }
-    }
-  }
+    skills: {
+      title: "Technologies",
+      items: ["Next.js", "React", "TypeScript", "Node.js", "Tailwind CSS", "Three.js", "Vercel", "IA / LLM"],
+    },
+    services: {
+      title: "Ce que je construis",
+      items: [
+        { title: "Design & développement", body: "Sites sur mesure avec Next.js. Pas de templates — du code propre, un design taillé." },
+        { title: "Lancement & support", body: "Déployé sur Vercel avec SMTP, analytics et SEO intégrés." },
+      ],
+      work: [
+        { title: "Ciavaglia Timepieces", url: "https://ciavagliatimepieces.ca" },
+        { title: "Spaxio Assistant", url: "https://www.spaxioassistant.com" },
+      ],
+    },
+    contact: {
+      title: "Nouveau message",
+      name: "Nom", email: "Courriel", projectType: "Type de projet", budget: "Budget",
+      message: "Que puis-je construire pour vous?", send: "Envoyer", sending: "Envoi...",
+      success: "Message envoyé avec succès",
+      error: "Échec de l'envoi. Réessayez.",
+      projectTypes: ["Site web", "E-commerce", "Page d'atterrissage", "Redesign", "Autre"],
+      budgets: ["Moins de 2k$", "2k$ – 5k$", "5k$ – 10k$", "10k$+", "Pas encore sûr"],
+      emailAddr: "polidorispaxio@gmail.com",
+    },
+    footer: "© 2026 Spaxio",
+    privacy: "Politique de confidentialité",
+    scrollHint: "Défilez pour explorer",
+  },
 } satisfies Record<Lang, any>;
-
-/* Site icons (like Apple link previews) — official logo/favicon from each site */
-const PREVIEW_CIAVAGLIA = "https://www.ciavagliatimepieces.ca/images/logo.png";
-const PREVIEW_SPAXIOASSISTANT = "https://www.spaxioassistant.com/logo.png";
 
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@type": "Organization",
-      name: "Spaxio",
-      url: "https://spaxio.ca",
-      logo: "https://spaxio.ca/logo.png"
-    },
-    {
-      "@type": "WebSite",
-      name: "Spaxio",
-      url: "https://spaxio.ca",
-      inLanguage: ["en-CA", "fr-CA"]
-    },
-    {
-      "@type": "Service",
-      name: "Luxury-inspired web design and development",
-      serviceType: "Web design and development",
-      provider: {
-        "@type": "Organization",
-        name: "Spaxio",
-        url: "https://spaxio.ca"
-      }
-    }
-  ]
+    { "@type": "Organization", name: "Spaxio", url: "https://spaxio.ca", logo: "https://spaxio.ca/logo.png" },
+    { "@type": "WebSite", name: "Spaxio", url: "https://spaxio.ca", inLanguage: ["en-CA", "fr-CA"] },
+    { "@type": "Service", name: "Luxury-inspired web design and development", serviceType: "Web design and development", provider: { "@type": "Organization", name: "Spaxio", url: "https://spaxio.ca" } },
+  ],
 };
 
 export default function HomePage() {
   const [lang, setLang] = useState<Lang>("en");
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [headerHidden, setHeaderHidden] = useState(false);
-  const { isDark, toggleTheme } = useTheme();
-  const logoSrc = isDark ? "/darkmodelogo.png" : "/logo.png";
-  const heroVideos = [
-    "/2887463-hd_1920_1080_25fps.mp4",
-    "/IMG_4685.mov",
-    "/5495845-hd_1920_1080_30fps.mp4"
-  ];
-  const [heroVideoIndex, setHeroVideoIndex] = useState(0);
-
   const t = useMemo(() => copy[lang], [lang]);
+  const scrollProgress = useRef(0);
+  const [progress, setProgress] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const [form, setForm] = useState({ name: "", email: "", projectType: "", budget: "", message: "" });
+  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [notification, setNotification] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormStatus("sending");
+    try {
+      const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form) });
+      if (!res.ok) throw new Error();
+      setFormStatus("sent");
+      setForm({ name: "", email: "", projectType: "", budget: "", message: "" });
+      setNotification(true);
+      setTimeout(() => setNotification(false), 4000);
+    } catch {
+      setFormStatus("error");
+      setNotification(true);
+      setTimeout(() => setNotification(false), 4000);
+    }
+  };
 
   useEffect(() => {
-    const items = Array.from(document.querySelectorAll<HTMLElement>(".scroll-image"));
-    const onScroll = () => {
-      const vh = window.innerHeight || 1;
-      items.forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        const offset = rect.top - vh * 0.5;
-        const value = `${offset * -0.2}px`;
-        el.style.setProperty("--parallax-offset", value);
-        const img = el.querySelector<HTMLElement>("img");
-        const videos = el.querySelectorAll<HTMLElement>(".hero-video");
-        if (img) img.style.setProperty("--parallax-offset", value);
-        videos.forEach((v) => v.style.setProperty("--parallax-offset", value));
-      });
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
+    const lenis = new Lenis({
+      duration: 2.5,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      touchMultiplier: 1,
+    });
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add((time: number) => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
 
-  useEffect(() => {
-    const header = document.querySelector<HTMLElement>(".overlay-header");
-    if (!header) return;
-    let lastY = window.scrollY;
-    let ticking = false;
-
-    const update = () => {
-      const currentY = window.scrollY;
-      const shouldHide = currentY > lastY && currentY > 80;
-      header.style.transform = shouldHide ? "translate(-50%, -120%)" : "translate(-50%, 0)";
-      setHeaderHidden(shouldHide);
-      lastY = currentY;
-      ticking = false;
-    };
-
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(update);
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) return;
-
-    const elements = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-          } else {
-            entry.target.classList.remove("is-visible");
-          }
-        });
+    ScrollTrigger.create({
+      trigger: scrollRef.current,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 2.5,
+      onUpdate: (self) => {
+        scrollProgress.current = self.progress;
+        setProgress(self.progress);
       },
-      { threshold: 0.18, rootMargin: "0px 0px -6% 0px" }
-    );
+    });
 
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    return () => {
+      lenis.destroy();
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+    };
   }, []);
 
-  useEffect(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) return;
-    const id = window.setInterval(() => {
-      setHeroVideoIndex((prev) => (prev + 1) % heroVideos.length);
-    }, 5000);
-    return () => window.clearInterval(id);
-  }, [heroVideos.length]);
+  // Smooth opacity ramps
+  const fade = (start: number, peakStart: number, peakEnd: number, end: number) => {
+    const p = progress;
+    if (p < start || p > end) return 0;
+    if (p < peakStart) return (p - start) / (peakStart - start);
+    if (p > peakEnd) return 1 - (p - peakEnd) / (end - peakEnd);
+    return 1;
+  };
+
+  const heroOp = Math.max(0, 1 - progress * 7);
+  const aboutOp = fade(0.14, 0.2, 0.3, 0.38);
+  const skillsOp = fade(0.32, 0.38, 0.48, 0.55);
+  const servicesOp = fade(0.50, 0.56, 0.68, 0.76);
+  const contactOp = Math.min(1, Math.max(0, (progress - 0.82) * 6));
 
   return (
-    <main className="page">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen max-w-[100vw] shrink-0">
-        <header className="overlay-header">
-          <div className="logo-banner">
-            <img src={logoSrc} alt="Spaxio logo" />
-          </div>
-          <button
-            className="nav-toggle"
-            aria-label="Toggle navigation"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((prev) => !prev)}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
-          <div className={`nav ${menuOpen ? "open" : ""}`} aria-label="Primary">
-            <a href="#hero" onClick={() => setMenuOpen(false)}>{t.nav.hero}</a>
-            <a href="#process" onClick={() => setMenuOpen(false)}>{t.nav.process}</a>
-            <a href="#mock" onClick={() => setMenuOpen(false)}>{t.nav.mock}</a>
-            <a href="/quote" className="nav-cta" onClick={() => setMenuOpen(false)}>
-              {t.nav.quote}
-            </a>
-            <a href="#work" onClick={() => setMenuOpen(false)}>{t.nav.work}</a>
-            <a href="/faq" onClick={() => setMenuOpen(false)}>{t.nav.faq}</a>
-            <a href="/blog" onClick={() => setMenuOpen(false)}>Blog</a>
-            <button
-              className="button secondary"
-              style={{ padding: "10px 14px", borderRadius: 10 }}
-              onClick={() => {
-                setLang("en");
-                setMenuOpen(false);
-              }}
-              aria-label="Switch to English"
-            >
-              EN
-            </button>
-            <button
-              className="button secondary"
-              style={{ padding: "10px 14px", borderRadius: 10 }}
-              onClick={() => {
-                setLang("fr");
-                setMenuOpen(false);
-              }}
-              aria-label="Passer au français"
-            >
-              FR
-            </button>
-            <button
-              className="button secondary"
-              style={{ padding: "10px 14px", borderRadius: 10 }}
-              onClick={() => {
-                toggleTheme();
-                setMenuOpen(false);
-              }}
-              aria-pressed={isDark}
-            >
-              {lang === "en" ? (isDark ? "Light mode" : "Dark mode") : isDark ? "Mode clair" : "Mode sombre"}
-            </button>
-          </div>
-        </header>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
 
-        <ScrollExpandMedia
-          mediaType="video"
-          mediaSrc={heroVideos[heroVideoIndex]}
-          bgImageSrc={HERO_SCROLL_BG}
-          title={t.headline}
-          date={t.badge}
-          scrollToExpand={t.scrollToExpand}
-          textBlend
-        >
-          <div className="hero max-w-[1320px] mx-auto w-full" id="hero">
-            <h1 className="sr-only">{t.headline}</h1>
-            <div className="hero-grid">
-              <div className="reveal" style={{ transitionDelay: "60ms" }}>
-                <p className="lead">{t.heroLead}</p>
-                <div className="cta-row">
-                  <a className="button" href="/quote">
-                    {t.ctaQuote}
-                  </a>
-                  <a className="button secondary" href="#mock">{t.ctaMock}</a>
-                </div>
-                <div className="ribbon reveal" style={{ transitionDelay: "120ms" }}>{t.ribbon}</div>
-              </div>
-              <div className="hero-nav-wrap reveal min-w-0" style={{ transitionDelay: "140ms" }}>
-                <HeroNavCards
-                  titles={{
-                    process: t.nav.process,
-                    mock: t.nav.mock,
-                    quote: t.nav.quote
-                  }}
-                  heroNav={t.heroNav}
-                />
-              </div>
-            </div>
-          </div>
-        </ScrollExpandMedia>
+      <WorldScene scrollProgress={scrollProgress} />
+
+      {/* ── Nav ── */}
+      <nav className="site-nav">
+        <button onClick={() => setLang(lang === "en" ? "fr" : "en")} className="lang-btn">
+          {lang === "en" ? "FR" : "EN"}
+        </button>
+      </nav>
+
+      {/* ── Vignette ── */}
+      <div className="vignette" />
+
+      {/* ═══ OVERLAYS ═══ */}
+
+      {/* Hero */}
+      <div className={`ov ov-hero ${heroOp > 0.01 ? "active" : ""}`} style={{ opacity: heroOp }}>
+        <h1 className="hero-name">{t.hero.name}</h1>
+        <p className="hero-tag">{t.hero.tagline}</p>
+        <p className="hero-sub">{t.hero.sub}</p>
+        <div className="scroll-hint">
+          <span>{t.scrollHint}</span>
+          <div className="scroll-bar" />
+        </div>
       </div>
 
-      <section className="scroll-image" aria-hidden="true">
-        <img
-          src="/pexels-hitarth-jadhav-57415-220357.jpg"
-          alt="Team collaborating on a high-end digital experience"
-          loading="lazy"
-        />
-      </section>
-
-      <section id="mock">
-        <h2 className="reveal">{t.mockTitle}</h2>
-        <p className="lead reveal" style={{ transitionDelay: "90ms" }}>{t.mockLead}</p>
-      </section>
-
-      <section id="work">
-        <h2 className="reveal">{t.workTitle}</h2>
-        <p className="lead reveal" style={{ transitionDelay: "90ms" }}>{t.workLead}</p>
-        <div className="work-row reveal" style={{ transitionDelay: "120ms" }}>
-          <div className="work-row-item">
-            <a
-              href="https://ciavagliatimepieces.ca"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="work-preview-link"
-              aria-label={t.work.ciavaglia.viewSite}
-            >
-              <img
-                src={PREVIEW_CIAVAGLIA}
-                alt="Ciavaglia Timepieces"
-                loading="lazy"
-                className="work-preview-img work-preview-icon"
-              />
-            </a>
-            <a
-              href="https://ciavagliatimepieces.ca"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="work-visit"
-            >
-              {t.work.ciavaglia.visitLabel}
-            </a>
-          </div>
-          <div className="work-row-item">
-            <a
-              href="https://www.spaxioassistant.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="work-preview-link"
-              aria-label={t.work.spaxioassistant.viewSite}
-            >
-              <img
-                src={PREVIEW_SPAXIOASSISTANT}
-                alt="Spaxio Assistant"
-                loading="lazy"
-                className="work-preview-img work-preview-icon"
-              />
-            </a>
-            <a
-              href="https://www.spaxioassistant.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="work-visit"
-            >
-              {t.work.spaxioassistant.visitLabel}
-            </a>
+      {/* About */}
+      <div className={`ov ov-side-left ${aboutOp > 0.01 ? "active" : ""}`} style={{ opacity: aboutOp }}>
+        <div className="warm-panel">
+          <h2 className="panel-title">{t.about.title}</h2>
+          <div className="panel-lines">
+            {t.about.lines.map((l: string, i: number) => (
+              <p key={i}>{l || "\u00A0"}</p>
+            ))}
           </div>
         </div>
-      </section>
+      </div>
 
-      <section className="scroll-image" aria-hidden="true">
-        <img
-          src="/pexels-pixabay-37347.jpg"
-          alt="Luxury-inspired workspace for digital product strategy"
-          loading="lazy"
-        />
-      </section>
+      {/* Skills */}
+      <div className={`ov ov-side-right ${skillsOp > 0.01 ? "active" : ""}`} style={{ opacity: skillsOp }}>
+        <div className="warm-panel">
+          <h2 className="panel-title">{t.skills.title}</h2>
+          <div className="skill-grid">
+            {t.skills.items.map((s: string) => (
+              <div className="skill-chip" key={s}>{s}</div>
+            ))}
+          </div>
+        </div>
+      </div>
 
-      <section id="process">
-        <h2 className="reveal">{t.processTitle}</h2>
-        <div className="cards">
-          {t.process.map((step: any, idx: number) => (
-            <div
-              className="card reveal"
-              style={{ transitionDelay: `${idx * 80}ms` }}
-              key={step.title}
-            >
-              <h3>{step.title}</h3>
-              <p>{step.body}</p>
+      {/* Services */}
+      <div className={`ov ${servicesOp > 0.01 ? "active" : ""}`} style={{ opacity: servicesOp }}>
+        <div className="svc-panel">
+          <h2 className="panel-title">{t.services.title}</h2>
+          <div className="svc-grid">
+            {t.services.items.map((s: any) => (
+              <div className="svc-card" key={s.title}>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </div>
+            ))}
+          </div>
+          <div className="svc-work">
+            {t.services.work.map((w: any) => (
+              <a key={w.title} href={w.url} target="_blank" rel="noopener noreferrer" className="work-link">
+                {w.title} &rarr;
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Contact — macOS MacBook screen */}
+      <div className={`ov ov-contact ${contactOp > 0.01 ? "active" : ""}`} style={{ opacity: contactOp }}>
+        <div className="macbook-screen">
+          <div className="mac-titlebar">
+            <div className="mac-dots">
+              <span className="mac-dot red" />
+              <span className="mac-dot yellow" />
+              <span className="mac-dot green" />
             </div>
-          ))}
+            <span className="mac-title">{t.contact.title}</span>
+          </div>
+          <form onSubmit={handleSubmit} className="mac-form">
+            <div className="mac-row">
+              <label>
+                <span>{t.contact.name}</span>
+                <input type="text" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+              </label>
+              <label>
+                <span>{t.contact.email}</span>
+                <input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+              </label>
+            </div>
+            <div className="mac-row">
+              <label>
+                <span>{t.contact.projectType}</span>
+                <select value={form.projectType} onChange={(e) => setForm({ ...form, projectType: e.target.value })}>
+                  <option value="">—</option>
+                  {t.contact.projectTypes.map((pt: string) => <option key={pt} value={pt}>{pt}</option>)}
+                </select>
+              </label>
+              <label>
+                <span>{t.contact.budget}</span>
+                <select value={form.budget} onChange={(e) => setForm({ ...form, budget: e.target.value })}>
+                  <option value="">—</option>
+                  {t.contact.budgets.map((b: string) => <option key={b} value={b}>{b}</option>)}
+                </select>
+              </label>
+            </div>
+            <label className="mac-full">
+              <span>{t.contact.message}</span>
+              <textarea required rows={3} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
+            </label>
+            <div className="mac-footer">
+              <button type="submit" className="mac-send" disabled={formStatus === "sending"}>
+                {formStatus === "sending" ? t.contact.sending : t.contact.send}
+              </button>
+              <a href={`mailto:${t.contact.emailAddr}`} className="mac-email">{t.contact.emailAddr}</a>
+            </div>
+          </form>
+          <p className="privacy-notice">
+            Your information is collected solely to respond to your inquiry and will not be shared with third parties.{" "}
+            See our <a href="/privacy">Privacy Policy</a> for details.
+          </p>
         </div>
-      </section>
 
-      <section id="quote">
-        <div className="form-shell">
-          <h2 className="reveal">{t.formTitle}</h2>
-          <p className="lead reveal" style={{ transitionDelay: "90ms" }}>{t.formLead}</p>
-          <div className="reveal" style={{ transitionDelay: "140ms" }}>
-            <a className="button" href="/quote">
-              {t.ctaQuote}
-            </a>
+        {/* macOS notification */}
+        <div className={`mac-notif ${notification ? "show" : ""}`}>
+          <div className="notif-icon">{formStatus === "sent" ? "✓" : "✕"}</div>
+          <div className="notif-text">
+            <strong>Spaxio</strong>
+            <span>{formStatus === "sent" ? t.contact.success : t.contact.error}</span>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section id="contact">
-        <div id="spaxio-form-3a6a74a3-e227-48d8-8d38-6e8623124ee2" />
-        <Script
-          src="https://www.spaxioassistant.com/embed/form.js"
-          data-form-id="3a6a74a3-e227-48d8-8d38-6e8623124ee2"
-          data-container="#spaxio-form-3a6a74a3-e227-48d8-8d38-6e8623124ee2"
-          data-theme="inherit"
-          strategy="afterInteractive"
-        />
-      </section>
-
-      <footer>
-        <p style={{ marginTop: "8px", color: "var(--muted)" }}>{t.copyright}</p>
-        <div className="footer-contact">
-          <span className="label">{t.contactLabel}</span>
-          <a href="mailto:polidorispaxio@gmail.com">polidorispaxio@gmail.com</a>
+      {/* Footer */}
+      <div className={`ov ov-footer ${contactOp > 0.01 ? "active" : ""}`} style={{ opacity: contactOp * 0.6 }}>
+        <p>{t.footer}</p>
+        <div className="footer-links">
+          <Link href="/privacy-policy" className="footer-link">{t.privacy}</Link>
         </div>
-      </footer>
-      <a
-        className={`button floating-quote ${headerHidden ? "hidden" : ""}`}
-        href="/quote"
-      >
-        {lang === "en" ? "Get Quote" : "Obtenir une soumission"}
-      </a>
-    </main>
+      </div>
+
+      {/* Scroll spacer */}
+      <div ref={scrollRef} className="scroll-spacer" />
+    </>
   );
 }

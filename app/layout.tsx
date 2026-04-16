@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Playfair_Display, Space_Grotesk } from "next/font/google";
+import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import CookieConsent from "@/components/CookieConsent";
 
 const display = Playfair_Display({ subsets: ["latin"], weight: ["400", "600", "700"], variable: "--font-display" });
-const sans = Space_Grotesk({ subsets: ["latin"], variable: "--font-sans" });
+const sans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://spaxio.ca"),
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
     siteName: "Spaxio",
     locale: "en_CA",
     title: "Spaxio — Luxe-grade web builds at honest prices",
-    description: "Get luxury-inspired web design, fast builds, and automation-ready sites at honest prices.",
+    description: "Get luxury-inspired web design, fast builds, and AI-powered sites at honest prices.",
     images: [
       {
         url: "/logo.png",
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Spaxio — Luxe-grade web builds at honest prices",
-    description: "Get luxury-inspired web design, fast builds, and automation-ready sites at honest prices.",
+    description: "Get luxury-inspired web design, fast builds, and AI-powered sites at honest prices.",
     images: ["/logo.png"]
   },
   robots: {
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${display.variable} ${sans.variable}`}>
         {children}
+        <CookieConsent />
       </body>
     </html>
   );
