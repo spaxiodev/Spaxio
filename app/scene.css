@@ -1,0 +1,155 @@
+/* ══════════════════════════════════════════════
+   SPAXIO — Mansion route styles
+   Scoped under .mansion-root
+   ══════════════════════════════════════════════ */
+
+.mansion-root {
+  --gold: #c8a030;
+  --gold-soft: #d9b756;
+  --cream: #f0e8d8;
+  --ink: #1a1208;
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans: "Inter", system-ui, sans-serif;
+}
+
+/* Body-level scroll fix while mansion route is mounted */
+body:has(.mansion-root) {
+  background: #0a0806;
+  color: var(--cream);
+  font-family: "Inter", system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+.mansion-root,
+.mansion-root * {
+  box-sizing: border-box;
+}
+
+.mansion-root .scroll-spacer { width: 1px; height: 700vh; pointer-events: none; position: relative; }
+
+/* Loading */
+.mansion-root .loading { position: fixed; inset: 0; background: #000; z-index: 200; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity .9s ease; }
+.mansion-root .loading.hide { opacity: 0; pointer-events: none; }
+.mansion-root .loading .brand { font-family: var(--serif); font-weight: 300; letter-spacing: .5em; font-size: clamp(2rem, 5vw, 3.6rem); color: var(--gold); text-indent: .5em; }
+.mansion-root .loading .tag { margin-top: 1.2rem; font-family: var(--sans); font-weight: 300; letter-spacing: .3em; font-size: .7rem; text-transform: uppercase; color: #8a7a50; }
+.mansion-root .loading .bar { margin-top: 2.4rem; width: 220px; height: 1px; background: #1a1410; overflow: hidden; }
+.mansion-root .loading .bar::after { content: ""; display: block; width: 40%; height: 100%; background: linear-gradient(90deg, transparent, var(--gold), transparent); animation: m-sweep 1.6s ease-in-out infinite; }
+@keyframes m-sweep { 0% { transform: translateX(-120%); } 100% { transform: translateX(320%); } }
+
+/* Canvas */
+.mansion-root .mcanvas { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; display: block; }
+
+/* Vignette */
+.mansion-root .vignette { position: fixed; inset: 0; z-index: 5; pointer-events: none; background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.35) 100%); }
+
+/* Nav */
+.mansion-root .nav { position: fixed; top: 1.4rem; right: 1.6rem; z-index: 60; display: flex; gap: 1rem; align-items: center; }
+.mansion-root .nav .brand { font-family: var(--serif); font-weight: 400; letter-spacing: .35em; font-size: .85rem; color: var(--cream); opacity: .85; }
+.mansion-root .lang { position: fixed; top: 1.4rem; left: 1.6rem; z-index: 60; font-family: var(--sans); font-size: .72rem; letter-spacing: .3em; color: var(--cream); opacity: .6; background: none; border: 1px solid rgba(240,232,216,.25); padding: .4rem .75rem; cursor: pointer; border-radius: 2px; transition: opacity .2s, color .2s, border-color .2s; }
+.mansion-root .lang:hover { opacity: 1; color: var(--gold); border-color: var(--gold); }
+
+/* Overlays */
+.mansion-root .ov { position: fixed; z-index: 20; pointer-events: none; transition: opacity .4s ease; will-change: opacity, transform; }
+.mansion-root .ov .card,
+.mansion-root .ov .svc-card,
+.mansion-root .ov .skills-panel,
+.mansion-root .ov .macbook,
+.mansion-root .ov a,
+.mansion-root .ov button,
+.mansion-root .ov input,
+.mansion-root .ov select,
+.mansion-root .ov textarea { pointer-events: auto; }
+
+/* Hero */
+.mansion-root .ov-hero { inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; pointer-events: none !important; }
+.mansion-root .ov-hero h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(4rem, 12vw, 10rem); letter-spacing: .12em; color: #fff; text-shadow: 0 2px 40px rgba(0,0,0,.6); line-height: 1; }
+.mansion-root .ov-hero .tag { margin-top: 1.4rem; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(1rem, 2vw, 1.5rem); color: var(--gold-soft); letter-spacing: .1em; }
+.mansion-root .ov-hero .sub { margin-top: .9rem; font-family: var(--sans); font-weight: 300; font-size: clamp(.8rem, 1.1vw, 1rem); color: rgba(240,232,216,.8); letter-spacing: .05em; max-width: 36rem; padding: 0 1rem; }
+.mansion-root .ov-hero .hint { position: absolute; bottom: 2.2rem; display: flex; flex-direction: column; align-items: center; gap: .6rem; opacity: .55; }
+.mansion-root .ov-hero .hint span { font-size: .65rem; letter-spacing: .35em; text-transform: uppercase; color: var(--cream); }
+.mansion-root .ov-hero .hint-bar { width: 1px; height: 40px; background: linear-gradient(to bottom, transparent, var(--gold), transparent); animation: m-hint 2.4s ease-in-out infinite; }
+@keyframes m-hint { 0%,100% { opacity: .3; transform: translateY(-6px); } 50% { opacity: 1; transform: translateY(6px); } }
+
+/* About */
+.mansion-root .ov-about { top: 50%; left: 6%; transform: translateY(-50%); width: min(28rem, 40vw); }
+.mansion-root .card { background: linear-gradient(180deg, rgba(250,246,238,.96), rgba(242,234,218,.92)); border: 1px solid rgba(200,160,48,.35); border-radius: 3px; padding: 2.2rem 2.4rem; box-shadow: 0 30px 80px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.3) inset; color: var(--ink); backdrop-filter: blur(6px); }
+.mansion-root .card .eyebrow { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: .8rem; color: var(--gold); letter-spacing: .12em; margin-bottom: .4rem; }
+.mansion-root .card h2 { font-family: var(--serif); font-weight: 400; font-size: 2.2rem; letter-spacing: .05em; color: var(--ink); margin-bottom: 1.2rem; }
+.mansion-root .card .rule { width: 42px; height: 1px; background: var(--gold); margin-bottom: 1.4rem; }
+.mansion-root .card p { font-family: var(--sans); font-weight: 300; line-height: 1.75; font-size: .9rem; color: #3a2e20; margin-bottom: .4rem; }
+.mansion-root .card p.spacer { height: .5rem; }
+
+/* Services */
+.mansion-root .ov-services { top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(56rem, 84vw); }
+.mansion-root .svc-head { text-align: center; margin-bottom: 2rem; }
+.mansion-root .svc-head .eyebrow { font-family: var(--serif); font-style: italic; color: var(--gold); font-size: .9rem; letter-spacing: .15em; }
+.mansion-root .svc-head h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3vw, 2.6rem); color: #fff; letter-spacing: .05em; margin-top: .3rem; text-shadow: 0 2px 20px rgba(0,0,0,.7); }
+.mansion-root .svc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1.2rem; }
+.mansion-root .svc-card { background: linear-gradient(180deg, rgba(26,18,12,.82), rgba(14,10,6,.9)); border: 1px solid rgba(200,160,48,.3); border-radius: 3px; padding: 1.8rem 1.6rem; color: var(--cream); box-shadow: 0 20px 60px rgba(0,0,0,.5); backdrop-filter: blur(4px); }
+.mansion-root .svc-card h3 { font-family: var(--serif); font-weight: 500; font-size: 1.3rem; color: var(--gold); margin-bottom: .4rem; letter-spacing: .04em; }
+.mansion-root .svc-card .rule { width: 28px; height: 1px; background: var(--gold); margin-bottom: .9rem; opacity: .6; }
+.mansion-root .svc-card p { font-family: var(--sans); font-weight: 300; font-size: .85rem; line-height: 1.65; color: rgba(240,232,216,.78); }
+.mansion-root .svc-work { margin-top: 1.4rem; display: flex; gap: 1.4rem; justify-content: center; flex-wrap: wrap; }
+.mansion-root .svc-work a { font-family: var(--serif); font-style: italic; color: var(--gold); font-size: .95rem; letter-spacing: .06em; text-decoration: none; border-bottom: 1px solid rgba(200,160,48,.4); padding-bottom: 2px; transition: color .2s, border-color .2s; }
+.mansion-root .svc-work a:hover { color: var(--gold-soft); border-color: var(--gold-soft); }
+
+/* Skills */
+.mansion-root .ov-skills { top: 50%; right: 6%; transform: translateY(-50%); width: min(24rem, 36vw); }
+.mansion-root .skills-panel { background: linear-gradient(180deg, rgba(20,14,8,.88), rgba(12,8,4,.95)); border: 1px solid rgba(200,160,48,.35); border-radius: 3px; padding: 1.8rem 2rem; backdrop-filter: blur(4px); box-shadow: 0 20px 60px rgba(0,0,0,.55); }
+.mansion-root .skills-panel .eyebrow { font-family: var(--serif); font-style: italic; color: var(--gold); font-size: .85rem; letter-spacing: .12em; }
+.mansion-root .skills-panel h2 { font-family: var(--serif); font-weight: 400; font-size: 1.8rem; color: var(--cream); margin-top: .2rem; margin-bottom: .9rem; letter-spacing: .04em; }
+.mansion-root .skills-panel .rule { width: 36px; height: 1px; background: var(--gold); margin-bottom: 1.2rem; }
+.mansion-root .skill-grid { display: flex; flex-wrap: wrap; gap: .5rem; }
+.mansion-root .skill-pill { font-family: var(--sans); font-weight: 400; font-size: .72rem; letter-spacing: .08em; color: var(--gold); background: rgba(200,160,48,.08); border: 1px solid rgba(200,160,48,.35); padding: .45rem .9rem; border-radius: 999px; }
+
+/* Section label */
+.mansion-root .section-label { position: fixed; left: 50%; top: 12%; transform: translateX(-50%); z-index: 15; pointer-events: none; font-family: var(--serif); font-style: italic; font-weight: 300; color: rgba(255,245,220,.7); font-size: 1.1rem; letter-spacing: .3em; text-transform: uppercase; text-shadow: 0 2px 20px rgba(0,0,0,.8); opacity: 0; transition: opacity .8s ease; }
+.mansion-root .section-label.show { opacity: 1; }
+
+/* Contact / Macbook */
+.mansion-root .ov-contact { inset: 0; display: flex; align-items: center; justify-content: center; }
+.mansion-root .macbook { width: min(40rem, 86vw); max-width: 660px; transform: translateY(2vh); }
+.mansion-root .macbook .screen { background: #f7f5ef; border-radius: 6px; overflow: hidden; box-shadow: 0 40px 120px rgba(0,0,0,.7), 0 0 0 1px rgba(0,0,0,.4), 0 0 0 3px rgba(30,20,10,.7); color: #1a1208; }
+.mansion-root .titlebar { height: 30px; background: linear-gradient(180deg, #e4ddd0, #d4ccbd); display: flex; align-items: center; padding: 0 12px; border-bottom: 1px solid rgba(0,0,0,.08); }
+.mansion-root .dots { display: flex; gap: 7px; }
+.mansion-root .dot { width: 11px; height: 11px; border-radius: 50%; box-shadow: 0 0 0 .5px rgba(0,0,0,.15) inset; }
+.mansion-root .dot.r { background: #ff5f57; } .mansion-root .dot.y { background: #ffbd2e; } .mansion-root .dot.g { background: #28c940; }
+.mansion-root .titlebar .t { flex: 1; text-align: center; font-family: var(--sans); font-size: .72rem; color: #5a5040; letter-spacing: .08em; font-weight: 500; }
+.mansion-root .mform { padding: 1.6rem 1.8rem 1.4rem; }
+.mansion-root .mform .head { display: flex; align-items: baseline; gap: .8rem; margin-bottom: 1.2rem; border-bottom: 1px solid rgba(0,0,0,.08); padding-bottom: .8rem; }
+.mansion-root .mform .head h3 { font-family: var(--serif); font-weight: 500; font-size: 1.5rem; color: var(--ink); letter-spacing: .02em; }
+.mansion-root .mform .head span { font-family: var(--serif); font-style: italic; font-size: .85rem; color: var(--gold); }
+.mansion-root .row { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; margin-bottom: .8rem; }
+.mansion-root label { display: block; }
+.mansion-root label .lbl { display: block; font-family: var(--serif); font-size: .78rem; color: #5a4830; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .28rem; font-weight: 500; }
+.mansion-root input, .mansion-root select, .mansion-root textarea { width: 100%; font-family: var(--sans); font-size: .85rem; color: var(--ink); background: #fdfbf6; border: 1px solid rgba(0,0,0,.12); border-bottom: 1px solid rgba(0,0,0,.3); border-radius: 2px; padding: .55rem .7rem; outline: none; transition: border-color .2s, box-shadow .2s; }
+.mansion-root input:focus, .mansion-root select:focus, .mansion-root textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(200,160,48,.15); }
+.mansion-root textarea { resize: none; min-height: 90px; font-family: var(--sans); line-height: 1.5; }
+.mansion-root .send-row { display: flex; align-items: center; justify-content: space-between; margin-top: 1rem; gap: 1rem; flex-wrap: wrap; }
+.mansion-root .send { font-family: var(--sans); font-weight: 500; font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); background: var(--ink); border: none; padding: .75rem 1.6rem; border-radius: 2px; cursor: pointer; transition: background .2s, color .2s; }
+.mansion-root .send:hover { background: #2a1f14; color: var(--gold-soft); }
+.mansion-root .send:disabled { opacity: .6; cursor: wait; }
+.mansion-root .email { font-family: var(--serif); font-style: italic; color: #6a5840; font-size: .82rem; text-decoration: none; border-bottom: 1px solid rgba(0,0,0,.15); }
+.mansion-root .email:hover { color: var(--gold); }
+.mansion-root .privacy { margin-top: .8rem; font-family: var(--sans); font-size: .68rem; color: #8a7a5a; line-height: 1.5; }
+.mansion-root .privacy a { color: var(--gold); }
+.mansion-root .success { padding: 2.8rem 1rem; text-align: center; }
+.mansion-root .success .check { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--gold); color: var(--gold); display: inline-flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: .9rem; }
+.mansion-root .success h4 { font-family: var(--serif); font-size: 1.35rem; color: var(--ink); font-weight: 500; margin-bottom: .3rem; }
+.mansion-root .success p { font-family: var(--serif); font-style: italic; color: #6a5840; font-size: .9rem; }
+
+/* Footer */
+.mansion-root .mfooter { position: fixed; bottom: 1rem; left: 0; right: 0; text-align: center; z-index: 20; font-family: var(--sans); font-size: .68rem; color: rgba(240,232,216,.35); letter-spacing: .2em; pointer-events: none; transition: opacity .4s; }
+.mansion-root .mfooter a { color: rgba(240,232,216,.55); text-decoration: none; margin-left: 1rem; pointer-events: auto; }
+.mansion-root .mfooter a:hover { color: var(--gold); }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .mansion-root .ov-about { left: 4%; right: 4%; width: auto; transform: translateY(-50%); }
+  .mansion-root .ov-services { width: 92vw; }
+  .mansion-root .ov-skills { right: 4%; left: 4%; width: auto; transform: translateY(-50%); }
+  .mansion-root .svc-grid { grid-template-columns: 1fr; }
+  .mansion-root .row { grid-template-columns: 1fr; }
+  .mansion-root .macbook { width: 92vw; }
+  .mansion-root .ov-hero h1 { font-size: 4.2rem; }
+}

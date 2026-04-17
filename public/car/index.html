@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Spaxio — Luxe-grade web builds at honest prices</title>
+<meta name="description" content="Spaxio builds luxe-grade, luxury-inspired websites at honest prices. Montreal, 2026." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/lights/RectAreaLightUniformsLib.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<style>
+  :root {
+    --gold: #f4d688;           /* luminous cream-gold for text — high contrast */
+    --gold-soft: #ffeab8;       /* hover / emphasis */
+    --gold-line: #a88c3c;       /* darker gold for thin rules/borders only */
+    --halo: 0 0 3px rgba(0,0,0,.95), 0 2px 12px rgba(0,0,0,.92), 0 0 24px rgba(0,0,0,.6);
+    --cream: #f5f0e8;
+    --stone: #c2b8a2;
+    --ink: #0a0a0a;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  ::-webkit-scrollbar { width: 0; height: 0; display: none; }
+  * { scrollbar-width: none; }
+  html, body { width: 100%; background: var(--ink); color: var(--cream); font-family: var(--mono); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  body { min-height: 700vh; cursor: none; }
+
+  /* Canvas */
+  #c { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; display: block; }
+
+  /* Custom cursor */
+  #cursor { position: fixed; width: 6px; height: 6px; background: #fff; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); mix-blend-mode: difference; }
+  #cursor-ring { position: fixed; width: 34px; height: 34px; border: 1px solid rgba(200,160,48,.55); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: width .18s ease, height .18s ease, border-color .18s ease; }
+  #cursor-ring.hover { width: 56px; height: 56px; border-color: var(--gold); }
+  @media (hover: none) { body { cursor: auto; } #cursor, #cursor-ring { display: none; } }
+
+  /* Vignette — darker so overlay text has contrast */
+  .vignette { position: fixed; inset: 0; z-index: 5; pointer-events: none; background: radial-gradient(ellipse at center, transparent 32%, rgba(0,0,0,.82) 100%); }
+
+  /* Top scroll progress line */
+  .progress-line { position: fixed; top: 0; left: 0; height: 1px; width: 0%; z-index: 500; background: linear-gradient(to right, var(--gold), #ffd780); transition: width .06s linear; }
+
+  /* Top bar */
+  .topbar { position: fixed; top: 28px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 40px; z-index: 60; pointer-events: none; }
+  .topbar .brand { font-family: var(--mono); font-size: 14px; font-weight: 600; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; text-shadow: var(--halo); }
+  .topbar .pct { font-family: var(--mono); font-size: 14px; font-weight: 500; letter-spacing: 3px; color: #fff; text-shadow: var(--halo); }
+
+  /* Loading */
+  #loading { position: fixed; inset: 0; z-index: 1000; background: #0a0a0a; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  #loading .brand { font-family: var(--serif); font-weight: 300; letter-spacing: 12px; color: #fff; font-size: clamp(48px, 8vw, 96px); text-indent: 12px; }
+  #loading .sub { margin-top: 16px; font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 6px; color: var(--gold); text-transform: uppercase; }
+  #loading .pct { position: absolute; bottom: 62px; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 12px; font-weight: 400; letter-spacing: 3px; color: rgba(255,255,255,.6); }
+  .loading-bar { position: fixed; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(255,255,255,.04); z-index: 1001; }
+  #load-bar { display: block; height: 100%; width: 0%; background: var(--gold); box-shadow: 0 0 12px rgba(200,160,48,.7); transition: width .15s linear; }
+
+  /* Section label */
+  .section-label { position: fixed; bottom: 56px; left: 50%; transform: translateX(-50%); z-index: 20; font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: 5px; color: rgba(255,255,255,.95); text-transform: uppercase; text-align: center; pointer-events: none; opacity: 0; transition: opacity .8s ease; text-shadow: 0 2px 14px rgba(0,0,0,.9), 0 0 2px rgba(0,0,0,.8); }
+  .section-label.show { opacity: 1; }
+  .section-label::before, .section-label::after { content: ''; display: inline-block; width: 22px; height: 1px; background: var(--gold); vertical-align: middle; margin: 0 14px; box-shadow: 0 0 8px rgba(200,160,48,.6); }
+
+  #hint { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 4px; color: rgba(255,255,255,.85); text-transform: uppercase; z-index: 18; pointer-events: none; text-shadow: 0 2px 12px rgba(0,0,0,.9); }
+
+  /* Overlays base */
+  .overlay { position: fixed; z-index: 20; opacity: 0; pointer-events: none; transition: opacity .6s ease; }
+  .overlay.active { pointer-events: auto; }
+  .overlay .eyebrow { font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 14px; text-shadow: var(--halo); }
+  .overlay .rule { width: 48px; height: 1px; background: var(--gold); opacity: .9; margin-bottom: 18px; box-shadow: 0 0 10px rgba(200,160,48,.55); }
+
+  /* Hero */
+  #hero { inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; flex-direction: column; }
+  #hero .hero-title { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(48px, 7vw, 96px); color: #fff; letter-spacing: .02em; line-height: 1.05; text-shadow: 0 4px 48px rgba(0,0,0,.95), 0 2px 20px rgba(0,0,0,.9); }
+  #hero .hero-sub { margin-top: 1.4rem; font-family: var(--mono); font-size: 14px; font-weight: 500; letter-spacing: 5px; color: rgba(255,255,255,.9); text-transform: uppercase; text-shadow: 0 2px 14px rgba(0,0,0,.9); }
+  .corner-br { position: fixed; right: 40px; bottom: 72px; z-index: 18; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 3px; color: rgba(245,240,232,.88); text-transform: uppercase; pointer-events: none; text-shadow: 0 2px 12px rgba(0,0,0,.9); }
+
+  /* About */
+  #about-overlay { top: 50%; left: 8%; transform: translateY(-50%); max-width: 460px; }
+  #about-overlay h2 { font-family: var(--serif); font-weight: 400; font-style: italic; font-size: clamp(36px, 4.4vw, 58px); color: #fff; line-height: 1.05; margin-bottom: 22px; text-shadow: 0 3px 32px rgba(0,0,0,.9), 0 2px 12px rgba(0,0,0,.85); }
+  #about-overlay h2 span { display: block; color: var(--gold-soft); }
+  #about-overlay p { font-family: var(--serif); font-weight: 400; font-size: 20px; line-height: 1.65; color: rgba(255,255,255,.95); max-width: 440px; text-shadow: 0 2px 16px rgba(0,0,0,.9); }
+
+  /* Services */
+  #services-overlay { top: 50%; right: 8%; transform: translateY(-50%); max-width: 460px; text-align: right; }
+  #services-overlay .svc { margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(200,160,48,.55); }
+  #services-overlay .svc h3 { font-family: var(--serif); font-weight: 400; font-style: italic; font-size: 32px; color: #fff; margin-bottom: 10px; text-shadow: 0 2px 18px rgba(0,0,0,.9); }
+  #services-overlay .svc p { font-family: var(--serif); font-weight: 400; font-size: 18px; line-height: 1.65; color: rgba(255,255,255,.92); text-shadow: 0 2px 12px rgba(0,0,0,.85); }
+  #services-overlay .work { margin-top: 36px; display: flex; gap: 22px; justify-content: flex-end; }
+  #services-overlay .work a { font-family: var(--serif); font-style: italic; color: var(--gold-soft); font-size: 17px; text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; text-shadow: var(--halo); }
+  #services-overlay .work a:hover { color: #ffd780; }
+
+  /* Tech */
+  #tech-overlay { inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  #tech-overlay .tiny { font-family: var(--mono); font-size: 14px; font-weight: 600; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 32px; text-shadow: var(--halo); }
+  #tech-overlay .pills { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 640px; }
+  #tech-overlay .pill { font-family: var(--mono); font-size: 14px; font-weight: 600; letter-spacing: 2px; color: var(--gold); background: rgba(0,0,0,.75); border: 1px solid var(--gold); padding: 12px 20px; border-radius: 999px; text-transform: uppercase; backdrop-filter: blur(6px); box-shadow: 0 4px 20px rgba(0,0,0,.6); }
+
+  /* Contact */
+  #contact-overlay { inset: 0; display: flex; align-items: center; justify-content: center; padding: 32px; }
+  .contact-card { width: min(560px, 92vw); background: rgba(10,10,10,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(200,160,48,.2); border-radius: 2px; padding: 48px; }
+  .contact-card h2 { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 36px; color: #fff; margin-bottom: 8px; }
+  .contact-card .tag { font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 30px; }
+  .contact-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 8px; }
+  .contact-form input, .contact-form select, .contact-form textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,.2); color: #fff; font-family: var(--serif); font-size: 18px; font-weight: 400; padding: 12px 0; outline: none; resize: none; transition: border-color .3s ease; }
+  .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { border-bottom-color: var(--gold); }
+  .contact-form select { appearance: none; cursor: none; color: #fff; }
+  .contact-form select option { background: #1a1a1a; color: #fff; }
+  .contact-form label { display: block; margin-bottom: 10px; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 3px; color: rgba(255,255,255,.7); text-transform: uppercase; }
+  .contact-form .field { margin-bottom: 18px; }
+  .contact-form .send-row { display: flex; align-items: center; justify-content: space-between; margin-top: 30px; gap: 16px; flex-wrap: wrap; }
+  .contact-form button { background: rgba(0,0,0,.4); border: 1px solid var(--gold); color: var(--gold); padding: 15px 30px; font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; cursor: none; transition: background .2s ease, color .2s ease; }
+  .contact-form button:hover { background: var(--gold); color: #000; }
+  .contact-form button:disabled { opacity: .5; }
+  .contact-form .email { font-family: var(--serif); font-style: italic; font-size: 16px; color: rgba(255,255,255,.7); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.2); }
+  .contact-form .privacy { margin-top: 20px; font-family: var(--mono); font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,.55); text-transform: uppercase; }
+  .contact-form .privacy a { color: var(--gold); }
+  .contact-success { display: none; padding: 20px 0 8px; text-align: center; }
+  .contact-success.show { display: block; }
+  .contact-success .check { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--gold); color: var(--gold); display: inline-flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+  .contact-success h4 { font-family: var(--serif); font-style: italic; font-size: 28px; color: #fff; margin-bottom: 6px; }
+  .contact-success p { font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; }
+
+  /* Footer mini */
+  #footer { position: fixed; bottom: 10px; right: 40px; z-index: 19; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 3px; color: rgba(255,255,255,.5); pointer-events: none; text-shadow: 0 2px 10px rgba(0,0,0,.9); }
+  #footer a { color: rgba(255,255,255,.65); text-decoration: none; pointer-events: auto; margin-left: 16px; }
+  #footer a:hover { color: var(--gold); }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    body { cursor: auto; }
+    #cursor, #cursor-ring { display: none; }
+    .topbar { padding: 0 20px; }
+    #about-overlay, #services-overlay { display: none; }
+    #tech-overlay { display: none; }
+    .contact-card { padding: 28px 20px; }
+    .contact-form .row { grid-template-columns: 1fr; }
+    .corner-br { right: 16px; bottom: 56px; }
+    #footer { right: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Loading -->
+<div id="loading">
+  <div class="brand">McLAREN&nbsp;P1</div>
+  <div class="sub">Spaxio · Montreal</div>
+  <div class="pct" id="pct">0%</div>
+</div>
+<div class="loading-bar"><span id="load-bar"></span></div>
+
+<!-- Canvas -->
+<canvas id="c"></canvas>
+
+<!-- Vignette -->
+<div class="vignette"></div>
+
+<!-- Cursor -->
+<div id="cursor-ring"></div>
+<div id="cursor"></div>
+
+<!-- Scroll line -->
+<div class="progress-line" id="progress-line"></div>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="brand">SPAXIO</div>
+  <div class="pct" id="top-pct">00%</div>
+</div>
+
+<!-- Section label -->
+<div class="section-label" id="section-label"></div>
+
+<!-- Hint -->
+<div id="hint">SCROLL TO BEGIN</div>
+
+<!-- Hero -->
+<section class="overlay" id="hero">
+  <div class="hero-title">Spaxio</div>
+  <div class="hero-sub">Luxe-grade web builds at honest prices</div>
+</section>
+<div class="corner-br">Montreal — Est. 2026</div>
+
+<!-- About -->
+<section class="overlay" id="about-overlay">
+  <div class="eyebrow">— About</div>
+  <h2>One developer.<span>Zero bloat.</span></h2>
+  <div class="rule"></div>
+  <p>Founded in Montreal, 2026. Obsessive attention to detail meets lean, efficient production. Luxury watchmaking precision — applied to web development.</p>
+</section>
+
+<!-- Services -->
+<section class="overlay" id="services-overlay">
+  <div class="eyebrow">— What I build</div>
+  <div class="svc">
+    <h3>Web Design &amp; Dev</h3>
+    <p>Custom Next.js sites. No templates — clean code, sharp design.</p>
+  </div>
+  <div class="svc">
+    <h3>Launch &amp; Support</h3>
+    <p>Deployed on Vercel with SMTP, analytics, and SEO baked in.</p>
+  </div>
+  <div class="work">
+    <a href="https://ciavagliatimepieces.ca" target="_blank" rel="noopener">Ciavaglia Timepieces →</a>
+    <a href="https://jpjewls.ca" target="_blank" rel="noopener">JP Jewels →</a>
+  </div>
+</section>
+
+<!-- Tech -->
+<section class="overlay" id="tech-overlay">
+  <div class="tiny">— The stack</div>
+  <div class="pills">
+    <span class="pill">Next.js</span>
+    <span class="pill">React</span>
+    <span class="pill">TypeScript</span>
+    <span class="pill">Vercel</span>
+    <span class="pill">Node.js</span>
+    <span class="pill">Three.js</span>
+    <span class="pill">Tailwind</span>
+    <span class="pill">AI / LLM</span>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="overlay" id="contact-overlay">
+  <div class="contact-card">
+    <h2>Let&rsquo;s build something great.</h2>
+    <div class="tag">— I read every message personally</div>
+    <form class="contact-form" id="contact-form" autocomplete="on">
+      <div class="row">
+        <div class="field">
+          <label>Name</label>
+          <input type="text" name="name" required />
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" name="email" required />
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Project Type</label>
+          <select name="projectType">
+            <option value="">—</option>
+            <option>Website</option>
+            <option>E-commerce</option>
+            <option>Landing page</option>
+            <option>Redesign</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Budget</label>
+          <select name="budget">
+            <option value="">—</option>
+            <option>Under $2k</option>
+            <option>$2k – $5k</option>
+            <option>$5k – $10k</option>
+            <option>$10k+</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Message</label>
+        <textarea name="message" rows="4" required></textarea>
+      </div>
+      <div class="send-row">
+        <button type="submit" id="send-btn">Send Message →</button>
+        <a class="email" href="mailto:polidorispaxio@gmail.com">polidorispaxio@gmail.com</a>
+      </div>
+      <p class="privacy">Your info is never shared. <a href="https://www.spaxio.ca/privacy-policy" target="_blank" rel="noopener">Privacy policy</a>.</p>
+    </form>
+    <div class="contact-success" id="success">
+      <div class="check">✓</div>
+      <h4>I&rsquo;ll be in touch.</h4>
+      <p>— Your message has landed</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<div id="footer">© 2026 SPAXIO<a href="https://www.spaxio.ca/privacy-policy">PRIVACY</a></div>
+
+<script>
+/* ══════════════════════════════════════════════
+   Spaxio — Cinematic McLaren P1 scroll journey
+   ══════════════════════════════════════════════ */
+gsap.registerPlugin(ScrollTrigger);
+THREE.RectAreaLightUniformsLib.init();
+
+const isMobile = window.innerWidth < 768;
+
+/* ── Renderer ── */
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.3;
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.physicallyCorrectLights = true;
+renderer.setClearColor(0x0a0a0a);
+
+/* ── Scene ── */
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0a0a);
+scene.fog = new THREE.Fog(0x0a0a0a, 15, 45);
+
+/* ── Camera ── */
+const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.05, 200);
+camera.position.set(0, 2.2, 13);
+
+/* ── Environment (procedural studio for reflections) ── */
+(function(){
+  const ec = document.createElement('canvas');
+  ec.width = 512; ec.height = 256;
+  const ctx = ec.getContext('2d');
+  const g = ctx.createLinearGradient(0, 0, 0, 256);
+  g.addColorStop(0, '#2a2e38'); g.addColorStop(0.35, '#12141a');
+  g.addColorStop(0.5, '#08090c'); g.addColorStop(0.65, '#0a0a0a');
+  g.addColorStop(1, '#040404');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, 512, 256);
+  ctx.fillStyle = 'rgba(255,245,225,0.92)';
+  ctx.fillRect(90, 20, 120, 36);
+  ctx.fillRect(300, 20, 120, 36);
+  const warm = ctx.createRadialGradient(430, 130, 0, 430, 130, 140);
+  warm.addColorStop(0, 'rgba(255,180,120,0.5)');
+  warm.addColorStop(1, 'rgba(255,180,120,0)');
+  ctx.fillStyle = warm; ctx.fillRect(270, 0, 250, 230);
+  const cool = ctx.createRadialGradient(80, 130, 0, 80, 130, 140);
+  cool.addColorStop(0, 'rgba(130,170,220,0.42)');
+  cool.addColorStop(1, 'rgba(130,170,220,0)');
+  ctx.fillStyle = cool; ctx.fillRect(0, 0, 260, 230);
+  const tex = new THREE.CanvasTexture(ec);
+  tex.mapping = THREE.EquirectangularReflectionMapping;
+  tex.encoding = THREE.sRGBEncoding;
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  pmrem.compileEquirectangularShader();
+  scene.environment = pmrem.fromEquirectangular(tex).texture;
+  pmrem.dispose();
+})();
+
+/* ── Lighting ── */
+const hemi = new THREE.HemisphereLight(0x303848, 0x000000, 0.15);
+scene.add(hemi);
+
+const keyLight = new THREE.RectAreaLight(0xfff5e0, 8, 12, 8);
+keyLight.position.set(0, 8, 2);
+keyLight.lookAt(0, 0, 0);
+scene.add(keyLight);
+
+const fillLight = new THREE.RectAreaLight(0xd0e8ff, 4, 8, 6);
+fillLight.position.set(-7, 4, 3);
+fillLight.lookAt(0, 0, 0);
+scene.add(fillLight);
+
+const rimLight = new THREE.RectAreaLight(0xffd0a0, 6, 6, 6);
+rimLight.position.set(6, 3, -5);
+rimLight.lookAt(0, 0, 0);
+scene.add(rimLight);
+
+const bounceLight = new THREE.RectAreaLight(0x223344, 2, 10, 10);
+bounceLight.position.set(0, -1, 0);
+bounceLight.lookAt(0, 2, 0);
+scene.add(bounceLight);
+
+const interiorLight = new THREE.PointLight(0xff8c00, 0, 3);
+interiorLight.position.set(0, 0.5, 0.5);
+scene.add(interiorLight);
+
+// Shadow caster (RectAreaLights don't cast shadows in r128)
+const shadowCaster = new THREE.SpotLight(0xffffff, 0.45, 24, Math.PI / 6, 0.6, 1.5);
+shadowCaster.position.set(0, 10, 2);
+shadowCaster.target.position.set(0, 0, 0);
+shadowCaster.castShadow = true;
+shadowCaster.shadow.mapSize.set(isMobile ? 1024 : 2048, isMobile ? 1024 : 2048);
+shadowCaster.shadow.bias = -0.0005;
+shadowCaster.shadow.radius = 6;
+scene.add(shadowCaster);
+scene.add(shadowCaster.target);
+
+/* ── Floor + pucks ── */
+const floor = new THREE.Mesh(
+  new THREE.CircleGeometry(12, 64),
+  new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.2, metalness: 0.8 })
+);
+floor.rotation.x = -Math.PI / 2;
+floor.position.y = -0.01;
+floor.receiveShadow = true;
+scene.add(floor);
+
+// subtle ring trim
+const ring = new THREE.Mesh(
+  new THREE.RingGeometry(11.88, 12.0, 128),
+  new THREE.MeshBasicMaterial({ color: 0x1a1a1a })
+);
+ring.rotation.x = -Math.PI / 2; ring.position.y = 0.001;
+scene.add(ring);
+
+const puckMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xfff2d0, emissiveIntensity: 0.8, roughness: 0.4, metalness: 0.0 });
+[[-3.5, -3], [3.5, -3], [-3.5, 3], [3.5, 3]].forEach(([x, z]) => {
+  const puck = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.04, 32), puckMat);
+  puck.position.set(x, 0.005, z); scene.add(puck);
+  const pl = new THREE.PointLight(0xfff2d0, 0.5, 4, 2);
+  pl.position.set(x, 0.3, z); scene.add(pl);
+});
+
+/* ── Load GLB ── */
+let scrollProgress = 0;
+let carReady = false;
+const targetCamPos = new THREE.Vector3(0, 2.2, 13);
+const targetLookAt = new THREE.Vector3(0, 0.6, 0);
+
+const loader = new THREE.GLTFLoader();
+loader.load(
+  '/car/ac_-_mclaren_p1_free.glb',
+  (gltf) => {
+    const model = gltf.scene;
+    const box = new THREE.Box3().setFromObject(model);
+    const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const scale = 5 / maxDim;
+    model.scale.setScalar(scale);
+    model.position.copy(center).multiplyScalar(-scale);
+    model.position.y = 0;
+    model.traverse(child => {
+      if (child.isMesh) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+        if (child.material) {
+          child.material.envMapIntensity = 1.2;
+        }
+      }
+    });
+    scene.add(model);
+    carReady = true;
+    hideLoadingScreen();
+    initScrollAnimation();
+  },
+  (progress) => {
+    if (progress.lengthComputable) {
+      updateLoadingBar((progress.loaded / progress.total) * 100);
+    } else {
+      updateLoadingBar(Math.min(95, (progress.loaded / (12 * 1024 * 1024)) * 100));
+    }
+  },
+  (error) => {
+    console.error('GLB load error:', error);
+    document.getElementById('pct').textContent = 'ERROR';
+  }
+);
+
+function updateLoadingBar(pct) {
+  document.getElementById('load-bar').style.width = pct + '%';
+  document.getElementById('pct').textContent = Math.round(pct) + '%';
+}
+function hideLoadingScreen() {
+  updateLoadingBar(100);
+  gsap.to('#loading', {
+    opacity: 0, duration: 1,
+    onComplete: () => {
+      const el = document.getElementById('loading');
+      if (el) el.style.display = 'none';
+      gsap.to('.loading-bar', { opacity: 0, duration: .5, onComplete: () => { const l = document.querySelector('.loading-bar'); if (l) l.style.display = 'none'; } });
+    }
+  });
+}
+
+/* ── Camera curves ── */
+const cameraPoints = [
+  new THREE.Vector3(0, 2.2, 13),         // 0%   — hero front (nose)
+  new THREE.Vector3(4.5, 1.8, 8),        // 14%  — front-right 3/4
+  new THREE.Vector3(6, 1.3, 0),          // 28%  — side profile
+  new THREE.Vector3(5, 1.4, -7),         // 42%  — rear 3/4 right
+  new THREE.Vector3(0, 1.8, -10),        // 57%  — rear hero (back of car)
+  new THREE.Vector3(0, 1.15, -4),        // 71%  — flying forward from the rear
+  new THREE.Vector3(-0.2, 0.92, -0.5),   // 85%  — passing through engine bay into cockpit
+  new THREE.Vector3(-0.35, 0.82, 0.3),   // 100% — seated in driver's seat (LHD, eye level)
+];
+const camCurve = new THREE.CatmullRomCurve3(cameraPoints, false, 'catmullrom', 0.5);
+
+const lookPoints = [
+  new THREE.Vector3(0, 0.6, 0),          // car center
+  new THREE.Vector3(0, 0.5, 0),
+  new THREE.Vector3(0, 0.5, 0),
+  new THREE.Vector3(0, 0.5, 0),
+  new THREE.Vector3(0, 0.6, 0),
+  new THREE.Vector3(-0.2, 0.75, 2),      // starting to aim forward into cockpit
+  new THREE.Vector3(-0.35, 0.78, 5),     // forward through the windshield
+  new THREE.Vector3(-0.35, 0.78, 10),    // deep forward, out the windshield
+];
+const lookCurve = new THREE.CatmullRomCurve3(lookPoints, false, 'catmullrom', 0.5);
+
+/* ── Scroll wiring ── */
+const sections = [
+  { start: 0.00, end: 0.18, text: 'McLAREN P1' },
+  { start: 0.18, end: 0.38, text: 'CARBON FIBRE MONOCOQUE' },
+  { start: 0.38, end: 0.62, text: 'FROM EVERY ANGLE' },
+  { start: 0.62, end: 0.82, text: 'ENTERING THE COCKPIT' },
+  { start: 0.82, end: 1.00, text: "PURE DRIVER'S CAR" },
+];
+
+/* Overlays driven directly from scrollProgress inside animate() */
+const overlayRefs = {
+  hero: document.getElementById('hero'),
+  about: document.getElementById('about-overlay'),
+  services: document.getElementById('services-overlay'),
+  tech: document.getElementById('tech-overlay'),
+  contact: document.getElementById('contact-overlay'),
+};
+const lastOp = { hero: -1, about: -1, services: -1, tech: -1, contact: -1 };
+
+function rampPulse(p, start, peakIn, peakOut, end) {
+  if (p < start || p > end) return 0;
+  if (p < peakIn) return (p - start) / (peakIn - start);
+  if (p > peakOut) return 1 - (p - peakOut) / (end - peakOut);
+  return 1;
+}
+function applyOverlay(key, value) {
+  const el = overlayRefs[key];
+  if (!el) return;
+  if (Math.abs(value - lastOp[key]) < 0.01) return;
+  lastOp[key] = value;
+  el.style.opacity = value;
+  if (value > 0.02) el.classList.add('active');
+  else el.classList.remove('active');
+}
+
+function initScrollAnimation() {
+  ScrollTrigger.create({
+    trigger: 'body',
+    start: 'top top',
+    end: 'bottom bottom',
+    scrub: 2,
+    onUpdate: (self) => { scrollProgress = self.progress; }
+  });
+  ScrollTrigger.refresh();
+}
+
+/* ── Section label ── */
+const labelEl = document.getElementById('section-label');
+let currentLabel = '';
+function updateSectionLabel(p) {
+  let txt = '';
+  for (const s of sections) if (p >= s.start && p <= s.end) { txt = s.text; break; }
+  if (txt !== currentLabel) {
+    currentLabel = txt;
+    if (!txt) { labelEl.classList.remove('show'); return; }
+    gsap.to(labelEl, { opacity: 0, duration: .25, onComplete: () => {
+      labelEl.textContent = txt;
+      labelEl.classList.add('show');
+      gsap.to(labelEl, { opacity: 1, duration: .5 });
+    }});
+  }
+}
+
+/* ── Animate ── */
+const progressLine = document.getElementById('progress-line');
+const topPct = document.getElementById('top-pct');
+let rafId = 0, paused = false;
+
+function animate() {
+  rafId = requestAnimationFrame(animate);
+  if (paused) return;
+
+  const t = scrollProgress;
+
+  if (carReady) {
+    const newPos = camCurve.getPoint(t);
+    const newLook = lookCurve.getPoint(t);
+    camera.position.lerp(newPos, 0.04);
+    targetLookAt.lerp(newLook, 0.04);
+    camera.lookAt(targetLookAt);
+    camera.position.y += Math.sin(Date.now() * 0.0005) * 0.003;
+  }
+
+  interiorLight.intensity = Math.max(0, (t - 0.6) * 5);
+  renderer.toneMappingExposure = 1.3 + t * 0.4;
+  floor.rotation.z += 0.0003;
+
+  // Overlays — fade both directions based on scroll
+  applyOverlay('hero',     Math.max(0, Math.min(1, 1 - t * 6)));
+  applyOverlay('about',    rampPulse(t, 0.15, 0.22, 0.32, 0.40));
+  applyOverlay('services', rampPulse(t, 0.40, 0.46, 0.54, 0.60));
+  applyOverlay('tech',     rampPulse(t, 0.60, 0.66, 0.74, 0.80));
+  applyOverlay('contact',  rampPulse(t, 0.82, 0.90, 1.00, 1.00));
+
+  // UI
+  const pct = Math.round(t * 100);
+  progressLine.style.width = (t * 100) + '%';
+  topPct.textContent = String(pct).padStart(2, '0') + '%';
+  updateSectionLabel(t);
+
+  renderer.render(scene, camera);
+}
+animate();
+
+/* ── Resize ── */
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  ScrollTrigger.refresh();
+});
+
+/* ── Visibility ── */
+document.addEventListener('visibilitychange', () => {
+  paused = document.hidden;
+});
+
+/* ── Custom cursor ── */
+(function(){
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  if (!cursor || !ring) return;
+  let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+  let rx = mx, ry = my;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  document.addEventListener('mousedown', () => ring.classList.add('hover'));
+  document.addEventListener('mouseup', () => ring.classList.remove('hover'));
+  // hover state on interactives
+  document.addEventListener('mouseover', e => {
+    const t = e.target;
+    if (t && (t.matches('a, button, input, select, textarea, .pill'))) ring.classList.add('hover');
+  }, true);
+  document.addEventListener('mouseout', e => {
+    const t = e.target;
+    if (t && (t.matches('a, button, input, select, textarea, .pill'))) ring.classList.remove('hover');
+  }, true);
+  (function tick(){
+    rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(tick);
+  })();
+})();
+
+/* ── Hint fade ── */
+gsap.to('#hint', { opacity: 0, delay: 5, duration: 1, onComplete: () => { const h = document.getElementById('hint'); if (h) h.style.display = 'none'; } });
+
+/* ── Contact form (SMTP via /api/contact) ── */
+const form = document.getElementById('contact-form');
+const successEl = document.getElementById('success');
+const sendBtn = document.getElementById('send-btn');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  sendBtn.disabled = true;
+  sendBtn.textContent = 'Sending…';
+  const fd = new FormData(form);
+  const payload = {
+    name: (fd.get('name') || '').toString().trim(),
+    email: (fd.get('email') || '').toString().trim(),
+    projectType: (fd.get('projectType') || '').toString(),
+    budget: (fd.get('budget') || '').toString(),
+    message: (fd.get('message') || '').toString().trim(),
+  };
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (res.ok && data.ok) {
+      form.style.display = 'none';
+      successEl.classList.add('show');
+    } else {
+      sendBtn.disabled = false;
+      sendBtn.textContent = 'Send Message →';
+      alert((data && data.error) || 'Could not send — email polidorispaxio@gmail.com');
+    }
+  } catch {
+    sendBtn.disabled = false;
+    sendBtn.textContent = 'Send Message →';
+    alert('Could not send — email polidorispaxio@gmail.com');
+  }
+});
+</script>
+</body>
+</html>

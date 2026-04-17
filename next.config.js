@@ -10,6 +10,18 @@ const nextConfig = {
         pathname: "/**"
       }
     ]
+  },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        { source: "/", destination: "/car/index.html" }
+      ],
+      afterFiles: [
+        { source: "/car", destination: "/car/index.html" },
+        { source: "/car/", destination: "/car/index.html" }
+      ],
+      fallback: []
+    };
   }
 };
 
