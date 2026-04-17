@@ -31,7 +31,7 @@
   ::-webkit-scrollbar { width: 0; height: 0; display: none; }
   * { scrollbar-width: none; }
   html, body { width: 100%; background: var(--ink); color: var(--cream); font-family: var(--mono); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-  body { min-height: 700vh; cursor: none; }
+  body { min-height: 700vh; cursor: none; touch-action: pan-y; -webkit-overflow-scrolling: touch; }
 
   /* Canvas */
   #c { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; display: block; }
@@ -135,13 +135,77 @@
   @media (max-width: 768px) {
     body { cursor: auto; }
     #cursor, #cursor-ring { display: none; }
-    .topbar { padding: 0 20px; }
-    #about-overlay, #services-overlay { display: none; }
-    #tech-overlay { display: none; }
-    .contact-card { padding: 28px 20px; }
-    .contact-form .row { grid-template-columns: 1fr; }
-    .corner-br { right: 16px; bottom: 56px; }
-    #footer { right: 16px; }
+
+    /* Top bar */
+    .topbar { padding: 0 16px; top: 16px; }
+    .topbar .brand { font-size: 11px; letter-spacing: 3px; }
+    .topbar .pct { font-size: 11px; letter-spacing: 2px; }
+
+    /* Loading */
+    #loading .brand { letter-spacing: 6px; }
+    #loading .sub { font-size: 11px; letter-spacing: 4px; }
+
+    /* Hero */
+    #hero .hero-title { font-size: clamp(36px, 10vw, 56px); }
+    #hero .hero-sub { font-size: 11px; letter-spacing: 3px; margin-top: 1rem; padding: 0 16px; }
+
+    /* Section label */
+    .section-label { font-size: 11px; letter-spacing: 3px; bottom: 44px; }
+    .section-label::before, .section-label::after { width: 14px; margin: 0 8px; }
+
+    /* Hint */
+    #hint { font-size: 10px; letter-spacing: 3px; bottom: 20px; }
+
+    /* Corner / footer */
+    .corner-br { right: 16px; bottom: 48px; font-size: 10px; letter-spacing: 2px; }
+    #footer { right: 16px; bottom: 6px; font-size: 10px; letter-spacing: 2px; }
+
+    /* About overlay — show on mobile, full-width bottom-aligned */
+    #about-overlay { display: flex; flex-direction: column; top: auto; left: 0; right: 0; bottom: 0; transform: none; max-width: 100%; padding: 24px 20px 80px; background: linear-gradient(to top, rgba(10,10,10,0.92) 60%, transparent 100%); }
+    #about-overlay h2 { font-size: clamp(26px, 6vw, 36px); margin-bottom: 14px; }
+    #about-overlay p { font-size: 16px; line-height: 1.55; max-width: 100%; }
+
+    /* Services overlay — show on mobile, full-width bottom-aligned */
+    #services-overlay { display: flex; flex-direction: column; top: auto; left: 0; right: 0; bottom: 0; transform: none; max-width: 100%; padding: 24px 20px 80px; text-align: left; background: linear-gradient(to top, rgba(10,10,10,0.92) 60%, transparent 100%); }
+    #services-overlay .svc { margin-top: 18px; padding-top: 14px; }
+    #services-overlay .svc h3 { font-size: 24px; }
+    #services-overlay .svc p { font-size: 15px; }
+    #services-overlay .work { justify-content: flex-start; gap: 16px; margin-top: 24px; }
+    #services-overlay .work a { font-size: 15px; }
+
+    /* Tech overlay — show on mobile */
+    #tech-overlay { display: flex; padding: 0 16px; }
+    #tech-overlay .tiny { font-size: 12px; letter-spacing: 3px; margin-bottom: 20px; }
+    #tech-overlay .pills { gap: 8px; max-width: 100%; }
+    #tech-overlay .pill { font-size: 11px; letter-spacing: 1px; padding: 8px 14px; }
+
+    /* Contact */
+    #contact-overlay { padding: 16px; }
+    .contact-card { padding: 24px 16px; width: min(560px, 96vw); }
+    .contact-card h2 { font-size: 26px; }
+    .contact-card .tag { font-size: 10px; letter-spacing: 3px; margin-bottom: 20px; }
+    .contact-form .row { grid-template-columns: 1fr; gap: 0; }
+    .contact-form input, .contact-form select, .contact-form textarea { font-size: 16px; /* prevents iOS zoom */ }
+    .contact-form label { font-size: 10px; }
+    .contact-form .send-row { flex-direction: column; align-items: stretch; gap: 12px; }
+    .contact-form button { width: 100%; text-align: center; }
+    .contact-form .email { text-align: center; font-size: 14px; }
+    .contact-form .privacy { font-size: 10px; text-align: center; }
+
+    /* Vignette — stronger on mobile for text contrast */
+    .vignette { background: radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.88) 100%); }
+
+    /* Progress line */
+    .progress-line { height: 2px; }
+  }
+
+  /* Small phones */
+  @media (max-width: 380px) {
+    #hero .hero-title { font-size: 32px; }
+    #about-overlay h2 { font-size: 24px; }
+    .contact-card { padding: 20px 12px; }
+    .contact-card h2 { font-size: 22px; }
+    #tech-overlay .pill { font-size: 10px; padding: 6px 10px; }
   }
 </style>
 </head>
@@ -149,7 +213,7 @@
 
 <!-- Loading -->
 <div id="loading">
-  <div class="brand">McLAREN&nbsp;P1</div>
+  <div class="brand">SPAXIO</div>
   <div class="sub">Spaxio · Montreal</div>
   <div class="pct" id="pct">0%</div>
 </div>
@@ -290,7 +354,7 @@
 
 <script>
 /* ══════════════════════════════════════════════
-   Spaxio — Cinematic McLaren P1 scroll journey
+   Spaxio — Cinematic scroll journey
    ══════════════════════════════════════════════ */
 gsap.registerPlugin(ScrollTrigger);
 THREE.RectAreaLightUniformsLib.init();
@@ -301,8 +365,8 @@ const isMobile = window.innerWidth < 768;
 const canvas = document.getElementById('c');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.shadowMap.enabled = true;
+renderer.setPixelRatio(isMobile ? Math.min(window.devicePixelRatio, 1.5) : Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = !isMobile;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.3;
@@ -503,7 +567,7 @@ const lookCurve = new THREE.CatmullRomCurve3(lookPoints, false, 'catmullrom', 0.
 
 /* ── Scroll wiring ── */
 const sections = [
-  { start: 0.00, end: 0.18, text: 'McLAREN P1' },
+  { start: 0.00, end: 0.18, text: 'SPAXIO' },
   { start: 0.18, end: 0.38, text: 'CARBON FIBRE MONOCOQUE' },
   { start: 0.38, end: 0.62, text: 'FROM EVERY ANGLE' },
   { start: 0.62, end: 0.82, text: 'ENTERING THE COCKPIT' },
