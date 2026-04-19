@@ -3,7 +3,14 @@
     "allow": [
       "Bash(git *)",
       "Bash(npm install *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(grep -iE \"page\\\\.tsx|\\\\.tsx$\")",
+      "Bash(curl -s http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(awk '/<\\\\/head>/{exit} /<script /{c++} END{print c+0}')",
+      "Bash(node scripts/perf-smoke.mjs)",
+      "Bash(kill %1)",
+      "Bash(wait)"
     ]
   }
 }

@@ -53,7 +53,14 @@ export const metadata: Metadata = {
       "max-video-preview": -1
     }
   },
-  icons: { icon: "/favicon.png", shortcut: "/favicon.png", apple: "/favicon.png" },
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.png", type: "image/png" }
+    ],
+    shortcut: "/favicon.svg",
+    apple: "/favicon.png"
+  },
   referrer: "origin-when-cross-origin",
   formatDetection: { email: false, address: false, telephone: false }
 };

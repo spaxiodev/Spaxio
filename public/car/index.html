@@ -5,15 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Spaxio — Luxe-grade web builds at honest prices</title>
 <meta name="description" content="Spaxio builds luxe-grade, luxury-inspired websites at honest prices. Montreal, 2026." />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon.png" type="image/png" sizes="any" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet" />
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/lights/RectAreaLightUniformsLib.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 <style>
   :root {
@@ -207,6 +203,61 @@
     .contact-card h2 { font-size: 22px; }
     #tech-overlay .pill { font-size: 10px; padding: 6px 10px; }
   }
+
+  /* ── Lite mode (low-power / reduced-motion / no-WebGL) ──
+     Skips Three.js entirely, stacks overlays as a normal scrolling page. */
+  body.lite { min-height: auto; cursor: auto; touch-action: auto; overflow-x: hidden; }
+  body.lite::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(130,170,220,.08), transparent 55%),
+      radial-gradient(ellipse at 80% 90%, rgba(255,180,120,.10), transparent 55%),
+      linear-gradient(180deg, #0c0c0e 0%, #070708 100%);
+  }
+  body.lite #c,
+  body.lite .vignette,
+  body.lite #cursor,
+  body.lite #cursor-ring,
+  body.lite #loading,
+  body.lite .loading-bar,
+  body.lite .section-label,
+  body.lite #hint,
+  body.lite .corner-br { display: none !important; }
+  body.lite .progress-line { display: none; }
+  body.lite .topbar { position: absolute; }
+  body.lite .topbar .pct { display: none; }
+  body.lite #footer { position: static; text-align: center; margin: 32px 0 24px; right: auto; }
+  body.lite #footer a { margin-left: 12px; }
+
+  /* Overlays become normal stacked sections */
+  body.lite .overlay {
+    position: relative;
+    inset: auto;
+    transform: none;
+    opacity: 1 !important;
+    pointer-events: auto;
+    max-width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 8% 80px;
+    transition: none;
+    background: transparent;
+  }
+  body.lite #hero { align-items: center; text-align: center; padding-top: 160px; min-height: 100vh; }
+  body.lite #about-overlay { align-items: flex-start; text-align: left; }
+  body.lite #services-overlay { align-items: flex-end; text-align: right; }
+  body.lite #tech-overlay { align-items: center; text-align: center; }
+  body.lite #contact-overlay { align-items: center; padding: 80px 4%; min-height: auto; }
+  body.lite .contact-card { background: rgba(14,14,16,0.72); }
+
+  @media (max-width: 768px) {
+    body.lite .overlay { padding: 100px 20px 60px; }
+    body.lite #services-overlay { align-items: flex-start; text-align: left; }
+    body.lite #services-overlay .work { justify-content: flex-start; }
+  }
 </style>
 </head>
 <body>
@@ -356,399 +407,496 @@
 /* ══════════════════════════════════════════════
    Spaxio — Cinematic scroll journey
    ══════════════════════════════════════════════ */
-gsap.registerPlugin(ScrollTrigger);
-THREE.RectAreaLightUniformsLib.init();
 
-const isMobile = window.innerWidth < 768;
-
-/* ── Renderer ── */
-const canvas = document.getElementById('c');
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(isMobile ? Math.min(window.devicePixelRatio, 1.5) : Math.min(window.devicePixelRatio, 2));
-renderer.shadowMap.enabled = !isMobile;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.3;
-renderer.outputEncoding = THREE.sRGBEncoding;
-renderer.physicallyCorrectLights = true;
-renderer.setClearColor(0x0a0a0a);
-
-/* ── Scene ── */
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x0a0a0a);
-scene.fog = new THREE.Fog(0x0a0a0a, 15, 45);
-
-/* ── Camera ── */
-const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.05, 200);
-camera.position.set(0, 2.2, 13);
-
-/* ── Environment (procedural studio for reflections) ── */
-(function(){
-  const ec = document.createElement('canvas');
-  ec.width = 512; ec.height = 256;
-  const ctx = ec.getContext('2d');
-  const g = ctx.createLinearGradient(0, 0, 0, 256);
-  g.addColorStop(0, '#2a2e38'); g.addColorStop(0.35, '#12141a');
-  g.addColorStop(0.5, '#08090c'); g.addColorStop(0.65, '#0a0a0a');
-  g.addColorStop(1, '#040404');
-  ctx.fillStyle = g; ctx.fillRect(0, 0, 512, 256);
-  ctx.fillStyle = 'rgba(255,245,225,0.92)';
-  ctx.fillRect(90, 20, 120, 36);
-  ctx.fillRect(300, 20, 120, 36);
-  const warm = ctx.createRadialGradient(430, 130, 0, 430, 130, 140);
-  warm.addColorStop(0, 'rgba(255,180,120,0.5)');
-  warm.addColorStop(1, 'rgba(255,180,120,0)');
-  ctx.fillStyle = warm; ctx.fillRect(270, 0, 250, 230);
-  const cool = ctx.createRadialGradient(80, 130, 0, 80, 130, 140);
-  cool.addColorStop(0, 'rgba(130,170,220,0.42)');
-  cool.addColorStop(1, 'rgba(130,170,220,0)');
-  ctx.fillStyle = cool; ctx.fillRect(0, 0, 260, 230);
-  const tex = new THREE.CanvasTexture(ec);
-  tex.mapping = THREE.EquirectangularReflectionMapping;
-  tex.encoding = THREE.sRGBEncoding;
-  const pmrem = new THREE.PMREMGenerator(renderer);
-  pmrem.compileEquirectangularShader();
-  scene.environment = pmrem.fromEquirectangular(tex).texture;
-  pmrem.dispose();
-})();
-
-/* ── Lighting ── */
-const hemi = new THREE.HemisphereLight(0x303848, 0x000000, 0.15);
-scene.add(hemi);
-
-const keyLight = new THREE.RectAreaLight(0xfff5e0, 8, 12, 8);
-keyLight.position.set(0, 8, 2);
-keyLight.lookAt(0, 0, 0);
-scene.add(keyLight);
-
-const fillLight = new THREE.RectAreaLight(0xd0e8ff, 4, 8, 6);
-fillLight.position.set(-7, 4, 3);
-fillLight.lookAt(0, 0, 0);
-scene.add(fillLight);
-
-const rimLight = new THREE.RectAreaLight(0xffd0a0, 6, 6, 6);
-rimLight.position.set(6, 3, -5);
-rimLight.lookAt(0, 0, 0);
-scene.add(rimLight);
-
-const bounceLight = new THREE.RectAreaLight(0x223344, 2, 10, 10);
-bounceLight.position.set(0, -1, 0);
-bounceLight.lookAt(0, 2, 0);
-scene.add(bounceLight);
-
-const interiorLight = new THREE.PointLight(0xff8c00, 0, 3);
-interiorLight.position.set(0, 0.5, 0.5);
-scene.add(interiorLight);
-
-// Shadow caster (RectAreaLights don't cast shadows in r128)
-const shadowCaster = new THREE.SpotLight(0xffffff, 0.45, 24, Math.PI / 6, 0.6, 1.5);
-shadowCaster.position.set(0, 10, 2);
-shadowCaster.target.position.set(0, 0, 0);
-shadowCaster.castShadow = true;
-shadowCaster.shadow.mapSize.set(isMobile ? 1024 : 2048, isMobile ? 1024 : 2048);
-shadowCaster.shadow.bias = -0.0005;
-shadowCaster.shadow.radius = 6;
-scene.add(shadowCaster);
-scene.add(shadowCaster.target);
-
-/* ── Floor + pucks ── */
-const floor = new THREE.Mesh(
-  new THREE.CircleGeometry(12, 64),
-  new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.2, metalness: 0.8 })
-);
-floor.rotation.x = -Math.PI / 2;
-floor.position.y = -0.01;
-floor.receiveShadow = true;
-scene.add(floor);
-
-// subtle ring trim
-const ring = new THREE.Mesh(
-  new THREE.RingGeometry(11.88, 12.0, 128),
-  new THREE.MeshBasicMaterial({ color: 0x1a1a1a })
-);
-ring.rotation.x = -Math.PI / 2; ring.position.y = 0.001;
-scene.add(ring);
-
-const puckMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xfff2d0, emissiveIntensity: 0.8, roughness: 0.4, metalness: 0.0 });
-[[-3.5, -3], [3.5, -3], [-3.5, 3], [3.5, 3]].forEach(([x, z]) => {
-  const puck = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.04, 32), puckMat);
-  puck.position.set(x, 0.005, z); scene.add(puck);
-  const pl = new THREE.PointLight(0xfff2d0, 0.5, 4, 2);
-  pl.position.set(x, 0.3, z); scene.add(pl);
-});
-
-/* ── Load GLB ── */
-let scrollProgress = 0;
-let carReady = false;
-const targetCamPos = new THREE.Vector3(0, 2.2, 13);
-const targetLookAt = new THREE.Vector3(0, 0.6, 0);
-
-const loader = new THREE.GLTFLoader();
-loader.load(
-  '/car/ac_-_mclaren_p1_free.glb',
-  (gltf) => {
-    const model = gltf.scene;
-    const box = new THREE.Box3().setFromObject(model);
-    const center = box.getCenter(new THREE.Vector3());
-    const size = box.getSize(new THREE.Vector3());
-    const maxDim = Math.max(size.x, size.y, size.z);
-    const scale = 5 / maxDim;
-    model.scale.setScalar(scale);
-    model.position.copy(center).multiplyScalar(-scale);
-    model.position.y = 0;
-    model.traverse(child => {
-      if (child.isMesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
-        if (child.material) {
-          child.material.envMapIntensity = 1.2;
-        }
-      }
-    });
-    scene.add(model);
-    carReady = true;
-    hideLoadingScreen();
-    initScrollAnimation();
-  },
-  (progress) => {
-    if (progress.lengthComputable) {
-      updateLoadingBar((progress.loaded / progress.total) * 100);
-    } else {
-      updateLoadingBar(Math.min(95, (progress.loaded / (12 * 1024 * 1024)) * 100));
-    }
-  },
-  (error) => {
-    console.error('GLB load error:', error);
-    document.getElementById('pct').textContent = 'ERROR';
-  }
-);
-
-function updateLoadingBar(pct) {
-  document.getElementById('load-bar').style.width = pct + '%';
-  document.getElementById('pct').textContent = Math.round(pct) + '%';
-}
-function hideLoadingScreen() {
-  updateLoadingBar(100);
-  gsap.to('#loading', {
-    opacity: 0, duration: 1,
-    onComplete: () => {
-      const el = document.getElementById('loading');
-      if (el) el.style.display = 'none';
-      gsap.to('.loading-bar', { opacity: 0, duration: .5, onComplete: () => { const l = document.querySelector('.loading-bar'); if (l) l.style.display = 'none'; } });
-    }
-  });
-}
-
-/* ── Camera curves ── */
-const cameraPoints = [
-  new THREE.Vector3(0, 2.2, 13),         // 0%   — hero front (nose)
-  new THREE.Vector3(4.5, 1.8, 8),        // 14%  — front-right 3/4
-  new THREE.Vector3(6, 1.3, 0),          // 28%  — side profile
-  new THREE.Vector3(5, 1.4, -7),         // 42%  — rear 3/4 right
-  new THREE.Vector3(0, 1.8, -10),        // 57%  — rear hero (back of car)
-  new THREE.Vector3(0, 1.15, -4),        // 71%  — flying forward from the rear
-  new THREE.Vector3(-0.2, 0.92, -0.5),   // 85%  — passing through engine bay into cockpit
-  new THREE.Vector3(-0.35, 0.82, 0.3),   // 100% — seated in driver's seat (LHD, eye level)
-];
-const camCurve = new THREE.CatmullRomCurve3(cameraPoints, false, 'catmullrom', 0.5);
-
-const lookPoints = [
-  new THREE.Vector3(0, 0.6, 0),          // car center
-  new THREE.Vector3(0, 0.5, 0),
-  new THREE.Vector3(0, 0.5, 0),
-  new THREE.Vector3(0, 0.5, 0),
-  new THREE.Vector3(0, 0.6, 0),
-  new THREE.Vector3(-0.2, 0.75, 2),      // starting to aim forward into cockpit
-  new THREE.Vector3(-0.35, 0.78, 5),     // forward through the windshield
-  new THREE.Vector3(-0.35, 0.78, 10),    // deep forward, out the windshield
-];
-const lookCurve = new THREE.CatmullRomCurve3(lookPoints, false, 'catmullrom', 0.5);
-
-/* ── Scroll wiring ── */
-const sections = [
-  { start: 0.00, end: 0.18, text: 'SPAXIO' },
-  { start: 0.18, end: 0.38, text: 'CARBON FIBRE MONOCOQUE' },
-  { start: 0.38, end: 0.62, text: 'FROM EVERY ANGLE' },
-  { start: 0.62, end: 0.82, text: 'ENTERING THE COCKPIT' },
-  { start: 0.82, end: 1.00, text: "PURE DRIVER'S CAR" },
-];
-
-/* Overlays driven directly from scrollProgress inside animate() */
-const overlayRefs = {
-  hero: document.getElementById('hero'),
-  about: document.getElementById('about-overlay'),
-  services: document.getElementById('services-overlay'),
-  tech: document.getElementById('tech-overlay'),
-  contact: document.getElementById('contact-overlay'),
-};
-const lastOp = { hero: -1, about: -1, services: -1, tech: -1, contact: -1 };
-
-function rampPulse(p, start, peakIn, peakOut, end) {
-  if (p < start || p > end) return 0;
-  if (p < peakIn) return (p - start) / (peakIn - start);
-  if (p > peakOut) return 1 - (p - peakOut) / (end - peakOut);
-  return 1;
-}
-function applyOverlay(key, value) {
-  const el = overlayRefs[key];
-  if (!el) return;
-  if (Math.abs(value - lastOp[key]) < 0.01) return;
-  lastOp[key] = value;
-  el.style.opacity = value;
-  if (value > 0.02) el.classList.add('active');
-  else el.classList.remove('active');
-}
-
-function initScrollAnimation() {
-  ScrollTrigger.create({
-    trigger: 'body',
-    start: 'top top',
-    end: 'bottom bottom',
-    scrub: 2,
-    onUpdate: (self) => { scrollProgress = self.progress; }
-  });
-  ScrollTrigger.refresh();
-}
-
-/* ── Section label ── */
-const labelEl = document.getElementById('section-label');
-let currentLabel = '';
-function updateSectionLabel(p) {
-  let txt = '';
-  for (const s of sections) if (p >= s.start && p <= s.end) { txt = s.text; break; }
-  if (txt !== currentLabel) {
-    currentLabel = txt;
-    if (!txt) { labelEl.classList.remove('show'); return; }
-    gsap.to(labelEl, { opacity: 0, duration: .25, onComplete: () => {
-      labelEl.textContent = txt;
-      labelEl.classList.add('show');
-      gsap.to(labelEl, { opacity: 1, duration: .5 });
-    }});
-  }
-}
-
-/* ── Animate ── */
-const progressLine = document.getElementById('progress-line');
-const topPct = document.getElementById('top-pct');
-let rafId = 0, paused = false;
-
-function animate() {
-  rafId = requestAnimationFrame(animate);
-  if (paused) return;
-
-  const t = scrollProgress;
-
-  if (carReady) {
-    const newPos = camCurve.getPoint(t);
-    const newLook = lookCurve.getPoint(t);
-    camera.position.lerp(newPos, 0.04);
-    targetLookAt.lerp(newLook, 0.04);
-    camera.lookAt(targetLookAt);
-    camera.position.y += Math.sin(Date.now() * 0.0005) * 0.003;
-  }
-
-  interiorLight.intensity = Math.max(0, (t - 0.6) * 5);
-  renderer.toneMappingExposure = 1.3 + t * 0.4;
-  floor.rotation.z += 0.0003;
-
-  // Overlays — fade both directions based on scroll
-  applyOverlay('hero',     Math.max(0, Math.min(1, 1 - t * 6)));
-  applyOverlay('about',    rampPulse(t, 0.15, 0.22, 0.32, 0.40));
-  applyOverlay('services', rampPulse(t, 0.40, 0.46, 0.54, 0.60));
-  applyOverlay('tech',     rampPulse(t, 0.60, 0.66, 0.74, 0.80));
-  applyOverlay('contact',  rampPulse(t, 0.82, 0.90, 1.00, 1.00));
-
-  // UI
-  const pct = Math.round(t * 100);
-  progressLine.style.width = (t * 100) + '%';
-  topPct.textContent = String(pct).padStart(2, '0') + '%';
-  updateSectionLabel(t);
-
-  renderer.render(scene, camera);
-}
-animate();
-
-/* ── Resize ── */
-window.addEventListener('resize', () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  ScrollTrigger.refresh();
-});
-
-/* ── Visibility ── */
-document.addEventListener('visibilitychange', () => {
-  paused = document.hidden;
-});
-
-/* ── Custom cursor ── */
-(function(){
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursor-ring');
-  if (!cursor || !ring) return;
-  let mx = window.innerWidth / 2, my = window.innerHeight / 2;
-  let rx = mx, ry = my;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  document.addEventListener('mousedown', () => ring.classList.add('hover'));
-  document.addEventListener('mouseup', () => ring.classList.remove('hover'));
-  // hover state on interactives
-  document.addEventListener('mouseover', e => {
-    const t = e.target;
-    if (t && (t.matches('a, button, input, select, textarea, .pill'))) ring.classList.add('hover');
-  }, true);
-  document.addEventListener('mouseout', e => {
-    const t = e.target;
-    if (t && (t.matches('a, button, input, select, textarea, .pill'))) ring.classList.remove('hover');
-  }, true);
-  (function tick(){
-    rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
-    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(tick);
-  })();
-})();
-
-/* ── Hint fade ── */
-gsap.to('#hint', { opacity: 0, delay: 5, duration: 1, onComplete: () => { const h = document.getElementById('hint'); if (h) h.style.display = 'none'; } });
-
-/* ── Contact form (SMTP via /api/contact) ── */
-const form = document.getElementById('contact-form');
-const successEl = document.getElementById('success');
-const sendBtn = document.getElementById('send-btn');
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  sendBtn.disabled = true;
-  sendBtn.textContent = 'Sending…';
-  const fd = new FormData(form);
-  const payload = {
-    name: (fd.get('name') || '').toString().trim(),
-    email: (fd.get('email') || '').toString().trim(),
-    projectType: (fd.get('projectType') || '').toString(),
-    budget: (fd.get('budget') || '').toString(),
-    message: (fd.get('message') || '').toString().trim(),
-  };
+/* ── Device capability detection ──
+   Lite mode skips Three.js/GSAP entirely and renders a stacked static page. */
+function detectLowPower() {
   try {
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-    const data = await res.json().catch(() => ({}));
-    if (res.ok && data.ok) {
-      form.style.display = 'none';
-      successEl.classList.add('show');
-    } else {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return true;
+    const c = navigator.connection;
+    if (c) {
+      if (c.saveData) return true;
+      if (/^(slow-2g|2g)$/.test(c.effectiveType || '')) return true;
+    }
+    if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) return true;
+    if (navigator.deviceMemory && navigator.deviceMemory <= 2) return true;
+    const cv = document.createElement('canvas');
+    const gl = cv.getContext('webgl2') || cv.getContext('webgl') || cv.getContext('experimental-webgl');
+    if (!gl) return true;
+  } catch (e) { return true; }
+  return false;
+}
+
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = src;
+    s.onload = resolve;
+    s.onerror = () => reject(new Error('Failed to load ' + src));
+    document.head.appendChild(s);
+  });
+}
+
+/* ── Contact form (used in both modes) ── */
+function wireContactForm() {
+  const form = document.getElementById('contact-form');
+  const successEl = document.getElementById('success');
+  const sendBtn = document.getElementById('send-btn');
+  if (!form) return;
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    sendBtn.disabled = true;
+    sendBtn.textContent = 'Sending…';
+    const fd = new FormData(form);
+    const payload = {
+      name: (fd.get('name') || '').toString().trim(),
+      email: (fd.get('email') || '').toString().trim(),
+      projectType: (fd.get('projectType') || '').toString(),
+      budget: (fd.get('budget') || '').toString(),
+      message: (fd.get('message') || '').toString().trim(),
+    };
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        form.style.display = 'none';
+        successEl.classList.add('show');
+      } else {
+        sendBtn.disabled = false;
+        sendBtn.textContent = 'Send Message →';
+        alert((data && data.error) || 'Could not send — email polidorispaxio@gmail.com');
+      }
+    } catch {
       sendBtn.disabled = false;
       sendBtn.textContent = 'Send Message →';
-      alert((data && data.error) || 'Could not send — email polidorispaxio@gmail.com');
+      alert('Could not send — email polidorispaxio@gmail.com');
     }
-  } catch {
-    sendBtn.disabled = false;
-    sendBtn.textContent = 'Send Message →';
-    alert('Could not send — email polidorispaxio@gmail.com');
+  });
+}
+
+/* ── Lite fallback ── */
+function initLite() {
+  document.body.classList.add('lite');
+  const l = document.getElementById('loading'); if (l) l.style.display = 'none';
+  const lb = document.querySelector('.loading-bar'); if (lb) lb.style.display = 'none';
+  wireContactForm();
+}
+
+/* ── Full 3D scene ── */
+function initScene() {
+  gsap.registerPlugin(ScrollTrigger);
+  THREE.RectAreaLightUniformsLib.init();
+
+  // Treat tablets and coarse-pointer devices as mobile
+  const isMobile = matchMedia('(max-width: 1024px)').matches || matchMedia('(pointer: coarse)').matches;
+
+  /* ── Renderer ── */
+  const canvas = document.getElementById('c');
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: !isMobile,
+    alpha: false,
+    powerPreference: 'high-performance',
+    stencil: false
+  });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 1.75));
+  renderer.shadowMap.enabled = !isMobile;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.3;
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.physicallyCorrectLights = !isMobile;
+  renderer.setClearColor(0x0a0a0a);
+
+  /* ── Scene ── */
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x0a0a0a);
+  scene.fog = new THREE.Fog(0x0a0a0a, 15, 45);
+
+  /* ── Camera ── */
+  const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.05, 200);
+  camera.position.set(0, 2.2, 13);
+
+  /* ── Environment (procedural studio for reflections) ── */
+  (function(){
+    const ec = document.createElement('canvas');
+    ec.width = 512; ec.height = 256;
+    const ctx = ec.getContext('2d');
+    const g = ctx.createLinearGradient(0, 0, 0, 256);
+    g.addColorStop(0, '#2a2e38'); g.addColorStop(0.35, '#12141a');
+    g.addColorStop(0.5, '#08090c'); g.addColorStop(0.65, '#0a0a0a');
+    g.addColorStop(1, '#040404');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, 512, 256);
+    ctx.fillStyle = 'rgba(255,245,225,0.92)';
+    ctx.fillRect(90, 20, 120, 36);
+    ctx.fillRect(300, 20, 120, 36);
+    const warm = ctx.createRadialGradient(430, 130, 0, 430, 130, 140);
+    warm.addColorStop(0, 'rgba(255,180,120,0.5)');
+    warm.addColorStop(1, 'rgba(255,180,120,0)');
+    ctx.fillStyle = warm; ctx.fillRect(270, 0, 250, 230);
+    const cool = ctx.createRadialGradient(80, 130, 0, 80, 130, 140);
+    cool.addColorStop(0, 'rgba(130,170,220,0.42)');
+    cool.addColorStop(1, 'rgba(130,170,220,0)');
+    ctx.fillStyle = cool; ctx.fillRect(0, 0, 260, 230);
+    const tex = new THREE.CanvasTexture(ec);
+    tex.mapping = THREE.EquirectangularReflectionMapping;
+    tex.encoding = THREE.sRGBEncoding;
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    pmrem.compileEquirectangularShader();
+    scene.environment = pmrem.fromEquirectangular(tex).texture;
+    pmrem.dispose();
+  })();
+
+  /* ── Lighting ── */
+  const hemi = new THREE.HemisphereLight(0x404858, 0x000000, isMobile ? 0.35 : 0.15);
+  scene.add(hemi);
+
+  // Desktop: 4 RectAreaLights for full luxury feel.
+  // Mobile: 1 RectArea (key) + cheap Directional (rim). RectArea fragment cost is high.
+  const keyLight = new THREE.RectAreaLight(0xfff5e0, 8, 12, 8);
+  keyLight.position.set(0, 8, 2);
+  keyLight.lookAt(0, 0, 0);
+  scene.add(keyLight);
+
+  if (!isMobile) {
+    const fillLight = new THREE.RectAreaLight(0xd0e8ff, 4, 8, 6);
+    fillLight.position.set(-7, 4, 3);
+    fillLight.lookAt(0, 0, 0);
+    scene.add(fillLight);
+
+    const rimLight = new THREE.RectAreaLight(0xffd0a0, 6, 6, 6);
+    rimLight.position.set(6, 3, -5);
+    rimLight.lookAt(0, 0, 0);
+    scene.add(rimLight);
+
+    const bounceLight = new THREE.RectAreaLight(0x223344, 2, 10, 10);
+    bounceLight.position.set(0, -1, 0);
+    bounceLight.lookAt(0, 2, 0);
+    scene.add(bounceLight);
+  } else {
+    const fillDir = new THREE.DirectionalLight(0xd0e8ff, 0.6);
+    fillDir.position.set(-7, 4, 3);
+    scene.add(fillDir);
+    const rimDir = new THREE.DirectionalLight(0xffd0a0, 0.8);
+    rimDir.position.set(6, 3, -5);
+    scene.add(rimDir);
   }
-});
+
+  const interiorLight = new THREE.PointLight(0xff8c00, 0, 3);
+  interiorLight.position.set(0, 0.5, 0.5);
+  scene.add(interiorLight);
+
+  // Shadow caster (desktop only — shadowMap disabled on mobile anyway)
+  if (!isMobile) {
+    const shadowCaster = new THREE.SpotLight(0xffffff, 0.45, 24, Math.PI / 6, 0.6, 1.5);
+    shadowCaster.position.set(0, 10, 2);
+    shadowCaster.target.position.set(0, 0, 0);
+    shadowCaster.castShadow = true;
+    shadowCaster.shadow.mapSize.set(1024, 1024);
+    shadowCaster.shadow.bias = -0.0005;
+    shadowCaster.shadow.radius = 3;
+    scene.add(shadowCaster);
+    scene.add(shadowCaster.target);
+  }
+
+  /* ── Floor + pucks ── */
+  const floor = new THREE.Mesh(
+    new THREE.CircleGeometry(12, isMobile ? 32 : 64),
+    new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.2, metalness: 0.8 })
+  );
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.y = -0.01;
+  floor.receiveShadow = !isMobile;
+  scene.add(floor);
+
+  // subtle ring trim
+  const ring = new THREE.Mesh(
+    new THREE.RingGeometry(11.88, 12.0, isMobile ? 64 : 128),
+    new THREE.MeshBasicMaterial({ color: 0x1a1a1a })
+  );
+  ring.rotation.x = -Math.PI / 2; ring.position.y = 0.001;
+  scene.add(ring);
+
+  const puckMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xfff2d0, emissiveIntensity: 0.8, roughness: 0.4, metalness: 0.0 });
+  [[-3.5, -3], [3.5, -3], [-3.5, 3], [3.5, 3]].forEach(([x, z]) => {
+    const puck = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.04, isMobile ? 16 : 32), puckMat);
+    puck.position.set(x, 0.005, z); scene.add(puck);
+    const pl = new THREE.PointLight(0xfff2d0, 0.5, 4, 2);
+    pl.position.set(x, 0.3, z); scene.add(pl);
+  });
+
+  /* ── Load GLB ── */
+  let scrollProgress = 0;
+  let carReady = false;
+  const targetLookAt = new THREE.Vector3(0, 0.6, 0);
+
+  const loader = new THREE.GLTFLoader();
+  loader.load(
+    '/car/ac_-_mclaren_p1_free.glb',
+    (gltf) => {
+      const model = gltf.scene;
+      const box = new THREE.Box3().setFromObject(model);
+      const center = box.getCenter(new THREE.Vector3());
+      const size = box.getSize(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const scale = 5 / maxDim;
+      model.scale.setScalar(scale);
+      model.position.copy(center).multiplyScalar(-scale);
+      model.position.y = 0;
+      model.traverse(child => {
+        if (child.isMesh) {
+          child.castShadow = !isMobile;
+          child.receiveShadow = !isMobile;
+          if (child.material) {
+            child.material.envMapIntensity = 1.2;
+          }
+        }
+      });
+      scene.add(model);
+      carReady = true;
+      hideLoadingScreen();
+      initScrollAnimation();
+    },
+    (progress) => {
+      if (progress.lengthComputable) {
+        updateLoadingBar((progress.loaded / progress.total) * 100);
+      } else {
+        updateLoadingBar(Math.min(95, (progress.loaded / (12 * 1024 * 1024)) * 100));
+      }
+    },
+    (error) => {
+      console.error('GLB load error:', error);
+      document.getElementById('pct').textContent = 'ERROR';
+    }
+  );
+
+  function updateLoadingBar(pct) {
+    document.getElementById('load-bar').style.width = pct + '%';
+    document.getElementById('pct').textContent = Math.round(pct) + '%';
+  }
+  function hideLoadingScreen() {
+    updateLoadingBar(100);
+    gsap.to('#loading', {
+      opacity: 0, duration: 1,
+      onComplete: () => {
+        const el = document.getElementById('loading');
+        if (el) el.style.display = 'none';
+        gsap.to('.loading-bar', { opacity: 0, duration: .5, onComplete: () => { const l = document.querySelector('.loading-bar'); if (l) l.style.display = 'none'; } });
+      }
+    });
+  }
+
+  /* ── Camera curves ── */
+  const cameraPoints = [
+    new THREE.Vector3(0, 2.2, 13),
+    new THREE.Vector3(4.5, 1.8, 8),
+    new THREE.Vector3(6, 1.3, 0),
+    new THREE.Vector3(5, 1.4, -7),
+    new THREE.Vector3(0, 1.8, -10),
+    new THREE.Vector3(0, 1.15, -4),
+    new THREE.Vector3(-0.2, 0.92, -0.5),
+    new THREE.Vector3(-0.35, 0.82, 0.3),
+  ];
+  const camCurve = new THREE.CatmullRomCurve3(cameraPoints, false, 'catmullrom', 0.5);
+
+  const lookPoints = [
+    new THREE.Vector3(0, 0.6, 0),
+    new THREE.Vector3(0, 0.5, 0),
+    new THREE.Vector3(0, 0.5, 0),
+    new THREE.Vector3(0, 0.5, 0),
+    new THREE.Vector3(0, 0.6, 0),
+    new THREE.Vector3(-0.2, 0.75, 2),
+    new THREE.Vector3(-0.35, 0.78, 5),
+    new THREE.Vector3(-0.35, 0.78, 10),
+  ];
+  const lookCurve = new THREE.CatmullRomCurve3(lookPoints, false, 'catmullrom', 0.5);
+
+  /* ── Scroll wiring ── */
+  const sections = [
+    { start: 0.00, end: 0.18, text: 'SPAXIO' },
+    { start: 0.18, end: 0.38, text: 'CARBON FIBRE MONOCOQUE' },
+    { start: 0.38, end: 0.62, text: 'FROM EVERY ANGLE' },
+    { start: 0.62, end: 0.82, text: 'ENTERING THE COCKPIT' },
+    { start: 0.82, end: 1.00, text: "PURE DRIVER'S CAR" },
+  ];
+
+  const overlayRefs = {
+    hero: document.getElementById('hero'),
+    about: document.getElementById('about-overlay'),
+    services: document.getElementById('services-overlay'),
+    tech: document.getElementById('tech-overlay'),
+    contact: document.getElementById('contact-overlay'),
+  };
+  const lastOp = { hero: -1, about: -1, services: -1, tech: -1, contact: -1 };
+
+  function rampPulse(p, start, peakIn, peakOut, end) {
+    if (p < start || p > end) return 0;
+    if (p < peakIn) return (p - start) / (peakIn - start);
+    if (p > peakOut) return 1 - (p - peakOut) / (end - peakOut);
+    return 1;
+  }
+  function applyOverlay(key, value) {
+    const el = overlayRefs[key];
+    if (!el) return;
+    if (Math.abs(value - lastOp[key]) < 0.01) return;
+    lastOp[key] = value;
+    el.style.opacity = value;
+    if (value > 0.02) el.classList.add('active');
+    else el.classList.remove('active');
+  }
+
+  function initScrollAnimation() {
+    ScrollTrigger.create({
+      trigger: 'body',
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: isMobile ? 0.6 : 2,
+      onUpdate: (self) => { scrollProgress = self.progress; }
+    });
+    ScrollTrigger.refresh();
+  }
+
+  /* ── Section label ── */
+  const labelEl = document.getElementById('section-label');
+  let currentLabel = '';
+  function updateSectionLabel(p) {
+    let txt = '';
+    for (const s of sections) if (p >= s.start && p <= s.end) { txt = s.text; break; }
+    if (txt !== currentLabel) {
+      currentLabel = txt;
+      if (!txt) { labelEl.classList.remove('show'); return; }
+      gsap.to(labelEl, { opacity: 0, duration: .25, onComplete: () => {
+        labelEl.textContent = txt;
+        labelEl.classList.add('show');
+        gsap.to(labelEl, { opacity: 1, duration: .5 });
+      }});
+    }
+  }
+
+  /* ── Animate ── */
+  const progressLine = document.getElementById('progress-line');
+  const topPct = document.getElementById('top-pct');
+  let rafId = 0, paused = false;
+  let lastRenderedScroll = -1;
+  const prevCamPos = new THREE.Vector3();
+
+  function animate() {
+    rafId = requestAnimationFrame(animate);
+    if (paused) return;
+
+    const t = scrollProgress;
+    let needsRender = false;
+
+    if (carReady) {
+      const newPos = camCurve.getPoint(t);
+      const newLook = lookCurve.getPoint(t);
+      prevCamPos.copy(camera.position);
+      camera.position.lerp(newPos, 0.04);
+      targetLookAt.lerp(newLook, 0.04);
+      camera.lookAt(targetLookAt);
+      if (!isMobile) camera.position.y += Math.sin(Date.now() * 0.0005) * 0.003;
+      if (prevCamPos.distanceToSquared(camera.position) > 0.0000005) needsRender = true;
+    }
+
+    const newInterior = Math.max(0, (t - 0.6) * 5);
+    if (newInterior !== interiorLight.intensity) { interiorLight.intensity = newInterior; needsRender = true; }
+    const newExp = 1.3 + t * 0.4;
+    if (newExp !== renderer.toneMappingExposure) { renderer.toneMappingExposure = newExp; needsRender = true; }
+
+    applyOverlay('hero',     Math.max(0, Math.min(1, 1 - t * 6)));
+    applyOverlay('about',    rampPulse(t, 0.15, 0.22, 0.32, 0.40));
+    applyOverlay('services', rampPulse(t, 0.40, 0.46, 0.54, 0.60));
+    applyOverlay('tech',     rampPulse(t, 0.60, 0.66, 0.74, 0.80));
+    applyOverlay('contact',  rampPulse(t, 0.82, 0.90, 1.00, 1.00));
+
+    if (Math.abs(t - lastRenderedScroll) > 0.0005) { needsRender = true; lastRenderedScroll = t; }
+
+    const pct = Math.round(t * 100);
+    progressLine.style.width = (t * 100) + '%';
+    topPct.textContent = String(pct).padStart(2, '0') + '%';
+    updateSectionLabel(t);
+
+    if (needsRender || !carReady) renderer.render(scene, camera);
+  }
+  animate();
+
+  /* ── Resize ── */
+  let resizeTimer = 0;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      ScrollTrigger.refresh();
+    }, 120);
+  });
+
+  /* ── Visibility ── */
+  document.addEventListener('visibilitychange', () => {
+    paused = document.hidden;
+  });
+
+  /* ── Custom cursor (desktop / fine pointer only) ── */
+  if (!isMobile) {
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    if (cursor && ring) {
+      let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+      let rx = mx, ry = my;
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+      document.addEventListener('mousedown', () => ring.classList.add('hover'));
+      document.addEventListener('mouseup', () => ring.classList.remove('hover'));
+      document.addEventListener('mouseover', e => {
+        const tg = e.target;
+        if (tg && (tg.matches('a, button, input, select, textarea, .pill'))) ring.classList.add('hover');
+      }, true);
+      document.addEventListener('mouseout', e => {
+        const tg = e.target;
+        if (tg && (tg.matches('a, button, input, select, textarea, .pill'))) ring.classList.remove('hover');
+      }, true);
+      (function tick(){
+        rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+        cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+        ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+        requestAnimationFrame(tick);
+      })();
+    }
+  } else {
+    const c1 = document.getElementById('cursor'); if (c1) c1.style.display = 'none';
+    const c2 = document.getElementById('cursor-ring'); if (c2) c2.style.display = 'none';
+  }
+
+  gsap.to('#hint', { opacity: 0, delay: 5, duration: 1, onComplete: () => { const h = document.getElementById('hint'); if (h) h.style.display = 'none'; } });
+}
+
+/* ── Boot ── */
+async function boot() {
+  wireContactForm();
+  if (detectLowPower()) {
+    initLite();
+    return;
+  }
+  try {
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js');
+    await Promise.all([
+      loadScript('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js'),
+      loadScript('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/lights/RectAreaLightUniformsLib.js'),
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js')
+    ]);
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js');
+    initScene();
+  } catch (err) {
+    console.warn('Scene load failed, falling back to lite:', err);
+    initLite();
+  }
+}
+boot();
 </script>
 </body>
 </html>
