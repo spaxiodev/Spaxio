@@ -782,31 +782,24 @@ function initScene() {
   const progressLine = document.getElementById('progress-line');
   const topPct = document.getElementById('top-pct');
   let rafId = 0, paused = false;
-  let lastRenderedScroll = -1;
-  const prevCamPos = new THREE.Vector3();
 
   function animate() {
     rafId = requestAnimationFrame(animate);
     if (paused) return;
 
     const t = scrollProgress;
-    let needsRender = false;
 
     if (carReady) {
       const newPos = camCurve.getPoint(t);
       const newLook = lookCurve.getPoint(t);
-      prevCamPos.copy(camera.position);
       camera.position.lerp(newPos, 0.04);
       targetLookAt.lerp(newLook, 0.04);
       camera.lookAt(targetLookAt);
       if (!isMobile) camera.position.y += Math.sin(Date.now() * 0.0005) * 0.003;
-      if (prevCamPos.distanceToSquared(camera.position) > 0.0000005) needsRender = true;
     }
 
-    const newInterior = Math.max(0, (t - 0.6) * 5);
-    if (newInterior !== interiorLight.intensity) { interiorLight.intensity = newInterior; needsRender = true; }
-    const newExp = 1.3 + t * 0.4;
-    if (newExp !== renderer.toneMappingExposure) { renderer.toneMappingExposure = newExp; needsRender = true; }
+    interiorLight.intensity = Math.max(0, (t - 0.6) * 5);
+    renderer.toneMappingExposure = 1.3 + t * 0.4;
 
     applyOverlay('hero',     Math.max(0, Math.min(1, 1 - t * 6)));
     applyOverlay('about',    rampPulse(t, 0.15, 0.22, 0.32, 0.40));
@@ -814,14 +807,12 @@ function initScene() {
     applyOverlay('tech',     rampPulse(t, 0.60, 0.66, 0.74, 0.80));
     applyOverlay('contact',  rampPulse(t, 0.82, 0.90, 1.00, 1.00));
 
-    if (Math.abs(t - lastRenderedScroll) > 0.0005) { needsRender = true; lastRenderedScroll = t; }
-
     const pct = Math.round(t * 100);
     progressLine.style.width = (t * 100) + '%';
     topPct.textContent = String(pct).padStart(2, '0') + '%';
     updateSectionLabel(t);
 
-    if (needsRender || !carReady) renderer.render(scene, camera);
+    renderer.render(scene, camera);
   }
   animate();
 
