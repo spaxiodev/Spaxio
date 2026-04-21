@@ -264,7 +264,7 @@
     border: none;
     box-shadow: none;
   }
-  body.lite #hero { align-items: center; text-align: center; padding-top: 160px; min-height: 100vh; }
+  body.lite #hero { align-items: center; text-align: center; padding-top: 160px; min-height: 100vh; min-height: 100svh; }
   body.lite #about-overlay { align-items: flex-start; text-align: left; }
   body.lite #services-overlay { align-items: flex-end; text-align: right; }
   body.lite #tech-overlay { align-items: center; text-align: center; }
@@ -272,9 +272,12 @@
   body.lite .contact-card { background: rgba(14,14,16,0.72); }
 
   @media (max-width: 768px) {
-    body.lite .overlay { padding: 100px 20px 60px; }
+    body.lite .overlay { padding: 80px 20px 48px; min-height: auto; }
+    body.lite #hero { padding-top: 100px; min-height: 90vh; min-height: 90svh; }
+    body.lite #hero::before { width: 92vw; height: 220px; }
     body.lite #services-overlay { align-items: flex-start; text-align: left; }
-    body.lite #services-overlay .work { justify-content: flex-start; }
+    body.lite #services-overlay .work { justify-content: flex-start; flex-wrap: wrap; }
+    body.lite #contact-overlay { padding: 40px 16px 60px; }
   }
 </style>
 </head>
@@ -454,6 +457,8 @@
 <script>
 function detectLowPower() {
   try {
+    if (matchMedia('(max-width: 900px)').matches) return true;
+    if (matchMedia('(pointer: coarse)').matches && matchMedia('(max-width: 1024px)').matches) return true;
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return true;
     const c = navigator.connection;
     if (c) {
