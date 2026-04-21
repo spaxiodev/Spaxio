@@ -230,8 +230,9 @@
       radial-gradient(ellipse at 80% 90%, rgba(255,180,120,.10), transparent 55%),
       linear-gradient(180deg, #0c0c0e 0%, #070708 100%);
   }
-  body:not(.lite) #contact-overlay { display: none !important; }
+  body:not(.lite):not(.mobile3d) #contact-overlay { display: none !important; }
   body.lite #screen-form { display: none !important; }
+  body.mobile3d #screen-form { display: none !important; }
   body.lite #c,
   body.lite .vignette,
   body.lite #cursor,
@@ -536,6 +537,8 @@ function initScene() {
   THREE.RectAreaLightUniformsLib.init();
 
   const isMobile = matchMedia('(max-width: 1024px)').matches || matchMedia('(pointer: coarse)').matches;
+  const isNarrow = matchMedia('(max-width: 768px)').matches;
+  if (isNarrow) document.body.classList.add('mobile3d');
 
   const canvas = document.getElementById('c');
   const renderer = new THREE.WebGLRenderer({
@@ -806,6 +809,7 @@ function initScene() {
   const SCREEN_PIXEL_W = 1280;
   const SCREEN_PIXEL_H = 800;
   function mountScreenForm() {
+    if (isNarrow) return;
     const el = document.getElementById('screen-form');
     if (!el || screenFormObj) return;
     el.style.display = 'block';
@@ -930,6 +934,7 @@ function initScene() {
     applyOverlay('about',    rampPulse(t, 0.15, 0.22, 0.32, 0.40));
     applyOverlay('services', rampPulse(t, 0.40, 0.46, 0.54, 0.60));
     applyOverlay('tech',     rampPulse(t, 0.60, 0.66, 0.74, 0.80));
+    applyOverlay('contact',  rampPulse(t, 0.82, 0.92, 1.01, 1.01));
 
     if (screenFormObj) {
       const formVis = rampPulse(t, 0.90, 0.97, 1.01, 1.01);
