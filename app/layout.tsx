@@ -9,11 +9,11 @@ const sans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-sans" });
 export const metadata: Metadata = {
   metadataBase: new URL("https://spaxio.ca"),
   title: {
-    default: "Spaxio — Luxe-grade web builds at honest prices",
+    default: "Spaxio — Clean websites at honest prices",
     template: "%s | Spaxio"
   },
-  description: "Spaxio crafts luxury-inspired websites at a fraction of typical agency cost. Get a quote in minutes and receive a free mock site.",
-  keywords: ["Spaxio", "web development", "Next.js", "luxury web design", "affordable websites", "landing page", "web agency"],
+  description: "Spaxio builds clean, custom websites at a fraction of typical agency cost. Get a quote in minutes and receive a free mock site.",
+  keywords: ["Spaxio", "web development", "Next.js", "custom websites", "affordable websites", "landing page", "web agency"],
   authors: [{ name: "Spaxio" }],
   creator: "Spaxio",
   publisher: "Spaxio",
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     url: "https://spaxio.ca",
     siteName: "Spaxio",
     locale: "en_CA",
-    title: "Spaxio — Luxe-grade web builds at honest prices",
-    description: "Get luxury-inspired web design, fast builds, and AI-powered sites at honest prices.",
+    title: "Spaxio — Clean websites at honest prices",
+    description: "Clean, custom web design, fast builds, and AI-powered sites at honest prices.",
     images: [
       {
         url: "/logo.png",
@@ -38,8 +38,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Spaxio — Luxe-grade web builds at honest prices",
-    description: "Get luxury-inspired web design, fast builds, and AI-powered sites at honest prices.",
+    title: "Spaxio — Clean websites at honest prices",
+    description: "Clean, custom web design, fast builds, and AI-powered sites at honest prices.",
     images: ["/logo.png"]
   },
   robots: {
@@ -54,11 +54,8 @@ export const metadata: Metadata = {
     }
   },
   icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.png", type: "image/png" }
-    ],
-    shortcut: "/favicon.svg",
+    icon: [{ url: "/favicon.png", type: "image/png" }],
+    shortcut: "/favicon.png",
     apple: "/favicon.png"
   },
   referrer: "origin-when-cross-origin",

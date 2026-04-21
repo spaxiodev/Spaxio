@@ -67,7 +67,7 @@ To exercise any of these rights, please contact us using the information below. 
 
 **Stefano Polidori**
 Privacy Officer, Spaxio
-Email: [polidorispaxio@gmail.com](mailto:polidorispaxio@gmail.com)
+Email: [contact@spaxio.ca](mailto:contact@spaxio.ca)
 Website: [spaxio.ca](https://spaxio.ca)`,
       },
       {
@@ -137,7 +137,7 @@ Pour exercer l'un de ces droits, veuillez nous contacter en utilisant les coordo
 
 **Stefano Polidori**
 Responsable de la confidentialité, Spaxio
-Courriel : [polidorispaxio@gmail.com](mailto:polidorispaxio@gmail.com)
+Courriel : [contact@spaxio.ca](mailto:contact@spaxio.ca)
 Site web : [spaxio.ca](https://spaxio.ca)`,
       },
       {

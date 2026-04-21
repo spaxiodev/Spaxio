@@ -14,11 +14,11 @@ const nextConfig = {
   async rewrites() {
     return {
       beforeFiles: [
-        { source: "/", destination: "/car/index.html" }
+        { source: "/", destination: "/Macbook/index.html" }
       ],
       afterFiles: [
-        { source: "/car", destination: "/car/index.html" },
-        { source: "/car/", destination: "/car/index.html" }
+        { source: "/Macbook", destination: "/Macbook/index.html" },
+        { source: "/Macbook/", destination: "/Macbook/index.html" }
       ],
       fallback: []
     };
