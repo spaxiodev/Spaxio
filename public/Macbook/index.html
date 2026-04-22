@@ -1008,14 +1008,14 @@ async function boot() {
     return;
   }
   try {
-    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js');
+    await loadScript('/vendor/three.min.js');
     await Promise.all([
-      loadScript('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js'),
-      loadScript('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/lights/RectAreaLightUniformsLib.js'),
-      loadScript('https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/renderers/CSS3DRenderer.js'),
-      loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js')
+      loadScript('/vendor/GLTFLoader.js'),
+      loadScript('/vendor/RectAreaLightUniformsLib.js'),
+      loadScript('/vendor/CSS3DRenderer.js'),
+      loadScript('/vendor/gsap.min.js')
     ]);
-    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js');
+    await loadScript('/vendor/ScrollTrigger.min.js');
     initScene();
   } catch (err) {
     console.warn('Scene load failed, falling back to lite:', err);

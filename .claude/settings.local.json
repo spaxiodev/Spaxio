@@ -10,7 +10,12 @@
       "Bash(awk '/<\\\\/head>/{exit} /<script /{c++} END{print c+0}')",
       "Bash(node scripts/perf-smoke.mjs)",
       "Bash(kill %1)",
-      "Bash(wait)"
+      "Bash(wait)",
+      "Bash(mkdir -p /c/3-WebsiteCreation/Spaxio/public/vendor)",
+      "Bash(curl -sSfL -o three.min.js https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js)",
+      "Bash(curl -sSfL -o GLTFLoader.js https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js)",
+      "Bash(curl -sSfL -o RectAreaLightUniformsLib.js https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/lights/RectAreaLightUniformsLib.js)",
+      "Bash(curl -sSfL -o CSS3DRenderer.js https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/renderers/CSS3DRenderer.js)"
     ]
   }
 }
