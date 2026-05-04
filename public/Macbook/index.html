@@ -720,21 +720,12 @@ function wireLangToggle() {
   });
 }
 
-function detectLowPower() {
+function supportsWebGL() {
   try {
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return true;
-    const c = navigator.connection;
-    if (c) {
-      if (c.saveData) return true;
-      if (/^(slow-2g|2g)$/.test(c.effectiveType || '')) return true;
-    }
-    if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) return true;
-    if (navigator.deviceMemory && navigator.deviceMemory <= 2) return true;
     const cv = document.createElement('canvas');
     const gl = cv.getContext('webgl2') || cv.getContext('webgl') || cv.getContext('experimental-webgl');
-    if (!gl) return true;
-  } catch (e) { return true; }
-  return false;
+    return Boolean(gl);
+  } catch (e) { return false; }
 }
 
 function loadScript(src) {
@@ -752,6 +743,8 @@ function wireForm(formId, successId, sendBtnId) {
   const successEl = document.getElementById(successId);
   const sendBtn = document.getElementById(sendBtnId);
   if (!form || !sendBtn) return;
+  if (form.dataset.wired === 'true') return;
+  form.dataset.wired = 'true';
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     sendBtn.disabled = true;
@@ -953,7 +946,7 @@ function initScene() {
 
   const loader = new THREE.GLTFLoader();
   loader.load(
-    '/Macbook/macbook.glb',
+    '/models/macbook.glb',
     (gltf) => {
       const model = gltf.scene;
       const box0 = new THREE.Box3().setFromObject(model);
@@ -1051,7 +1044,8 @@ function initScene() {
     },
     (error) => {
       console.error('GLB load error:', error);
-      document.getElementById('pct').textContent = 'ERROR';
+      const pct = document.getElementById('pct');
+      if (pct) pct.textContent = 'MODEL ERROR';
     }
   );
 
@@ -1225,7 +1219,7 @@ function initScene() {
   animate();
 
   let resizeTimer = 0;
-  window.addEventListener('resize', () => {
+  function onResize() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -1234,7 +1228,8 @@ function initScene() {
       cssRenderer.setSize(window.innerWidth, window.innerHeight);
       ScrollTrigger.refresh();
     }, 120);
-  });
+  }
+  window.addEventListener('resize', onResize);
 
   document.addEventListener('visibilitychange', () => {
     paused = document.hidden;
@@ -1276,7 +1271,7 @@ async function boot() {
   applyLang(detectInitialLang());
   wireLangToggle();
   wireContactForm();
-  if (detectLowPower()) {
+  if (!supportsWebGL()) {
     initLite();
     return;
   }
@@ -1291,8 +1286,9 @@ async function boot() {
     await loadScript('/vendor/ScrollTrigger.min.js');
     initScene();
   } catch (err) {
-    console.warn('Scene load failed, falling back to lite:', err);
-    initLite();
+    console.error('Scene script load failed:', err);
+    const pct = document.getElementById('pct');
+    if (pct) pct.textContent = 'SCRIPT ERROR';
   }
 }
 boot();
