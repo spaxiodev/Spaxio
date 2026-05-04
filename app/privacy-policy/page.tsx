@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 type Lang = "en" | "fr";
+
+const LANG_KEY = "polidoridev_lang";
 
 const content = {
   en: {
@@ -66,9 +68,9 @@ To exercise any of these rights, please contact us using the information below. 
         body: `If you have any questions about this privacy policy or wish to make a data-related request, please contact:
 
 **Stefano Polidori**
-Privacy Officer, Spaxio
-Email: [contact@spaxio.ca](mailto:contact@spaxio.ca)
-Website: [spaxio.ca](https://spaxio.ca)`,
+Privacy Officer, Polidori Dev
+Email: [contact@polidori.dev](mailto:contact@polidori.dev)
+Website: [polidori.dev](https://polidori.dev)`,
       },
       {
         heading: "8. Changes to This Policy",
@@ -136,9 +138,9 @@ Pour exercer l'un de ces droits, veuillez nous contacter en utilisant les coordo
         body: `Si vous avez des questions concernant cette politique de confidentialité ou souhaitez faire une demande relative à vos données, veuillez contacter :
 
 **Stefano Polidori**
-Responsable de la confidentialité, Spaxio
-Courriel : [contact@spaxio.ca](mailto:contact@spaxio.ca)
-Site web : [spaxio.ca](https://spaxio.ca)`,
+Responsable de la confidentialité, Polidori Dev
+Courriel : [contact@polidori.dev](mailto:contact@polidori.dev)
+Site web : [polidori.dev](https://polidori.dev)`,
       },
       {
         heading: "8. Modifications de cette politique",
@@ -180,12 +182,39 @@ export default function PrivacyPolicyPage() {
   const [lang, setLang] = useState<Lang>("en");
   const t = content[lang];
 
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const fromUrl = params.get("lang");
+      if (fromUrl === "fr" || fromUrl === "en") {
+        setLang(fromUrl);
+        return;
+      }
+      const stored = window.localStorage.getItem(LANG_KEY);
+      if (stored === "fr" || stored === "en") {
+        setLang(stored);
+        return;
+      }
+      if ((navigator.language || "").toLowerCase().startsWith("fr")) {
+        setLang("fr");
+      }
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(LANG_KEY, lang);
+      document.documentElement.lang = lang === "fr" ? "fr-CA" : "en";
+    } catch {}
+  }, [lang]);
+
   return (
     <div className="pp-page">
       <nav className="site-nav">
         <button
           onClick={() => setLang(lang === "en" ? "fr" : "en")}
           className="lang-btn"
+          aria-label={lang === "en" ? "Passer au français" : "Switch to English"}
         >
           {lang === "en" ? "FR" : "EN"}
         </button>

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://spaxio.ca";
+  const baseUrl = "https://polidori.dev";
   const lastModified = new Date();
 
   return [

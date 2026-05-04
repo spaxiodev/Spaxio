@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --warm: #ff9945;
+  --warm: #ffffff;
   --bg: #0a0a0a;
-  --text: #e8e4df;
-  --text-dim: #7a7267;
+  --text: #e8e8e8;
+  --text-dim: #7a7a7a;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -227,7 +227,7 @@ h1, h2, h3 {
 }
 
 .cc-btn-accept:hover {
-  background: #ffad6a;
+  background: #cccccc;
 }
 
 .cc-btn-reject {

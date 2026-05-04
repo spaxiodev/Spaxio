@@ -44,7 +44,7 @@ const text = {
   },
 };
 
-const CONSENT_KEY = "spaxio_cookie_consent";
+const CONSENT_KEY = "polidoridev_cookie_consent";
 
 export function getConsent(): ConsentState | null {
   if (typeof window === "undefined") return null;

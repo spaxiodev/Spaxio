@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Spaxio privacy policy — how we handle your data.",
+  description: "Polidori Dev privacy policy — how we handle your data.",
 };
 
 export default function PrivacyPage() {
@@ -29,7 +29,7 @@ export default function PrivacyPage() {
             display: "inline-block",
           }}
         >
-          &larr; Back to Spaxio
+          &larr; Back to Polidori Dev
         </Link>
 
         <h1
@@ -48,8 +48,8 @@ export default function PrivacyPage() {
 
         <section style={{ lineHeight: 1.8, fontSize: "1rem" }}>
           <p style={{ marginBottom: "1.5rem" }}>
-            Spaxio respects your privacy. When you use our contact form, we
-            collect only the information you provide (name, email, project
+            Polidori Dev respects your privacy. When you use our contact form,
+            we collect only the information you provide (name, email, project
             details) to respond to your inquiry. We do not sell, share, or
             distribute your personal data to third parties.
           </p>
@@ -72,8 +72,8 @@ export default function PrivacyPage() {
           </h2>
           <p>
             Privacy Officer: Stefano Polidori —{" "}
-            <a href="mailto:contact@spaxio.ca" style={{ color: "var(--warm)" }}>
-              contact@spaxio.ca
+            <a href="mailto:contact@polidori.dev" style={{ color: "var(--warm)" }}>
+              contact@polidori.dev
             </a>
           </p>
         </section>

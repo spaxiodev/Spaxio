@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/"
     },
-    sitemap: "https://spaxio.ca/sitemap.xml",
-    host: "https://spaxio.ca"
+    sitemap: "https://polidori.dev/sitemap.xml",
+    host: "https://polidori.dev"
   };
 }
