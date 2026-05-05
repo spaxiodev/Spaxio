@@ -4,8 +4,8 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Web Design &amp; Development Agency Montreal | Polidori Dev</title>
-<meta name="description" content="Montreal web design &amp; development agency. Custom websites, hosting, e-commerce, landing pages, SEO and redesigns at honest prices. Get a free quote — 514-516-0515." />
-<meta name="keywords" content="web design Montreal, web development Montreal, web agency Montreal, web hosting Montreal, e-commerce Montreal, landing pages Montreal, SEO Montreal, website redesign Montreal, Polidori Dev, Stefano Polidori, Next.js developer Montreal, freelance web developer Montreal, Quebec web agency" />
+<meta name="description" content="Montreal web design &amp; development agency. Custom websites, motion design, hosting, e-commerce, landing pages, SEO and redesigns at honest prices. Get a free quote — 514-516-0515." />
+<meta name="keywords" content="web design Montreal, web development Montreal, web agency Montreal, web hosting Montreal, motion design Montreal, e-commerce Montreal, landing pages Montreal, SEO Montreal, website redesign Montreal, Polidori Dev, Stefano Polidori, Next.js developer Montreal, freelance web developer Montreal, Quebec web agency" />
 <meta name="author" content="Stefano Polidori" />
 <meta name="geo.region" content="CA-QC" />
 <meta name="geo.placename" content="Montreal" />
@@ -24,7 +24,7 @@
 <meta property="og:site_name" content="Polidori Dev" />
 <meta property="og:locale" content="en_CA" />
 <meta property="og:title" content="Web Design &amp; Development Agency Montreal | Polidori Dev" />
-<meta property="og:description" content="Custom websites, hosting, e-commerce, landing pages, SEO and redesigns by an independent Montreal agency." />
+<meta property="og:description" content="Custom websites, motion design, hosting, e-commerce, landing pages, SEO and redesigns by an independent Montreal agency." />
 <meta property="og:image" content="https://polidori.dev/logo.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -33,7 +33,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Web Design &amp; Development Agency Montreal | Polidori Dev" />
-<meta name="twitter:description" content="Custom websites, hosting, e-commerce, landing pages, SEO and redesigns by an independent Montreal agency." />
+<meta name="twitter:description" content="Custom websites, motion design, hosting, e-commerce, landing pages, SEO and redesigns by an independent Montreal agency." />
 <meta name="twitter:image" content="https://polidori.dev/logo.png" />
 
 <link rel="icon" href="/favicon.png" type="image/png" sizes="any" />
@@ -73,7 +73,7 @@
       "@id": "https://polidori.dev/#website",
       "url": "https://polidori.dev/",
       "name": "Polidori Dev",
-      "description": "Montreal web design and development agency offering custom websites, hosting, e-commerce, landing pages, SEO and redesigns.",
+      "description": "Montreal web design and development agency offering custom websites, motion design, hosting, e-commerce, landing pages, SEO and redesigns.",
       "publisher": { "@id": "https://polidori.dev/#organization" },
       "inLanguage": ["en-CA", "fr-CA"]
     },
@@ -82,7 +82,7 @@
       "@id": "https://polidori.dev/#service",
       "name": "Polidori Dev",
       "alternateName": "Polidori Dev Web Agency",
-      "description": "Montreal web design and development agency offering custom websites, hosting, e-commerce stores, landing pages, SEO and website redesigns at honest prices.",
+      "description": "Montreal web design and development agency offering custom websites, motion design, hosting, e-commerce stores, landing pages, SEO and website redesigns at honest prices.",
       "url": "https://polidori.dev/",
       "image": "https://polidori.dev/logo.png",
       "logo": "https://polidori.dev/logo.png",
@@ -120,6 +120,7 @@
       "knowsAbout": [
         "Web Design",
         "Web Development",
+        "Motion Design",
         "Web Hosting",
         "E-commerce",
         "Landing Pages",
@@ -148,6 +149,15 @@
               "@type": "Service",
               "name": "Web Development",
               "description": "Hand-coded Next.js and React websites with clean architecture.",
+              "areaServed": { "@type": "City", "name": "Montreal" }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Motion Design",
+              "description": "Motion graphics, animated interfaces and launch visuals for websites and campaigns.",
               "areaServed": { "@type": "City", "name": "Montreal" }
             }
           },
@@ -560,9 +570,14 @@
     <h3 data-i18n="svc_launch_h">Hosting, SEO &amp; Redesigns</h3>
     <p data-i18n="svc_launch_p">Vercel hosting with SEO, analytics, redesigns and ongoing support baked in.</p>
   </div>
+  <div class="svc">
+    <h3 data-i18n="svc_motion_h">Motion Design</h3>
+    <p data-i18n="svc_motion_p">Motion graphics, animated sections and product visuals that make your site feel alive.</p>
+  </div>
   <ul class="svc-list" aria-label="Services">
     <li data-i18n="svc_item_design">Web Design</li>
     <li data-i18n="svc_item_dev">Web Development</li>
+    <li data-i18n="svc_item_motion">Motion Design</li>
     <li data-i18n="svc_item_hosting">Hosting</li>
     <li data-i18n="svc_item_ecommerce">E-commerce</li>
     <li data-i18n="svc_item_landing">Landing Pages</li>
@@ -613,6 +628,7 @@
             <option data-i18n="opt_website">Website</option>
             <option data-i18n="opt_ecommerce">E-commerce</option>
             <option data-i18n="opt_landing">Landing page</option>
+            <option data-i18n="opt_motion">Motion design</option>
             <option data-i18n="opt_redesign">Redesign</option>
             <option data-i18n="opt_other">Other</option>
           </select>
@@ -673,6 +689,7 @@
           <option data-i18n="opt_website">Website</option>
           <option data-i18n="opt_ecommerce">E-commerce</option>
           <option data-i18n="opt_landing">Landing page</option>
+          <option data-i18n="opt_motion">Motion design</option>
           <option data-i18n="opt_redesign">Redesign</option>
           <option data-i18n="opt_other">Other</option>
         </select>
@@ -717,8 +734,11 @@ const I18N = {
     svc_design_p: 'Custom Next.js websites, e-commerce stores and landing pages — clean code, sharp design.',
     svc_launch_h: 'Hosting, SEO & Redesigns',
     svc_launch_p: 'Vercel hosting with SEO, analytics, redesigns and ongoing support baked in.',
+    svc_motion_h: 'Motion Design',
+    svc_motion_p: 'Motion graphics, animated sections and product visuals that make your site feel alive.',
     svc_item_design: 'Web Design',
     svc_item_dev: 'Web Development',
+    svc_item_motion: 'Motion Design',
     svc_item_hosting: 'Hosting',
     svc_item_ecommerce: 'E-commerce',
     svc_item_landing: 'Landing Pages',
@@ -736,6 +756,7 @@ const I18N = {
     opt_website: 'Website',
     opt_ecommerce: 'E-commerce',
     opt_landing: 'Landing page',
+    opt_motion: 'Motion design',
     opt_redesign: 'Redesign',
     opt_other: 'Other',
     opt_budget_under2k: 'Under $2k',
@@ -762,7 +783,7 @@ const I18N = {
     sec_contact: 'GET IN TOUCH',
     err_send: 'Could not send — email contact@polidori.dev',
     meta_title: 'Web Design & Development Agency Montreal | Polidori Dev',
-    meta_desc: 'Montreal web design & development agency. Custom websites, hosting, e-commerce, landing pages, SEO and redesigns at honest prices. Get a free quote — 514-516-0515.',
+    meta_desc: 'Montreal web design & development agency. Custom websites, motion design, hosting, e-commerce, landing pages, SEO and redesigns at honest prices. Get a free quote — 514-516-0515.',
     toggle_label: 'FR'
   },
   fr: {
@@ -779,8 +800,11 @@ const I18N = {
     svc_design_p: 'Sites Next.js sur mesure, boutiques e-commerce et pages d’atterrissage — code propre, design soigné.',
     svc_launch_h: 'Hébergement, SEO & Refontes',
     svc_launch_p: 'Hébergement Vercel avec SEO, analytique, refontes et support continu intégrés.',
+    svc_motion_h: 'Motion design',
+    svc_motion_p: 'Graphisme animé, sections interactives et visuels produit pour donner vie à votre site.',
     svc_item_design: 'Conception Web',
     svc_item_dev: 'Développement Web',
+    svc_item_motion: 'Motion design',
     svc_item_hosting: 'Hébergement',
     svc_item_ecommerce: 'E-commerce',
     svc_item_landing: 'Pages d’atterrissage',
@@ -798,6 +822,7 @@ const I18N = {
     opt_website: 'Site web',
     opt_ecommerce: 'E-commerce',
     opt_landing: 'Page d’atterrissage',
+    opt_motion: 'Motion design',
     opt_redesign: 'Refonte',
     opt_other: 'Autre',
     opt_budget_under2k: 'Moins de 2 000 $',

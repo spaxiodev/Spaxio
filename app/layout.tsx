@@ -10,9 +10,9 @@ const SITE_URL = "https://polidori.dev";
 const SITE_NAME = "Polidori Dev";
 const SITE_TAGLINE = "Web Design & Development Agency Montreal";
 const SITE_DESCRIPTION =
-  "Montreal web design & development agency. Custom websites, hosting, e-commerce, landing pages, SEO and redesigns at honest prices. Get a free quote — 514-516-0515.";
+  "Montreal web design & development agency. Custom websites, motion design, hosting, e-commerce, landing pages, SEO and redesigns at honest prices. Get a free quote — 514-516-0515.";
 const SITE_DESCRIPTION_SHORT =
-  "Custom websites, hosting, e-commerce, landing pages, SEO and redesigns by an independent Montreal agency.";
+  "Custom websites, motion design, hosting, e-commerce, landing pages, SEO and redesigns by an independent Montreal agency.";
 const PHONE = "+1-514-516-0515";
 
 export const metadata: Metadata = {
@@ -27,6 +27,7 @@ export const metadata: Metadata = {
     "web development Montreal",
     "web agency Montreal",
     "web hosting Montreal",
+    "motion design Montreal",
     "e-commerce Montreal",
     "landing pages Montreal",
     "SEO Montreal",
@@ -114,6 +115,7 @@ const AREA_SERVED = [
 const SERVICES = [
   { name: "Web Design", description: "Custom website design tailored to your brand and audience." },
   { name: "Web Development", description: "Hand-coded Next.js and React websites with clean architecture." },
+  { name: "Motion Design", description: "Motion graphics, animated interfaces and launch visuals for websites and campaigns." },
   { name: "Web Hosting", description: "Managed hosting on Vercel with SSL, global CDN and uptime monitoring." },
   { name: "E-commerce Websites", description: "Custom online stores with secure checkout, payments and inventory." },
   { name: "Landing Pages", description: "High-converting single-page sites for campaigns and product launches." },
@@ -172,6 +174,7 @@ const jsonLd = {
       knowsAbout: [
         "Web Design",
         "Web Development",
+        "Motion Design",
         "Web Hosting",
         "E-commerce",
         "Landing Pages",
