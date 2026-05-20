@@ -4,6 +4,9 @@ import nodemailer from "nodemailer";
 interface QuotePayload {
   name: string;
   email: string;
+  phone?: string;
+  industry?: string;
+  website?: string;
   budget: string;
   projectType: string;
   message: string;
@@ -35,14 +38,27 @@ export async function POST(req: Request) {
     }
   });
 
-  const text = `New quote request\n\nName: ${body.name}\nEmail: ${body.email}\nBudget: ${body.budget || "-"}\nProject type: ${body.projectType || "-"}\n\nNotes:\n${body.message}`;
+  const text = [
+    "New website reservation request",
+    "",
+    `Name: ${body.name}`,
+    `Email: ${body.email}`,
+    `Phone: ${body.phone || "-"}`,
+    `Business industry: ${body.industry || "-"}`,
+    `Current website: ${body.website || "-"}`,
+    `Budget: ${body.budget || "-"}`,
+    `Project type: ${body.projectType || "-"}`,
+    "",
+    "Project info:",
+    body.message
+  ].join("\n");
 
   try {
     await transporter.sendMail({
       from: process.env.SMTP_USER,
       to: process.env.CONTACT_TO,
       replyTo: body.email,
-      subject: "New website quote request",
+      subject: "New website reservation request",
       text
     });
     return NextResponse.json({ ok: true });

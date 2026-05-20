@@ -10,9 +10,9 @@ const SITE_URL = "https://polidori.dev";
 const SITE_NAME = "Polidori Dev";
 const SITE_TAGLINE = "Web Design & Development Agency Montreal";
 const SITE_DESCRIPTION =
-  "Montreal web design & development agency. Custom websites, motion design, hosting, e-commerce, landing pages, SEO and redesigns at honest prices. Get a free quote — 514-516-0515.";
+  "Montreal web design and development agency offering professional custom websites for $1000 CAD, managed hosting for $150/month, SEO, analytics and launch support.";
 const SITE_DESCRIPTION_SHORT =
-  "Custom websites, motion design, hosting, e-commerce, landing pages, SEO and redesigns by an independent Montreal agency.";
+  "Professional custom websites, managed hosting, SEO, analytics and launch support by an independent Montreal agency.";
 const PHONE = "+1-514-516-0515";
 
 export const metadata: Metadata = {
@@ -27,10 +27,10 @@ export const metadata: Metadata = {
     "web development Montreal",
     "web agency Montreal",
     "web hosting Montreal",
-    "motion design Montreal",
-    "e-commerce Montreal",
-    "landing pages Montreal",
+    "professional website Montreal",
+    "business website Montreal",
     "SEO Montreal",
+    "managed website hosting Montreal",
     "website redesign Montreal",
     "Polidori Dev",
     "Stefano Polidori",
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
         url: "/logo.png",
         width: 1200,
         height: 630,
-        alt: `${SITE_NAME} — Montreal web design and development agency`
+        alt: `${SITE_NAME} - Montreal web design and development agency`
       }
     ]
   },
@@ -113,14 +113,26 @@ const AREA_SERVED = [
 ];
 
 const SERVICES = [
-  { name: "Web Design", description: "Custom website design tailored to your brand and audience." },
-  { name: "Web Development", description: "Hand-coded Next.js and React websites with clean architecture." },
-  { name: "Motion Design", description: "Motion graphics, animated interfaces and launch visuals for websites and campaigns." },
-  { name: "Web Hosting", description: "Managed hosting on Vercel with SSL, global CDN and uptime monitoring." },
-  { name: "E-commerce Websites", description: "Custom online stores with secure checkout, payments and inventory." },
-  { name: "Landing Pages", description: "High-converting single-page sites for campaigns and product launches." },
-  { name: "Search Engine Optimization (SEO)", description: "Technical SEO, structured data and on-page optimization for Google rankings." },
-  { name: "Website Redesign", description: "Modernization of legacy websites with improved performance, SEO and UX." }
+  {
+    name: "Professional Website",
+    description: "Custom business website with Zoom discovery, full custom design, 3 revision rounds, SEO and launch support.",
+    price: "1000 CAD"
+  },
+  {
+    name: "Managed Hosting",
+    description: "Monthly hosting with maintenance checks, SEO support, analytics reports, SSL, backups and priority support.",
+    price: "150 CAD per month"
+  },
+  {
+    name: "Search Engine Optimization (SEO)",
+    description: "Technical SEO, structured data, page structure and on-page optimization for local ranking.",
+    price: "Included"
+  },
+  {
+    name: "Website Launch Support",
+    description: "Deployment support, contact flow setup, analytics setup and final launch checks.",
+    price: "Included"
+  }
 ];
 
 const jsonLd = {
@@ -174,10 +186,8 @@ const jsonLd = {
       knowsAbout: [
         "Web Design",
         "Web Development",
-        "Motion Design",
         "Web Hosting",
-        "E-commerce",
-        "Landing Pages",
+        "Managed Hosting",
         "Search Engine Optimization",
         "Website Redesign",
         "Next.js",
@@ -194,7 +204,9 @@ const jsonLd = {
             name: s.name,
             description: s.description,
             areaServed: { "@type": "City", name: "Montreal" }
-          }
+          },
+          price: s.price,
+          priceCurrency: "CAD"
         }))
       }
     }
