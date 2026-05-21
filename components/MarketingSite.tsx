@@ -1,6 +1,7 @@
 "use client";
 
 import type { CSSProperties, FormEvent } from "react";
+import type { Route } from "next";
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 
@@ -8,6 +9,7 @@ type Lang = "en" | "fr";
 type Variant = "home" | "services";
 type Status = "idle" | "sending" | "sent" | "error";
 type MotionStyle = CSSProperties & { "--i"?: number };
+type ServiceAreaLink = [string, Route];
 
 const brand = {
   name: "Polidori Dev",
@@ -94,6 +96,10 @@ const copy = {
         ]
       }
     ],
+    serviceAreas: {
+      title: "Service pages for local search",
+      lead: "Focused pages help customers and search engines understand the exact web services available in Montreal."
+    },
     contactMethods: {
       title: "Reach out directly",
       whatsapp: "WhatsApp",
@@ -199,6 +205,10 @@ const copy = {
         ]
       }
     ],
+    serviceAreas: {
+      title: "Pages de services pour la recherche locale",
+      lead: "Des pages ciblees aident les clients et les moteurs de recherche a comprendre les services web offerts a Montreal."
+    },
     contactMethods: {
       title: "Me joindre directement",
       whatsapp: "WhatsApp",
@@ -234,6 +244,21 @@ const whatsappText = {
   en: "Hi, I want to reserve a spot for a professional website.",
   fr: "Bonjour, je veux reserver une place pour un site web professionnel."
 };
+
+const serviceAreaLinks = {
+  en: [
+    ["Website design Montreal", "/website-design-montreal"],
+    ["Website development Montreal", "/website-development-montreal"],
+    ["SEO Montreal", "/seo-montreal"],
+    ["Website hosting Montreal", "/website-hosting-montreal"]
+  ],
+  fr: [
+    ["Conception de site web a Montreal", "/website-design-montreal"],
+    ["Developpement web a Montreal", "/website-development-montreal"],
+    ["SEO a Montreal", "/seo-montreal"],
+    ["Hebergement web a Montreal", "/website-hosting-montreal"]
+  ]
+} satisfies Record<Lang, ServiceAreaLink[]>;
 
 export default function MarketingSite({ variant }: { variant: Variant }) {
   const [lang, setLang] = useState<Lang>("en");
@@ -446,6 +471,19 @@ export default function MarketingSite({ variant }: { variant: Variant }) {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="mk-local-links" aria-labelledby="local-service-pages-title">
+        <div>
+          <p className="mk-eyebrow">Local SEO</p>
+          <h2 id="local-service-pages-title">{t.serviceAreas.title}</h2>
+          <p>{t.serviceAreas.lead}</p>
+        </div>
+        <nav aria-label="Local service pages">
+          {serviceAreaLinks[lang].map(([label, href]) => (
+            <Link key={href} href={href}>{label}</Link>
+          ))}
+        </nav>
       </section>
 
       <section className="mk-contact-methods" aria-labelledby="contact-methods-title">

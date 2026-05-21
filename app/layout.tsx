@@ -10,9 +10,9 @@ const SITE_URL = "https://polidori.dev";
 const SITE_NAME = "Polidori Dev";
 const SITE_TAGLINE = "Web Design & Development Agency Montreal";
 const SITE_DESCRIPTION =
-  "Montreal web design and development agency offering professional custom websites for $1000 CAD, managed hosting for $150/month, SEO, analytics and launch support.";
+  "Montreal web design and development agency offering professional custom websites for $1000 CAD, managed hosting for $150/month, local SEO, analytics and launch support.";
 const SITE_DESCRIPTION_SHORT =
-  "Professional custom websites, managed hosting, SEO, analytics and launch support by an independent Montreal agency.";
+  "Professional custom websites, website development, managed hosting, local SEO, analytics and launch support by an independent Montreal agency.";
 const PHONE = "+1-514-516-0515";
 
 export const metadata: Metadata = {
@@ -24,12 +24,18 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   keywords: [
     "web design Montreal",
+    "website design Montreal",
+    "custom website design Montreal",
     "web development Montreal",
+    "website development Montreal",
     "web agency Montreal",
     "web hosting Montreal",
+    "website hosting Montreal",
     "professional website Montreal",
     "business website Montreal",
+    "small business website Montreal",
     "SEO Montreal",
+    "local SEO Montreal",
     "managed website hosting Montreal",
     "website redesign Montreal",
     "Polidori Dev",
@@ -44,11 +50,7 @@ export const metadata: Metadata = {
   category: "Web design",
   applicationName: SITE_NAME,
   alternates: {
-    canonical: SITE_URL,
-    languages: {
-      "en-CA": SITE_URL,
-      "fr-CA": `${SITE_URL}/?lang=fr`
-    }
+    canonical: SITE_URL
   },
   other: {
     "geo.region": "CA-QC",
@@ -114,24 +116,34 @@ const AREA_SERVED = [
 
 const SERVICES = [
   {
-    name: "Professional Website",
-    description: "Custom business website with Zoom discovery, full custom design, 3 revision rounds, SEO and launch support.",
-    price: "1000 CAD"
+    name: "Website Design Montreal",
+    description: "Custom business website design with Zoom discovery, full custom design, 3 revision rounds, responsive layouts, local SEO and launch support.",
+    url: `${SITE_URL}/website-design-montreal`,
+    price: "1000"
   },
   {
-    name: "Managed Hosting",
-    description: "Monthly hosting with maintenance checks, SEO support, analytics reports, SSL, backups and priority support.",
-    price: "150 CAD per month"
+    name: "Website Development Montreal",
+    description: "Responsive website development with technical SEO, contact flows, analytics setup and launch support.",
+    url: `${SITE_URL}/website-development-montreal`,
+    price: "1000"
   },
   {
-    name: "Search Engine Optimization (SEO)",
-    description: "Technical SEO, structured data, page structure and on-page optimization for local ranking.",
-    price: "Included"
+    name: "SEO Montreal",
+    description: "Technical SEO, structured data, page structure, local service pages and on-page optimization for organic search visibility.",
+    url: `${SITE_URL}/seo-montreal`,
+    price: "0"
+  },
+  {
+    name: "Managed Website Hosting Montreal",
+    description: "Monthly hosting with maintenance checks, SEO support, analytics reports, SSL, backups, uptime checks and priority support.",
+    url: `${SITE_URL}/website-hosting-montreal`,
+    price: "150"
   },
   {
     name: "Website Launch Support",
     description: "Deployment support, contact flow setup, analytics setup and final launch checks.",
-    price: "Included"
+    url: `${SITE_URL}/services`,
+    price: "0"
   }
 ];
 
@@ -203,6 +215,7 @@ const jsonLd = {
             "@type": "Service",
             name: s.name,
             description: s.description,
+            url: s.url,
             areaServed: { "@type": "City", name: "Montreal" }
           },
           price: s.price,

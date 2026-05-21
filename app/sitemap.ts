@@ -3,6 +3,12 @@ import type { MetadataRoute } from "next";
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://polidori.dev";
   const lastModified = new Date();
+  const servicePages = [
+    "website-design-montreal",
+    "website-development-montreal",
+    "seo-montreal",
+    "website-hosting-montreal"
+  ];
 
   return [
     {
@@ -17,6 +23,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9
     },
+    ...servicePages.map((slug) => ({
+      url: `${baseUrl}/${slug}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.85
+    })),
     {
       url: `${baseUrl}/privacy-policy`,
       lastModified,
