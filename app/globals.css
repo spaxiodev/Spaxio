@@ -545,17 +545,17 @@ h1, h2, h3 {
 }
 
 .mk-local-links .mk-eyebrow {
-  color: #d1d5db;
+  color: #000000;
 }
 
 .mk-local-links h2 {
-  color: #d1d5db;
+  color: #000000;
   font-size: clamp(1.8rem, 3vw, 3.35rem);
 }
 
 .mk-local-links p:not(.mk-eyebrow) {
   max-width: 620px;
-  color: #d1d5db;
+  color: #000000;
   line-height: 1.7;
   margin-top: 14px;
 }
@@ -574,7 +574,7 @@ h1, h2, h3 {
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 6px;
   padding: 13px 15px;
-  color: #d1d5db;
+  color: #000000;
   background: rgba(255, 255, 255, 0.05);
   font-size: 0.84rem;
   font-weight: 800;
