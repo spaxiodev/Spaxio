@@ -349,14 +349,14 @@ h1, h2, h3 {
 
 .seo-hero h1 {
   max-width: 920px;
-  color: #fff;
+  color: #000000;
   font-size: clamp(3rem, 7vw, 7rem);
   font-weight: 700;
 }
 
 .seo-hero p {
   max-width: 760px;
-  color: rgba(244, 241, 234, 0.72);
+  color: #000000;
   font-size: clamp(1rem, 2vw, 1.2rem);
   line-height: 1.75;
   margin-top: 24px;
@@ -375,11 +375,11 @@ h1, h2, h3 {
   display: inline-flex;
   align-items: center;
   min-height: 38px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 6px;
   padding: 9px 12px;
-  color: rgba(244, 241, 234, 0.72);
-  background: rgba(255, 255, 255, 0.045);
+  color: #000000;
+  background: rgba(0, 0, 0, 0.045);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.03em;
@@ -403,7 +403,7 @@ h1, h2, h3 {
 .seo-copy-grid h2,
 .seo-deliverables h2,
 .seo-faq h2 {
-  color: #fff;
+  color: #000000;
   font-size: clamp(2rem, 4vw, 4.1rem);
 }
 
@@ -420,7 +420,7 @@ h1, h2, h3 {
 
 .seo-copy-stack h3,
 .seo-faq h3 {
-  color: #fff;
+  color: #000000;
   font-family: var(--font-sans), sans-serif;
   font-size: 1rem;
   line-height: 1.35;
@@ -428,7 +428,7 @@ h1, h2, h3 {
 
 .seo-copy-stack p,
 .seo-faq p {
-  color: rgba(244, 241, 234, 0.68);
+  color: #000000;
   line-height: 1.75;
   margin-top: 10px;
 }
@@ -1643,7 +1643,8 @@ h1, h2, h3 {
   margin: 0 0 clamp(30px, 8vw, 100px);
 }
 
-.mk-section-head h2 {
+.mk-services .mk-section-head h2,
+.mk-services-hero .mk-section-head h2 {
   color: var(--mk-paper);
 }
 
