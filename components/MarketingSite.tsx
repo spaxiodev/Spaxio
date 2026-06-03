@@ -24,7 +24,7 @@ const copy = {
     nav: {
       home: "Home",
       services: "Services",
-      reserve: "Reserve a spot",
+      reserve: "Contact",
       lang: "FR"
     },
     hero: {
@@ -32,7 +32,7 @@ const copy = {
       title: "Websites built like business tools.",
       lead:
         "Custom websites for small businesses that need to look credible, rank locally, and turn visitors into booked calls.",
-      reserve: "Reserve a spot",
+      reserve: "Contact",
       services: "View services",
       contact: "Talk on WhatsApp"
     },
@@ -108,7 +108,7 @@ const copy = {
       phone: "Call"
     },
     form: {
-      eyebrow: "Reserve a spot",
+      eyebrow: "Contact",
       title: "Tell me what you need built.",
       lead:
         "Share the basics and I will follow up with next steps. If you already have a website, include it so I can review what should stay, change, or be rebuilt.",
@@ -241,7 +241,7 @@ const copy = {
 };
 
 const whatsappText = {
-  en: "Hi, I want to reserve a spot for a professional website.",
+  en: "Hi, I want to Contact for a professional website.",
   fr: "Bonjour, je veux reserver une place pour un site web professionnel."
 };
 

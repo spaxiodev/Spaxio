@@ -116,7 +116,7 @@ export default function SeoServicePage({ content }: { content: SeoServicePageCon
         <nav className="mk-nav" aria-label="Primary">
           <Link href="/">Home</Link>
           <Link href="/services">Services</Link>
-          <a href={whatsappUrl} target="_blank" rel="noreferrer">Reserve a spot</a>
+          <a href={whatsappUrl} target="_blank" rel="noreferrer">Contact</a>
         </nav>
       </header>
 
