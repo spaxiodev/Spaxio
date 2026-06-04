@@ -10,25 +10,25 @@ type SeoPage = SeoServicePageContent & {
 };
 
 export const seoServicePages: Record<string, SeoPage> = {
-  "website-design-montreal": {
-    slug: "website-design-montreal",
-    metaTitle: "Website Design Montreal | Custom Business Websites",
+  "website-design": {
+    slug: "website-design",
+    metaTitle: "Website Design | Custom Business Websites",
     metaDescription:
-      "Custom website design in Montreal for small businesses that need a credible, mobile-friendly site built for local SEO, trust, and booked calls.",
-    eyebrow: "Website design Montreal",
-    title: "Custom website design for Montreal businesses.",
+      "Custom website design for small businesses that need a credible, mobile-friendly site built for SEO, trust, and booked calls.",
+    eyebrow: "Website design",
+    title: "Custom website design for growing businesses.",
     lead:
       "Polidori Dev designs business websites that make your offer clear, help customers trust you faster, and give search engines a stronger page structure to understand.",
-    primaryKeyword: "website design Montreal",
+    primaryKeyword: "website design",
     secondaryKeywords: [
       "custom website design",
       "business website design",
       "small business web design",
-      "responsive web design Montreal"
+      "responsive web design"
     ],
-    serviceName: "Website Design Montreal",
+    serviceName: "Website Design",
     serviceDescription:
-      "Custom website design for Montreal businesses, including mobile responsive layouts, service page planning, conversion-focused content structure, and local SEO setup.",
+      "Custom website design for small businesses, including mobile responsive layouts, service page planning, conversion-focused content structure, and SEO setup.",
     sections: [
       {
         title: "Designed around the way customers decide",
@@ -36,9 +36,9 @@ export const seoServicePages: Record<string, SeoPage> = {
           "A strong business website is not just visual polish. The page order, service copy, proof points, contact paths, and mobile layout all need to help visitors quickly understand why they should contact you."
       },
       {
-        title: "Built for local search from the start",
+        title: "Built for search from the start",
         body:
-          "Each design is planned with search-friendly headings, internal links, service sections, location relevance, metadata, and structured data so your website has a better foundation for searches like website design Montreal."
+          "Each design is planned with search-friendly headings, internal links, service sections, metadata, and structured data so your website has a better foundation for searches like website design."
       },
       {
         title: "Clear scope and launch support",
@@ -51,15 +51,15 @@ export const seoServicePages: Record<string, SeoPage> = {
       "Responsive mobile layout",
       "Service page structure",
       "Conversion-focused calls to action",
-      "Local SEO metadata",
+      "SEO metadata",
       "Image alt text guidance",
       "Analytics and launch checks"
     ],
     faq: [
       {
-        question: "Do you design websites for small businesses in Montreal?",
+        question: "Do you design websites for small businesses?",
         answer:
-          "Yes. Polidori Dev focuses on custom websites for Montreal and Quebec businesses that need a credible online presence, clearer service pages, and better local search visibility."
+          "Yes. Polidori Dev focuses on custom websites for businesses that need a credible online presence, clearer service pages, and better search visibility."
       },
       {
         question: "Is SEO included with website design?",
@@ -73,25 +73,25 @@ export const seoServicePages: Record<string, SeoPage> = {
       }
     ]
   },
-  "website-development-montreal": {
-    slug: "website-development-montreal",
-    metaTitle: "Website Development Montreal | Fast Business Websites",
+  "website-development": {
+    slug: "website-development",
+    metaTitle: "Website Development | Fast Business Websites",
     metaDescription:
-      "Website development in Montreal for fast, mobile-friendly business websites with technical SEO, contact flows, analytics, and launch support.",
-    eyebrow: "Website development Montreal",
+      "Website development for fast, mobile-friendly business websites with technical SEO, contact flows, analytics, and launch support.",
+    eyebrow: "Website development",
     title: "Website development that turns design into a fast business tool.",
     lead:
-      "Polidori Dev builds custom websites with clean responsive code, fast loading, reliable contact paths, and the technical SEO foundation needed for modern local search.",
-    primaryKeyword: "website development Montreal",
+      "Polidori Dev builds custom websites with clean responsive code, fast loading, reliable contact paths, and the technical SEO foundation needed for modern search.",
+    primaryKeyword: "website development",
     secondaryKeywords: [
-      "web development Montreal",
+      "web development",
       "business website development",
-      "Next.js developer Montreal",
+      "Next.js developer",
       "responsive website development"
     ],
-    serviceName: "Website Development Montreal",
+    serviceName: "Website Development",
     serviceDescription:
-      "Website development for Montreal businesses, including responsive front-end development, technical SEO, contact forms, analytics setup, hosting support, and launch checks.",
+      "Website development for businesses, including responsive front-end development, technical SEO, contact forms, analytics setup, hosting support, and launch checks.",
     sections: [
       {
         title: "Fast, responsive implementation",
@@ -136,25 +136,25 @@ export const seoServicePages: Record<string, SeoPage> = {
       }
     ]
   },
-  "seo-montreal": {
-    slug: "seo-montreal",
-    metaTitle: "SEO Montreal | Local SEO for Business Websites",
+  "seo": {
+    slug: "seo",
+    metaTitle: "SEO | Search Optimization for Business Websites",
     metaDescription:
-      "SEO support in Montreal for small business websites, including technical SEO, structured data, local service pages, analytics, and ranking improvements.",
-    eyebrow: "SEO Montreal",
-    title: "SEO setup for websites that need better local visibility.",
+      "SEO support for small business websites, including technical SEO, structured data, service pages, analytics, and ranking improvements.",
+    eyebrow: "SEO",
+    title: "SEO setup for websites that need better visibility.",
     lead:
       "Polidori Dev adds technical SEO, clear service architecture, structured data, and reporting basics so your business website has a stronger foundation for organic search.",
-    primaryKeyword: "SEO Montreal",
+    primaryKeyword: "SEO",
     secondaryKeywords: [
-      "local SEO Montreal",
+      "local SEO",
       "small business SEO",
       "technical SEO",
       "website ranking support"
     ],
-    serviceName: "SEO Montreal",
+    serviceName: "SEO",
     serviceDescription:
-      "Local SEO and technical SEO support for Montreal business websites, including metadata, structured data, sitemap setup, service page planning, analytics, and on-page optimization.",
+      "Local SEO and technical SEO support for business websites, including metadata, structured data, sitemap setup, service page planning, analytics, and on-page optimization.",
     sections: [
       {
         title: "Search intent before keyword stuffing",
@@ -177,7 +177,7 @@ export const seoServicePages: Record<string, SeoPage> = {
       "Page titles and descriptions",
       "Structured data",
       "Sitemap and robots review",
-      "Local service page planning",
+      "Service page planning",
       "Internal linking improvements",
       "Analytics reporting"
     ],
@@ -185,7 +185,7 @@ export const seoServicePages: Record<string, SeoPage> = {
       {
         question: "Can SEO guarantee first place on Google?",
         answer:
-          "No ethical SEO provider can guarantee first place. Good SEO improves the technical foundation, content relevance, local signals, and measurement so the site has a better chance to compete."
+          "No ethical SEO provider can guarantee first place. Good SEO improves the technical foundation, content relevance, and measurement so the site has a better chance to compete."
       },
       {
         question: "What SEO is included in the website package?",
@@ -199,25 +199,25 @@ export const seoServicePages: Record<string, SeoPage> = {
       }
     ]
   },
-  "website-hosting-montreal": {
-    slug: "website-hosting-montreal",
-    metaTitle: "Website Hosting Montreal | Managed Hosting and Maintenance",
+  "website-hosting": {
+    slug: "website-hosting",
+    metaTitle: "Website Hosting | Managed Hosting and Maintenance",
     metaDescription:
-      "Managed website hosting in Montreal with maintenance checks, SSL, backups, uptime monitoring, analytics reports, SEO support, and priority support.",
-    eyebrow: "Website hosting Montreal",
+      "Managed website hosting with maintenance checks, SSL, backups, uptime monitoring, analytics reports, SEO support, and priority support.",
+    eyebrow: "Website hosting",
     title: "Managed website hosting for business owners who want support.",
     lead:
       "Polidori Dev offers managed hosting for business websites that need secure hosting, maintenance checks, uptime monitoring, analytics reports, and ongoing SEO support.",
-    primaryKeyword: "website hosting Montreal",
+    primaryKeyword: "website hosting",
     secondaryKeywords: [
       "managed website hosting",
       "business website maintenance",
-      "website support Montreal",
+      "website support",
       "monthly website hosting"
     ],
-    serviceName: "Managed Website Hosting Montreal",
+    serviceName: "Managed Website Hosting",
     serviceDescription:
-      "Managed website hosting and maintenance for Montreal businesses, including SSL, backups, uptime checks, performance monitoring, analytics reports, small updates, and SEO support.",
+      "Managed website hosting and maintenance for businesses, including SSL, backups, uptime checks, performance monitoring, analytics reports, small updates, and SEO support.",
     sections: [
       {
         title: "Hosting with maintenance built in",
@@ -272,7 +272,7 @@ export function buildSeoMetadata(slug: keyof typeof seoServicePages): Metadata {
   return {
     title: page.metaTitle,
     description: page.metaDescription,
-    keywords: [page.primaryKeyword, ...page.secondaryKeywords, SITE_NAME, "Montreal web agency"],
+    keywords: [page.primaryKeyword, ...page.secondaryKeywords, SITE_NAME, "web agency"],
     alternates: {
       canonical: url
     },

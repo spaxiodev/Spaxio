@@ -4,10 +4,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://polidori.dev";
   const lastModified = new Date();
   const servicePages = [
-    "website-design-montreal",
-    "website-development-montreal",
-    "seo-montreal",
-    "website-hosting-montreal"
+    "website-design",
+    "website-development",
+    "seo",
+    "website-hosting"
   ];
 
   return [

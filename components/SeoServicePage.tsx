@@ -65,16 +65,10 @@ export default function SeoServicePage({ content }: { content: SeoServicePageCon
           email: EMAIL,
           address: {
             "@type": "PostalAddress",
-            addressLocality: "Montreal",
-            addressRegion: "QC",
             addressCountry: "CA"
           }
         },
-        areaServed: [
-          { "@type": "City", name: "Montreal" },
-          { "@type": "AdministrativeArea", name: "Quebec" },
-          { "@type": "Country", name: "Canada" }
-        ],
+        areaServed: [{ "@type": "Country", name: "Canada" }],
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: `${content.serviceName} deliverables`,
@@ -143,8 +137,8 @@ export default function SeoServicePage({ content }: { content: SeoServicePageCon
 
       <section className="seo-copy-grid" aria-labelledby="seo-overview-title">
         <div>
-          <p className="mk-eyebrow">Local search focus</p>
-          <h2 id="seo-overview-title">{content.serviceName} for Montreal businesses</h2>
+          <p className="mk-eyebrow">Search focus</p>
+          <h2 id="seo-overview-title">{content.serviceName} for growing businesses</h2>
         </div>
         <div className="seo-copy-stack">
           {content.sections.map((section) => (
@@ -190,7 +184,7 @@ export default function SeoServicePage({ content }: { content: SeoServicePageCon
       </section>
 
       <footer className="mk-footer">
-        <p>Custom websites, SEO, hosting, and launch support in Montreal.</p>
+        <p>Custom websites, SEO, hosting, and launch support.</p>
         <div>
           <Link href="/">Home</Link>
           <Link href="/services">Services</Link>

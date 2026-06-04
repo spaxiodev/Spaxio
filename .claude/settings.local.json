@@ -15,7 +15,18 @@
       "Bash(curl -sSfL -o three.min.js https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js)",
       "Bash(curl -sSfL -o GLTFLoader.js https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js)",
       "Bash(curl -sSfL -o RectAreaLightUniformsLib.js https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/lights/RectAreaLightUniformsLib.js)",
-      "Bash(curl -sSfL -o CSS3DRenderer.js https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/renderers/CSS3DRenderer.js)"
+      "Bash(curl -sSfL -o CSS3DRenderer.js https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/renderers/CSS3DRenderer.js)",
+      "Bash(npx tsc *)",
+      "Bash(curl -sL \"https://ciavagliatimepiece.ca\")",
+      "Bash(curl -sL -o /tmp/c.ico -w \"code=%{http_code} type=%{content_type} size=%{size_download}\\\\n\" \"https://ciavagliatimepiece.ca/favicon.ico\")",
+      "Read(//tmp/**)",
+      "Bash(curl -sL -o /tmp/c2.img -w \"code=%{http_code} type=%{content_type} size=%{size_download}\\\\n\" \"https://icons.duckduckgo.com/ip3/ciavagliatimepiece.ca.ico\")",
+      "Bash(curl -sIL \"https://ciavagliatimepiece.ca\" -o /dev/null -w \"final=%{url_effective} code=%{http_code}\\\\n\" --max-time 15)",
+      "Bash(curl -sIL \"https://www.ciavagliatimepiece.ca\" -o /dev/null -w \"final=%{url_effective} code=%{http_code}\\\\n\" --max-time 15)",
+      "Bash(nslookup ciavagliatimepiece.ca)",
+      "Bash(nslookup vastojewelery.com)",
+      "Bash(curl -sL -o /tmp/cc.img -w \"code=%{http_code} type=%{content_type} size=%{size_download}\\\\n\" \"https://www.google.com/s2/favicons?domain=ciavagliatimepieces.ca&sz=256\")",
+      "Bash(echo \"---EXIT $?---\")"
     ]
   }
 }

@@ -23,12 +23,13 @@ const copy = {
   en: {
     nav: {
       home: "Home",
+      work: "Portfolio",
       services: "Services",
       reserve: "Contact",
       lang: "FR"
     },
     hero: {
-      eyebrow: "Montreal web design and development",
+      eyebrow: "Web design and development",
       title: "Websites built like business tools.",
       lead:
         "Custom websites for small businesses that need to look credible, rank locally, and turn visitors into booked calls.",
@@ -54,6 +55,12 @@ const copy = {
       ["Revisions", "You get 3 rounds of revisions so the final site feels aligned before launch."],
       ["SEO and launch", "Technical SEO, page structure, ranking basics, analytics setup, and launch support are handled with the build."]
     ],
+    work: {
+      eyebrow: "Selected work",
+      title: "Sites I've built.",
+      lead: "Real businesses now running on websites I designed and developed from scratch. Tap any one to see it live.",
+      visit: "Visit site"
+    },
     servicesPage: {
       eyebrow: "Services",
       title: "Website services with clear pricing and a clean scope.",
@@ -98,7 +105,7 @@ const copy = {
     ],
     serviceAreas: {
       title: "Service pages for local search",
-      lead: "Focused pages help customers and search engines understand the exact web services available in Montreal."
+      lead: "Focused pages help customers and search engines understand the exact web services available."
     },
     contactMethods: {
       title: "Reach out directly",
@@ -125,19 +132,20 @@ const copy = {
       error: "Something went wrong. Please try email or WhatsApp."
     },
     footer: {
-      line: "Custom websites, SEO, hosting, and launch support in Montreal.",
+      line: "Custom websites, SEO, hosting, and launch support.",
       privacy: "Privacy"
     }
   },
   fr: {
     nav: {
       home: "Accueil",
+      work: "Portfolio",
       services: "Services",
       reserve: "Reserver une place",
       lang: "EN"
     },
     hero: {
-      eyebrow: "Conception et developpement web a Montreal",
+      eyebrow: "Conception et developpement web",
       title: "Des sites web concus comme de vrais outils d'affaires.",
       lead:
         "Des sites personnalises pour les petites entreprises qui veulent paraitre credibles, etre visibles localement et transformer les visiteurs en appels reserves.",
@@ -163,6 +171,12 @@ const copy = {
       ["Revisions", "Vous avez 3 rondes de revisions pour que le resultat final soit bien aligne avant le lancement."],
       ["SEO et lancement", "Le SEO technique, la structure des pages, les bases de classement, les analytiques et le soutien au lancement sont inclus."]
     ],
+    work: {
+      eyebrow: "Projets realises",
+      title: "Des sites que j'ai crees.",
+      lead: "De vraies entreprises propulsees par des sites que j'ai concus et developpes a partir de zero. Touchez-en un pour le voir en ligne.",
+      visit: "Voir le site"
+    },
     servicesPage: {
       eyebrow: "Services",
       title: "Des services web avec des prix clairs et une portee precise.",
@@ -207,7 +221,7 @@ const copy = {
     ],
     serviceAreas: {
       title: "Pages de services pour la recherche locale",
-      lead: "Des pages ciblees aident les clients et les moteurs de recherche a comprendre les services web offerts a Montreal."
+      lead: "Des pages ciblees aident les clients et les moteurs de recherche a comprendre les services web offerts."
     },
     contactMethods: {
       title: "Me joindre directement",
@@ -234,11 +248,44 @@ const copy = {
       error: "Un probleme est survenu. Essayez par courriel ou WhatsApp."
     },
     footer: {
-      line: "Sites web sur mesure, SEO, hebergement et soutien au lancement a Montreal.",
+      line: "Sites web sur mesure, SEO, hebergement et soutien au lancement.",
       privacy: "Confidentialite"
     }
   }
 };
+
+const portfolio = [
+  {
+    name: "Vasto Jewelery",
+    host: "vastojewelery.com",
+    url: "https://vastojewelery.com",
+    tag: { en: "Jewelery", fr: "Bijouterie" },
+    blurb: {
+      en: "An elegant storefront built to showcase fine jewelery and turn browsers into buyers.",
+      fr: "Une vitrine elegante concue pour mettre en valeur la bijouterie fine et convertir les visiteurs en clients."
+    }
+  },
+  {
+    name: "Ciavaglia Timepieces",
+    host: "ciavagliatimepieces.ca",
+    url: "https://ciavagliatimepieces.ca",
+    tag: { en: "Watchmaking", fr: "Horlogerie" },
+    blurb: {
+      en: "A refined site for a watchmaker, framing craftsmanship and heritage with quiet confidence.",
+      fr: "Un site raffine pour un horloger, mettant en scene le savoir-faire et l'heritage avec elegance."
+    }
+  },
+  {
+    name: "Tooth Doctor Patel",
+    host: "toothdoctorpatel.com",
+    url: "https://toothdoctorpatel.com",
+    tag: { en: "Dental practice", fr: "Clinique dentaire" },
+    blurb: {
+      en: "A trustworthy, easy-to-navigate site that helps a dental practice fill its appointment book.",
+      fr: "Un site fiable et facile a parcourir qui aide une clinique dentaire a remplir son agenda."
+    }
+  }
+];
 
 const whatsappText = {
   en: "Hi, I want to Contact for a professional website.",
@@ -247,16 +294,16 @@ const whatsappText = {
 
 const serviceAreaLinks = {
   en: [
-    ["Website design Montreal", "/website-design-montreal"],
-    ["Website development Montreal", "/website-development-montreal"],
-    ["SEO Montreal", "/seo-montreal"],
-    ["Website hosting Montreal", "/website-hosting-montreal"]
+    ["Website design", "/website-design"],
+    ["Website development", "/website-development"],
+    ["SEO", "/seo"],
+    ["Website hosting", "/website-hosting"]
   ],
   fr: [
-    ["Conception de site web a Montreal", "/website-design-montreal"],
-    ["Developpement web a Montreal", "/website-development-montreal"],
-    ["SEO a Montreal", "/seo-montreal"],
-    ["Hebergement web a Montreal", "/website-hosting-montreal"]
+    ["Conception de site web", "/website-design"],
+    ["Developpement web", "/website-development"],
+    ["SEO", "/seo"],
+    ["Hebergement web", "/website-hosting"]
   ]
 } satisfies Record<Lang, ServiceAreaLink[]>;
 
@@ -360,6 +407,7 @@ export default function MarketingSite({ variant }: { variant: Variant }) {
 
         <nav className="mk-nav" aria-label="Primary">
           <Link href="/">{t.nav.home}</Link>
+          <a href="/#work">{t.nav.work}</a>
           <Link href="/services">{t.nav.services}</Link>
           <a href="#contact">{t.nav.reserve}</a>
           <button type="button" onClick={toggleLang}>{t.nav.lang}</button>
@@ -430,6 +478,46 @@ export default function MarketingSite({ variant }: { variant: Variant }) {
                   <h3>{title}</h3>
                   <p>{body}</p>
                 </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="mk-work" id="work" aria-labelledby="work-title">
+            <div className="mk-work-head">
+              <p className="mk-eyebrow">{t.work.eyebrow}</p>
+              <h2 id="work-title">{t.work.title}</h2>
+              <p className="mk-work-lead">{t.work.lead}</p>
+            </div>
+
+            <div className="mk-work-grid">
+              {portfolio.map((item, index) => (
+                <a
+                  className="mk-work-card"
+                  key={item.url}
+                  href={item.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ "--i": index } as MotionStyle}
+                >
+                  <div className="mk-work-card-top">
+                    <span className="mk-work-fav">
+                      <img
+                        src={`https://www.google.com/s2/favicons?domain=${item.host}&sz=256`}
+                        alt={`${item.name} favicon`}
+                        width="256"
+                        height="256"
+                        loading="lazy"
+                      />
+                    </span>
+                    <span className="mk-work-tag">{item.tag[lang]}</span>
+                  </div>
+                  <h3 className="mk-work-name">{item.name}</h3>
+                  <p className="mk-work-blurb">{item.blurb[lang]}</p>
+                  <span className="mk-work-foot">
+                    <span className="mk-work-host">{item.host}</span>
+                    <span className="mk-work-visit">{t.work.visit}<i aria-hidden="true">&rarr;</i></span>
+                  </span>
+                </a>
               ))}
             </div>
           </section>

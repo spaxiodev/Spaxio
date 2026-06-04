@@ -9,16 +9,16 @@ export const metadata: Metadata = {
     canonical: "https://polidori.dev/services"
   },
   keywords: [
-    "web design services Montreal",
-    "website development services Montreal",
-    "SEO services Montreal",
-    "managed website hosting Montreal",
+    "web design services",
+    "website development services",
+    "SEO services",
+    "managed website hosting",
     "business website services"
   ],
   openGraph: {
     title: "Web Design, Development, SEO and Hosting Services | Polidori Dev",
     description:
-      "Clear pricing for custom business websites, managed hosting, SEO, analytics, maintenance, and launch support in Montreal.",
+      "Clear pricing for custom business websites, managed hosting, SEO, analytics, maintenance, and launch support.",
     url: "https://polidori.dev/services",
     type: "website"
   }

@@ -1998,3 +1998,220 @@ h1, h2, h3 {
     line-height: 1.6;
   }
 }
+
+/* ============================================================
+   Portfolio / selected work — inverted band that stands out
+   ============================================================ */
+.mk-work {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: clamp(84px, 14vw, 190px) clamp(16px, 4vw, 56px) clamp(72px, 12vw, 160px);
+  background: var(--mk-ink);
+  color: var(--mk-paper);
+  border-top: 1px solid var(--mk-ink);
+  border-bottom: 1px solid var(--mk-ink);
+  overflow: hidden;
+}
+
+.mk-work > * {
+  position: relative;
+  z-index: 1;
+}
+
+.mk-work-head {
+  max-width: 1100px;
+}
+
+.mk-work-head .mk-eyebrow {
+  color: rgba(243, 239, 229, 0.62);
+}
+
+.mk-work-head h2 {
+  margin-top: 14px;
+  color: var(--mk-paper);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 950;
+  letter-spacing: -0.05em;
+  line-height: 0.86;
+  text-transform: uppercase;
+  font-size: clamp(2.9rem, 9.5vw, 9.5rem);
+}
+
+.mk-work-lead {
+  max-width: 620px;
+  margin-top: 26px;
+  color: rgba(243, 239, 229, 0.72);
+  font-size: clamp(1.02rem, 1.7vw, 1.3rem);
+  line-height: 1.5;
+}
+
+.mk-work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2vw, 28px);
+  margin-top: clamp(44px, 7vw, 92px);
+}
+
+.mk-work-card {
+  display: flex;
+  flex-direction: column;
+  min-height: clamp(320px, 34vw, 460px);
+  padding: clamp(22px, 2.6vw, 38px);
+  border: 1px solid rgba(243, 239, 229, 0.22);
+  background: rgba(243, 239, 229, 0.03);
+  color: var(--mk-paper);
+  text-decoration: none;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background 0.5s ease, border-color 0.5s ease;
+}
+
+/* scroll-driven entrance — progressive enhancement, content stays visible without it */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .mk-work-card {
+      animation: mkWorkReveal linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 28%;
+    }
+  }
+}
+
+@keyframes mkWorkReveal {
+  from {
+    opacity: 0;
+    transform: translateY(64px) scale(0.965);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.mk-work-card:hover,
+.mk-work-card:focus-visible {
+  transform: translateY(-10px);
+  background: var(--mk-paper);
+  border-color: var(--mk-paper);
+  color: var(--mk-ink);
+  outline: none;
+}
+
+.mk-work-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.mk-work-fav {
+  display: block;
+  width: clamp(120px, 16vw, 200px);
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgba(243, 239, 229, 0.22);
+  background: rgba(243, 239, 229, 0.94);
+  overflow: hidden;
+  transition: border-color 0.5s ease;
+}
+
+.mk-work-fav img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mk-work-card:hover .mk-work-fav,
+.mk-work-card:focus-visible .mk-work-fav {
+  border-color: rgba(7, 7, 7, 0.2);
+}
+
+.mk-work-tag {
+  padding: 5px 12px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: clamp(0.62rem, 0.9vw, 0.74rem);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.mk-work-name {
+  margin-top: auto;
+  padding-top: 36px;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(1.7rem, 2.7vw, 2.7rem);
+  font-weight: 950;
+  letter-spacing: -0.04em;
+  line-height: 0.96;
+  text-transform: uppercase;
+}
+
+.mk-work-blurb {
+  margin-top: 14px;
+  font-size: clamp(0.92rem, 1.15vw, 1.04rem);
+  line-height: 1.5;
+  opacity: 0.82;
+}
+
+.mk-work-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid currentColor;
+}
+
+.mk-work-host {
+  font-size: clamp(0.78rem, 1vw, 0.9rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  opacity: 0.75;
+}
+
+.mk-work-visit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(0.78rem, 1vw, 0.9rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.mk-work-visit i {
+  font-style: normal;
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.mk-work-card:hover .mk-work-visit i,
+.mk-work-card:focus-visible .mk-work-visit i {
+  transform: translateX(6px);
+}
+
+@media (max-width: 900px) {
+  .mk-work {
+    width: 100%;
+  }
+
+  .mk-work-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mk-work-card {
+    min-height: auto;
+  }
+
+  .mk-work-name {
+    padding-top: 28px;
+  }
+}
+
+@media (max-width: 560px) {
+  .mk-work-head h2 {
+    font-size: clamp(2.6rem, 16vw, 4.4rem);
+  }
+}
