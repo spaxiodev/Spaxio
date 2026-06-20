@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import { Instrument_Serif, Inter, Geist_Mono } from "next/font/google";
 import CookieConsent from "@/components/CookieConsent";
 
-const display = Playfair_Display({ subsets: ["latin"], weight: ["400", "600", "700"], variable: "--font-display" });
-const sans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-sans" });
+const display = Instrument_Serif({ subsets: ["latin"], weight: ["400"], style: ["normal", "italic"], variable: "--font-display" });
+const sans = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 const SITE_URL = "https://polidori.dev";
 const SITE_NAME = "Polidori Dev";
-const SITE_TAGLINE = "Web Design & Development Agency";
+const SITE_TAGLINE = "Build Websites with AI & Land Clients on Social Media";
 const SITE_DESCRIPTION =
-  "Web design and development agency offering professional custom websites for $1000 CAD, managed hosting for $150/month, SEO, analytics and launch support.";
+  "The Polidori Dev course teaches you to build websites with AI — prompting Claude Code and connectors — and land clients through social media. No coding degree required. Lifetime access and a private community.";
 const SITE_DESCRIPTION_SHORT =
-  "Professional custom websites, website development, managed hosting, SEO, analytics and launch support by an independent web agency.";
+  "Learn to build websites with AI (Claude Code + connectors) and get clients on social media. Lifetime access plus a private Discord community.";
 const PHONE = "+1-514-516-0515";
 
 export const metadata: Metadata = {
@@ -23,30 +24,26 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   keywords: [
-    "web design",
-    "website design",
-    "custom website design",
-    "web development",
-    "website development",
-    "web agency",
-    "web hosting",
-    "website hosting",
-    "professional website",
-    "business website",
-    "small business website",
-    "SEO",
-    "local SEO",
-    "managed website hosting",
-    "website redesign",
+    "build websites with AI",
+    "Claude Code course",
+    "AI web design course",
+    "make websites without coding",
+    "get clients on social media",
+    "freelance clients social media",
+    "AI agency course",
+    "prompt engineering for websites",
+    "no-code AI websites",
+    "web design business",
+    "make money with AI",
+    "online course",
     "Polidori Dev",
-    "Stefano Polidori",
-    "Next.js developer",
-    "freelance web developer"
+    "Polidori Dev course",
+    "Stefano Polidori"
   ],
   authors: [{ name: "Stefano Polidori", url: SITE_URL }],
   creator: "Stefano Polidori",
   publisher: SITE_NAME,
-  category: "Web design",
+  category: "Education",
   applicationName: SITE_NAME,
   alternates: {
     canonical: SITE_URL
@@ -101,39 +98,6 @@ const ADDRESS = {
 
 const AREA_SERVED = [{ "@type": "Country", name: "Canada" }];
 
-const SERVICES = [
-  {
-    name: "Website Design",
-    description: "Custom business website design with Zoom discovery, full custom design, 3 revision rounds, responsive layouts, SEO and launch support.",
-    url: `${SITE_URL}/website-design`,
-    price: "1000"
-  },
-  {
-    name: "Website Development",
-    description: "Responsive website development with technical SEO, contact flows, analytics setup and launch support.",
-    url: `${SITE_URL}/website-development`,
-    price: "1000"
-  },
-  {
-    name: "SEO",
-    description: "Technical SEO, structured data, page structure, service pages and on-page optimization for organic search visibility.",
-    url: `${SITE_URL}/seo`,
-    price: "0"
-  },
-  {
-    name: "Managed Website Hosting",
-    description: "Monthly hosting with maintenance checks, SEO support, analytics reports, SSL, backups, uptime checks and priority support.",
-    url: `${SITE_URL}/website-hosting`,
-    price: "150"
-  },
-  {
-    name: "Website Launch Support",
-    description: "Deployment support, contact flow setup, analytics setup and final launch checks.",
-    url: `${SITE_URL}/services`,
-    price: "0"
-  }
-];
-
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -160,48 +124,35 @@ const jsonLd = {
       inLanguage: ["en-CA", "fr-CA"]
     },
     {
-      "@type": "ProfessionalService",
-      "@id": `${SITE_URL}#service`,
-      name: SITE_NAME,
-      alternateName: "Polidori Dev Web Agency",
+      "@type": "Course",
+      "@id": `${SITE_URL}#course`,
+      name: "The Polidori Dev Course",
       description: SITE_DESCRIPTION,
       url: SITE_URL,
       image: `${SITE_URL}/logo.png`,
-      logo: `${SITE_URL}/logo.png`,
-      telephone: PHONE,
-      email: "contact@polidori.dev",
-      priceRange: "$$",
-      currenciesAccepted: "CAD",
-      paymentAccepted: "Credit Card, Bank Transfer, E-transfer",
-      address: ADDRESS,
-      areaServed: AREA_SERVED,
+      inLanguage: ["en-CA", "fr-CA"],
       provider: { "@id": `${SITE_URL}#organization` },
-      knowsAbout: [
-        "Web Design",
-        "Web Development",
-        "Web Hosting",
-        "Managed Hosting",
-        "Search Engine Optimization",
-        "Website Redesign",
-        "Next.js",
-        "React",
-        "TypeScript"
+      instructor: { "@type": "Person", name: "Stefano Polidori" },
+      teaches: [
+        "Building websites with AI",
+        "Prompting Claude Code",
+        "Using AI connectors and automation",
+        "Packaging and pricing web services",
+        "Getting clients on social media",
+        "Closing deals and getting paid"
       ],
-      hasOfferCatalog: {
-        "@type": "OfferCatalog",
-        name: "Web Services",
-        itemListElement: SERVICES.map((s) => ({
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: s.name,
-            description: s.description,
-            url: s.url,
-            areaServed: { "@type": "Country", name: "Canada" }
-          },
-          price: s.price,
-          priceCurrency: "CAD"
-        }))
+      offers: {
+        "@type": "Offer",
+        category: "Paid",
+        price: "0",
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+        url: "https://whop.com/polidori-dev/course-access-one-time-payment/"
+      },
+      hasCourseInstance: {
+        "@type": "CourseInstance",
+        courseMode: "Online",
+        courseWorkload: "PT20H"
       }
     }
   ]
@@ -210,7 +161,7 @@ const jsonLd = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${display.variable} ${sans.variable}`}>
+      <body className={`${display.variable} ${sans.variable} ${mono.variable}`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

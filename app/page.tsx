@@ -1,5 +1,5 @@
-import MarketingSite from "@/components/MarketingSite";
+import CourseHome from "@/components/CourseHome";
 
 export default function HomePage() {
-  return <MarketingSite variant="home" />;
+  return <CourseHome />;
 }

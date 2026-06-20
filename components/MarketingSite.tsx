@@ -461,6 +461,25 @@ export default function MarketingSite({ variant }: { variant: Variant }) {
             </div>
           </div>
 
+          <section className="mk-promo" aria-label="Course and community">
+            <a
+              className="mk-promo-card"
+              href="https://whop.com/polidori-dev/course-access-one-time-payment/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src="/whop-course.png" alt="Polidori Dev web development course — Learn. Build. Launch." loading="lazy" />
+            </a>
+            <a
+              className="mk-promo-card"
+              href="https://discord.gg/kQhZgkDT8"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img src="/discord-community.png" alt="Join the Polidori Dev Discord community" loading="lazy" />
+            </a>
+          </section>
+
           <section className="mk-intro">
             <div>
               <p className="mk-eyebrow">{t.intro.kicker}</p>

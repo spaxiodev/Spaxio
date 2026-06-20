@@ -26,7 +26,10 @@
       "Bash(nslookup ciavagliatimepiece.ca)",
       "Bash(nslookup vastojewelery.com)",
       "Bash(curl -sL -o /tmp/cc.img -w \"code=%{http_code} type=%{content_type} size=%{size_download}\\\\n\" \"https://www.google.com/s2/favicons?domain=ciavagliatimepieces.ca&sz=256\")",
-      "Bash(echo \"---EXIT $?---\")"
+      "Bash(echo \"---EXIT $?---\")",
+      "Bash(cp \"ChatGPT Image Jun 16, 2026, 07_57_46 PM.png\" public/whop-course.png)",
+      "Bash(cp \"ChatGPT Image Jun 16, 2026, 07_58_20 PM.png\" public/discord-community.png)",
+      "Bash(ffprobe -v error -select_streams v:0 -show_entries stream=width,height,r_frame_rate,nb_frames,duration,codec_name -of default=noprint_wrappers=1 \"hf_20260617_222752_31b8c67c-58c4-40f2-9d6c-5c54b0c5e2a2 \\(1\\).mp4\")"
     ]
   }
 }
