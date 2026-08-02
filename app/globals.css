@@ -2251,6 +2251,117 @@ h1, h2, h3 {
   }
 }
 
+/* Instagram reels */
+
+.mk-reels {
+  width: 100%;
+  padding: clamp(72px, 11vw, 150px) clamp(16px, 4vw, 56px);
+  background: var(--mk-paper);
+  color: var(--mk-ink);
+  border-bottom: 1px solid var(--mk-line);
+}
+
+.mk-reels-head {
+  max-width: 760px;
+}
+
+.mk-reels-head h2 {
+  margin-top: 14px;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 950;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 7vw, 6.2rem);
+}
+
+.mk-reels-lead {
+  max-width: 620px;
+  margin-top: 22px;
+  color: var(--mk-muted);
+  font-size: clamp(1rem, 1.6vw, 1.22rem);
+  line-height: 1.55;
+}
+
+.mk-reels-follow {
+  margin-top: 28px;
+}
+
+.mk-reels-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 26px);
+  margin-top: clamp(40px, 6vw, 80px);
+}
+
+.mk-reel {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  border: 1px solid var(--mk-line);
+  background: var(--mk-paper-2);
+  overflow: hidden;
+}
+
+.mk-reel-featured {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.mk-reel iframe {
+  display: block;
+  width: 100%;
+  height: clamp(460px, 52vw, 620px);
+  border: 0;
+  background: var(--mk-paper);
+}
+
+.mk-reel-featured iframe {
+  height: clamp(520px, 62vw, 780px);
+}
+
+.mk-reel figcaption {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 14px clamp(14px, 1.6vw, 20px);
+  border-top: 1px solid var(--mk-line);
+}
+
+.mk-reel figcaption strong {
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.mk-reel figcaption span {
+  color: var(--mk-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+@media (max-width: 1100px) {
+  .mk-reels-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mk-reel-featured {
+    grid-column: span 2;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .mk-reels-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mk-reel-featured {
+    grid-column: auto;
+  }
+}
+
 /* ============================================================
    COURSE SITE  (cs-)  — Resend-inspired: black canvas, editorial
    serif headlines, hairline borders, white CTA, atmospheric glows.
@@ -2497,6 +2608,66 @@ h1, h2, h3 {
 .cs-section-head { max-width: 720px; margin: 0 0 48px; }
 .cs-section-center .cs-section-head { margin-left: auto; margin-right: auto; }
 .cs-section-head h2 { font-size: clamp(2.2rem, 5vw, 3.6rem); letter-spacing: -0.025em; }
+
+/* ---- Instagram reels ---- */
+.cs-reels-body {
+  margin-top: 18px;
+  color: var(--cs-charcoal);
+  font-size: clamp(1rem, 1.4vw, 1.12rem);
+  line-height: 1.6;
+}
+.cs-reels-cta { margin-top: 26px; }
+
+.cs-reels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+.cs-reel {
+  margin: 0;
+  border: 1px solid var(--cs-hairline-strong);
+  border-radius: 14px;
+  background: var(--cs-surface-card);
+  overflow: hidden;
+}
+
+.cs-reel-featured { grid-column: span 3; }
+
+.cs-reel iframe {
+  display: block;
+  width: 100%;
+  height: clamp(560px, 50vw, 700px);
+  border: 0;
+  background: #fff;
+}
+
+.cs-reel-featured iframe { height: clamp(600px, 58vw, 800px); }
+
+.cs-reel figcaption {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 14px 18px;
+  border-top: 1px solid var(--cs-hairline);
+}
+.cs-reel figcaption strong {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--cs-ink);
+}
+.cs-reel figcaption span {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--cs-mute);
+}
+
+@media (max-width: 900px) {
+  .cs-reels { grid-template-columns: 1fr; }
+  .cs-reel-featured { grid-column: auto; }
+}
 
 /* Atmospheric glow helper (one per section, anchored top) */
 .cs-glow::before {

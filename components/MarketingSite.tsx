@@ -16,8 +16,18 @@ const brand = {
   phoneDisplay: "514-516-0515",
   phoneE164: "15145160515",
   email: "contact@polidori.dev",
-  messengerUrl: "https://m.me/polidoridev"
+  messengerUrl: "https://m.me/polidoridev",
+  instagramUrl: "https://www.instagram.com/polidori.dev/",
+  instagramHandle: "@polidori.dev"
 };
+
+// Reel shortcodes from instagram.com/polidori.dev, ordered by views.
+const reels = [
+  { code: "DZl4PovRcYy", views: "1.7M", featured: true },
+  { code: "Da8k-0MxpPJ", views: "162K", featured: false },
+  { code: "Dav6OECRPRV", views: "78.7K", featured: false },
+  { code: "Day_GmjRKn3", views: "58.8K", featured: false }
+];
 
 const copy = {
   en: {
@@ -112,7 +122,8 @@ const copy = {
       whatsapp: "WhatsApp",
       messenger: "Messenger",
       email: "Email",
-      phone: "Call"
+      phone: "Call",
+      instagram: "Instagram"
     },
     form: {
       eyebrow: "Contact",
@@ -130,6 +141,13 @@ const copy = {
       sending: "Sending...",
       success: "Request sent. I will follow up soon.",
       error: "Something went wrong. Please try email or WhatsApp."
+    },
+    reels: {
+      eyebrow: "Instagram",
+      title: "Watch the builds.",
+      lead: "Short breakdowns of real client sites, design decisions, and the work behind the launches. Follow along on Instagram.",
+      views: "views",
+      follow: "Follow on Instagram"
     },
     footer: {
       line: "Custom websites, SEO, hosting, and launch support.",
@@ -228,7 +246,8 @@ const copy = {
       whatsapp: "WhatsApp",
       messenger: "Messenger",
       email: "Courriel",
-      phone: "Appeler"
+      phone: "Appeler",
+      instagram: "Instagram"
     },
     form: {
       eyebrow: "Reserver une place",
@@ -246,6 +265,13 @@ const copy = {
       sending: "Envoi...",
       success: "Demande envoyee. Je vous repondrai bientot.",
       error: "Un probleme est survenu. Essayez par courriel ou WhatsApp."
+    },
+    reels: {
+      eyebrow: "Instagram",
+      title: "Voir les projets en video.",
+      lead: "De courtes videos sur de vrais sites clients, les choix de design et le travail derriere chaque lancement. Suivez le tout sur Instagram.",
+      views: "vues",
+      follow: "Suivre sur Instagram"
     },
     footer: {
       line: "Sites web sur mesure, SEO, hebergement et soutien au lancement.",
@@ -354,7 +380,8 @@ export default function MarketingSite({ variant }: { variant: Variant }) {
       whatsapp: `https://wa.me/${brand.phoneE164}?text=${message}`,
       email: `mailto:${brand.email}?subject=${mailSubject}&body=${mailBody}`,
       messenger: brand.messengerUrl,
-      phone: `tel:+${brand.phoneE164}`
+      phone: `tel:+${brand.phoneE164}`,
+      instagram: brand.instagramUrl
     };
   }, [lang]);
 
@@ -464,7 +491,7 @@ export default function MarketingSite({ variant }: { variant: Variant }) {
           <section className="mk-promo" aria-label="Course and community">
             <a
               className="mk-promo-card"
-              href="https://whop.com/polidori-dev/course-access-one-time-payment/"
+              href="https://whop.com/polidori-dev-3c24/polidori-dev-full-guide/"
               target="_blank"
               rel="noreferrer"
             >
@@ -540,6 +567,45 @@ export default function MarketingSite({ variant }: { variant: Variant }) {
               ))}
             </div>
           </section>
+
+          <section className="mk-reels" id="instagram" aria-labelledby="reels-title">
+            <div className="mk-reels-head">
+              <p className="mk-eyebrow">{t.reels.eyebrow}</p>
+              <h2 id="reels-title">{t.reels.title}</h2>
+              <p className="mk-reels-lead">{t.reels.lead}</p>
+              <a
+                className="mk-btn mk-btn-primary mk-reels-follow"
+                href={links.instagram}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t.reels.follow}
+              </a>
+            </div>
+
+            <div className="mk-reels-grid">
+              {reels.map((reel, index) => (
+                <figure
+                  className={reel.featured ? "mk-reel mk-reel-featured" : "mk-reel"}
+                  key={reel.code}
+                  style={{ "--i": index } as MotionStyle}
+                >
+                  <iframe
+                    src={`https://www.instagram.com/reel/${reel.code}/embed/`}
+                    title={`${brand.instagramHandle} reel ${reel.code}`}
+                    loading="lazy"
+                    allow="encrypted-media; picture-in-picture; web-share"
+                    allowFullScreen
+                    scrolling="no"
+                  />
+                  <figcaption>
+                    <strong>{reel.views}</strong>
+                    <span>{t.reels.views}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
         </>
       ) : (
         <section className="mk-services-hero">
@@ -600,6 +666,7 @@ export default function MarketingSite({ variant }: { variant: Variant }) {
           <a href={links.messenger} target="_blank" rel="noreferrer">{t.contactMethods.messenger}</a>
           <a href={links.email}>{t.contactMethods.email}</a>
           <a href={links.phone}>{t.contactMethods.phone}</a>
+          <a href={links.instagram} target="_blank" rel="noreferrer">{t.contactMethods.instagram}</a>
         </div>
       </section>
 
@@ -649,6 +716,7 @@ export default function MarketingSite({ variant }: { variant: Variant }) {
         <div>
           <a href={`tel:+${brand.phoneE164}`}>{brand.phoneDisplay}</a>
           <a href={`mailto:${brand.email}`}>{brand.email}</a>
+          <a href={brand.instagramUrl} target="_blank" rel="noreferrer">{brand.instagramHandle}</a>
           <Link href="/privacy-policy">{t.footer.privacy}</Link>
         </div>
       </footer>

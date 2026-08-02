@@ -8,7 +8,7 @@ import ScrollVideoHero from "./ScrollVideoHero";
 type Lang = "en" | "fr";
 type MotionStyle = CSSProperties & { "--i"?: number; "--cs-glow-color"?: string };
 
-const COURSE_URL = "https://whop.com/polidori-dev/course-access-one-time-payment/";
+const COURSE_URL = "https://whop.com/polidori-dev-3c24/polidori-dev-full-guide/";
 const DISCORD_URL = "https://discord.gg/kQhZgkDT8";
 
 const CODE_SNIPPET = `<span class="c">~/clients/dental-clinic</span>
@@ -27,8 +27,18 @@ const CODE_SNIPPET = `<span class="c">~/clients/dental-clinic</span>
 
 const brand = {
   name: "Polidori Dev",
-  email: "contact@polidori.dev"
+  email: "contact@polidori.dev",
+  instagramUrl: "https://www.instagram.com/polidori.dev/",
+  instagramHandle: "@polidori.dev"
 };
+
+// Reel shortcodes from instagram.com/polidori.dev, ordered by views.
+const REELS = [
+  { code: "DZl4PovRcYy", views: "1.7M", featured: true },
+  { code: "Da8k-0MxpPJ", views: "162K", featured: false },
+  { code: "Dav6OECRPRV", views: "78.7K", featured: false },
+  { code: "Day_GmjRKn3", views: "58.8K", featured: false }
+];
 
 const copy = {
   en: {
@@ -97,6 +107,14 @@ const copy = {
       title: "You won't be building alone.",
       body: "Join the Discord to ask questions, share your builds, and learn alongside everyone else taking the course.",
       cta: "Join the Discord"
+    },
+    reels: {
+      eyebrow: "Instagram",
+      title: "Millions of views. Same playbook.",
+      body:
+        "The system in this course is the one I post about every week. Here are some of the reels that got the most attention.",
+      views: "views",
+      cta: "Follow on Instagram"
     },
     faqHead: { eyebrow: "FAQ", title: "Questions, answered." },
     faq: [
@@ -179,6 +197,14 @@ const copy = {
       title: "Tu ne bâtiras pas seul.",
       body: "Rejoins le Discord pour poser tes questions, partager tes projets et apprendre avec les autres membres du cours.",
       cta: "Rejoindre le Discord"
+    },
+    reels: {
+      eyebrow: "Instagram",
+      title: "Des millions de vues. La même méthode.",
+      body:
+        "Le système enseigné dans ce cours, c'est celui dont je parle chaque semaine. Voici quelques-uns des reels les plus vus.",
+      views: "vues",
+      cta: "Suivre sur Instagram"
     },
     faqHead: { eyebrow: "FAQ", title: "Tes questions, nos réponses." },
     faq: [
@@ -320,6 +346,40 @@ export default function CourseHome() {
           </div>
         </section>
 
+        {/* Instagram reels */}
+        <section className="cs-section" id="instagram">
+          <div className="cs-section-head">
+            <p className="cs-eyebrow">{t.reels.eyebrow}</p>
+            <h2>{t.reels.title}</h2>
+            <p className="cs-reels-body">{t.reels.body}</p>
+            <a className="cs-btn cs-btn-ghost cs-reels-cta" href={brand.instagramUrl} target="_blank" rel="noreferrer">
+              {t.reels.cta}
+            </a>
+          </div>
+          <div className="cs-reels">
+            {REELS.map((reel, i) => (
+              <figure
+                className={reel.featured ? "cs-reel cs-reel-featured" : "cs-reel"}
+                key={reel.code}
+                style={{ "--i": i } as MotionStyle}
+              >
+                <iframe
+                  src={`https://www.instagram.com/reel/${reel.code}/embed/`}
+                  title={`${brand.instagramHandle} reel ${reel.code}`}
+                  loading="lazy"
+                  allow="encrypted-media; picture-in-picture; web-share"
+                  allowFullScreen
+                  scrolling="no"
+                />
+                <figcaption>
+                  <strong>{reel.views}</strong>
+                  <span>{t.reels.views}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+
         {/* Curriculum */}
         <section className="cs-section" id="curriculum">
           <div className="cs-section-head">
@@ -416,6 +476,7 @@ export default function CourseHome() {
           <div>
             <span className="cs-status"><i />{lang === "fr" ? "Inscriptions ouvertes" : "Enrolling now"}</span>
             <a href={`mailto:${brand.email}`}>{brand.email}</a>
+            <a href={brand.instagramUrl} target="_blank" rel="noreferrer">{brand.instagramHandle}</a>
             <Link href="/privacy-policy">{lang === "fr" ? "Confidentialité" : "Privacy"}</Link>
           </div>
         </div>

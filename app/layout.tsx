@@ -112,7 +112,7 @@ const jsonLd = {
       telephone: PHONE,
       address: ADDRESS,
       areaServed: AREA_SERVED,
-      sameAs: []
+      sameAs: ["https://www.instagram.com/polidori.dev/"]
     },
     {
       "@type": "WebSite",
@@ -147,7 +147,7 @@ const jsonLd = {
         price: "0",
         priceCurrency: "USD",
         availability: "https://schema.org/InStock",
-        url: "https://whop.com/polidori-dev/course-access-one-time-payment/"
+        url: "https://whop.com/polidori-dev-3c24/polidori-dev-full-guide/"
       },
       hasCourseInstance: {
         "@type": "CourseInstance",
