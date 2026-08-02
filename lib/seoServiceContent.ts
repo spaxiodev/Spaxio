@@ -14,11 +14,11 @@ export const seoServicePages: Record<string, SeoPage> = {
     slug: "website-design",
     metaTitle: "Website Design | Custom Business Websites",
     metaDescription:
-      "Custom website design for small businesses that need a credible, mobile-friendly site built for SEO, trust, and booked calls.",
+      "Custom website design for small businesses that need a site people trust, that works on a phone, and that gets found on Google.",
     eyebrow: "Website design",
     title: "Custom website design for growing businesses.",
     lead:
-      "Polidori Dev designs business websites that make your offer clear, help customers trust you faster, and give search engines a stronger page structure to understand.",
+      "I design business websites that make it obvious what you do, get people to trust you faster, and give Google a clean structure to work with.",
     primaryKeyword: "website design",
     secondaryKeywords: [
       "custom website design",
@@ -31,19 +31,19 @@ export const seoServicePages: Record<string, SeoPage> = {
       "Custom website design for small businesses, including mobile responsive layouts, service page planning, conversion-focused content structure, and SEO setup.",
     sections: [
       {
-        title: "Designed around the way customers decide",
+        title: "Designed around how people actually decide",
         body:
-          "A strong business website is not just visual polish. The page order, service copy, proof points, contact paths, and mobile layout all need to help visitors quickly understand why they should contact you."
+          "A good business website is more than something that looks nice. The order of the sections, the way services are written, the proof you show, how easy it is to reach you, how it all behaves on a phone. Every one of those either helps someone pick up the phone or gives them a reason not to."
       },
       {
-        title: "Built for search from the start",
+        title: "Built for search from day one",
         body:
-          "Each design is planned with search-friendly headings, internal links, service sections, metadata, and structured data so your website has a better foundation for searches like website design."
+          "Every design gets planned with search-friendly headings, internal links, proper service sections, metadata, and structured data. That's the groundwork that gives you a shot at ranking for something like website design."
       },
       {
-        title: "Clear scope and launch support",
+        title: "You know the scope, and I help you launch",
         body:
-          "The professional website package includes a custom design, responsive development, three revision rounds, SEO setup, analytics basics, and support to get the site live."
+          "The professional website package covers a custom design, responsive build, three rounds of revisions, SEO setup, analytics, and me helping you get the thing live."
       }
     ],
     deliverables: [
@@ -59,17 +59,17 @@ export const seoServicePages: Record<string, SeoPage> = {
       {
         question: "Do you design websites for small businesses?",
         answer:
-          "Yes. Polidori Dev focuses on custom websites for businesses that need a credible online presence, clearer service pages, and better search visibility."
+          "Yes, that's most of what I do. Small businesses that need to look legitimate online, explain their services properly, and get found in search."
       },
       {
         question: "Is SEO included with website design?",
         answer:
-          "The website build includes technical SEO basics, metadata, page structure, structured data, mobile responsive development, and launch checks. Ongoing SEO support is available with managed hosting."
+          "Yes. The build covers technical SEO basics, metadata, page structure, structured data, responsive development, and launch checks. If you want SEO worked on month after month, that comes with managed hosting."
       },
       {
         question: "How much does a professional website cost?",
         answer:
-          "The core professional website build is $1000 CAD and includes discovery, custom design, three revision rounds, SEO setup, and launch support."
+          "$1000 CAD for the whole thing. That includes the first call, a custom design, three rounds of revisions, SEO setup, and help getting it live."
       }
     ]
   },
@@ -77,11 +77,11 @@ export const seoServicePages: Record<string, SeoPage> = {
     slug: "website-development",
     metaTitle: "Website Development | Fast Business Websites",
     metaDescription:
-      "Website development for fast, mobile-friendly business websites with technical SEO, contact flows, analytics, and launch support.",
+      "Website development for fast, mobile-friendly business websites with technical SEO, working contact forms, analytics, and launch support.",
     eyebrow: "Website development",
-    title: "Website development that turns design into a fast business tool.",
+    title: "Development that turns a design into something fast and useful.",
     lead:
-      "Polidori Dev builds custom websites with clean responsive code, fast loading, reliable contact paths, and the technical SEO foundation needed for modern search.",
+      "I build custom websites with clean responsive code, quick load times, contact buttons that actually work, and the technical SEO groundwork search engines expect these days.",
     primaryKeyword: "website development",
     secondaryKeywords: [
       "web development",
@@ -94,19 +94,19 @@ export const seoServicePages: Record<string, SeoPage> = {
       "Website development for businesses, including responsive front-end development, technical SEO, contact forms, analytics setup, hosting support, and launch checks.",
     sections: [
       {
-        title: "Fast, responsive implementation",
+        title: "Fast, and it works everywhere",
         body:
-          "Your website is developed to work smoothly across phones, tablets, laptops, and desktops. Performance, accessibility, clean page structure, and reliable contact actions are part of the build."
+          "Your site gets built to run smoothly on phones, tablets, laptops, and desktops. Speed, accessibility, a clean page structure, and contact buttons that do what they say are all part of it, not extras."
       },
       {
-        title: "Technical SEO is handled during development",
+        title: "Technical SEO happens while I build",
         body:
-          "Search visibility depends on more than copy. Metadata, schema, sitemap coverage, robots settings, semantic headings, crawlable links, and mobile performance all matter during development."
+          "Getting found takes more than good writing. Metadata, schema, sitemaps, robots settings, proper headings, links Google can follow, and mobile speed all get sorted during the build rather than bolted on after."
       },
       {
-        title: "Launch support after the code is ready",
+        title: "I stick around for the launch",
         body:
-          "The process includes deployment support, SSL checks, contact form setup, analytics setup, and final QA so the website can go live without leaving the technical pieces unfinished."
+          "Deployment, SSL checks, contact form setup, analytics, and a final pass over everything. The site goes live with nothing technical left dangling."
       }
     ],
     deliverables: [
@@ -122,17 +122,17 @@ export const seoServicePages: Record<string, SeoPage> = {
       {
         question: "What platform do you use for website development?",
         answer:
-          "Polidori Dev builds modern custom websites with technologies such as Next.js, React, TypeScript, and optimized static or server-rendered pages depending on the project."
+          "I build with Next.js, React, and TypeScript, using static or server-rendered pages depending on what the project needs. No page builders, no bloated themes."
       },
       {
         question: "Can you rebuild an existing business website?",
         answer:
-          "Yes. Existing websites can be reviewed for content, structure, SEO issues, and conversion problems before rebuilding the parts that need to change."
+          "Yes. I'll go through what you have first, look at the content, structure, SEO problems, and why people aren't converting, then rebuild the parts that need it."
       },
       {
         question: "Does development include mobile optimization?",
         answer:
-          "Yes. Responsive development is included so the website works clearly across common mobile and desktop screen sizes."
+          "Yes, always. The site is built to read clearly on phones and desktops alike. Most of your visitors will be on a phone anyway."
       }
     ]
   },
@@ -140,11 +140,11 @@ export const seoServicePages: Record<string, SeoPage> = {
     slug: "seo",
     metaTitle: "SEO | Search Optimization for Business Websites",
     metaDescription:
-      "SEO support for small business websites, including technical SEO, structured data, service pages, analytics, and ranking improvements.",
+      "SEO for small business websites: technical SEO, structured data, service pages, analytics, and steady ranking improvements.",
     eyebrow: "SEO",
-    title: "SEO setup for websites that need better visibility.",
+    title: "SEO for businesses that aren't showing up.",
     lead:
-      "Polidori Dev adds technical SEO, clear service architecture, structured data, and reporting basics so your business website has a stronger foundation for organic search.",
+      "I handle the technical SEO, the service page structure, the structured data, and the reporting, so your site has a real foundation to compete in search instead of sitting on page four.",
     primaryKeyword: "SEO",
     secondaryKeywords: [
       "local SEO",
@@ -157,19 +157,19 @@ export const seoServicePages: Record<string, SeoPage> = {
       "Local SEO and technical SEO support for business websites, including metadata, structured data, sitemap setup, service page planning, analytics, and on-page optimization.",
     sections: [
       {
-        title: "Search intent before keyword stuffing",
+        title: "Answer the question, don't stuff keywords",
         body:
-          "Ranking for searches like website design and website development requires pages that directly answer the search intent. The goal is useful, focused content that matches what customers are trying to find."
+          "To rank for something like website design or website development, a page has to actually answer what the person typed in. That means useful, focused content, not the same phrase repeated twenty times."
       },
       {
-        title: "Technical SEO plus useful service pages",
+        title: "The technical side, plus pages worth reading",
         body:
-          "SEO work includes metadata, sitemap coverage, schema, heading structure, internal links, fast mobile pages, and dedicated service pages that describe the business clearly."
+          "Metadata, sitemaps, schema, heading structure, internal links, fast mobile pages, and service pages that explain the business in plain terms. Both halves matter, and one without the other doesn't get you far."
       },
       {
-        title: "Measurement for ongoing improvement",
+        title: "Numbers, so you know what's working",
         body:
-          "Analytics and monthly reporting help show which pages are getting attention, which contact paths are working, and where content can be improved over time."
+          "Analytics and monthly reports show which pages people land on, which contact buttons they press, and where the content needs another look."
       }
     ],
     deliverables: [
@@ -185,17 +185,17 @@ export const seoServicePages: Record<string, SeoPage> = {
       {
         question: "Can SEO guarantee first place on Google?",
         answer:
-          "No ethical SEO provider can guarantee first place. Good SEO improves the technical foundation, content relevance, and measurement so the site has a better chance to compete."
+          "No, and anyone who promises that is lying to you. What good SEO does is fix the technical foundation, sharpen the content, and track the results, so the site has a real chance to compete."
       },
       {
         question: "What SEO is included in the website package?",
         answer:
-          "The $1000 CAD website build includes SEO basics such as metadata, page structure, structured data, sitemap coverage, mobile responsive development, and launch checks."
+          "The $1000 CAD build covers the basics: metadata, page structure, structured data, sitemap coverage, responsive development, and launch checks."
       },
       {
         question: "Do you offer ongoing SEO support?",
         answer:
-          "Yes. Managed hosting includes ongoing SEO support, monthly analytics reports, maintenance checks, uptime checks, and small content updates when needed."
+          "Yes, through managed hosting. That gets you continued SEO work, monthly analytics reports, maintenance and uptime checks, and small content updates as you need them."
       }
     ]
   },
@@ -203,11 +203,11 @@ export const seoServicePages: Record<string, SeoPage> = {
     slug: "website-hosting",
     metaTitle: "Website Hosting | Managed Hosting and Maintenance",
     metaDescription:
-      "Managed website hosting with maintenance checks, SSL, backups, uptime monitoring, analytics reports, SEO support, and priority support.",
+      "Managed website hosting with maintenance checks, SSL, backups, uptime monitoring, analytics reports, SEO work, and priority support.",
     eyebrow: "Website hosting",
-    title: "Managed website hosting for business owners who want support.",
+    title: "Hosting for owners who'd rather not think about it.",
     lead:
-      "Polidori Dev offers managed hosting for business websites that need secure hosting, maintenance checks, uptime monitoring, analytics reports, and ongoing SEO support.",
+      "Secure hosting, maintenance checks, uptime monitoring, monthly reports, and ongoing SEO. You run your business and I keep the site running.",
     primaryKeyword: "website hosting",
     secondaryKeywords: [
       "managed website hosting",
@@ -220,19 +220,19 @@ export const seoServicePages: Record<string, SeoPage> = {
       "Managed website hosting and maintenance for businesses, including SSL, backups, uptime checks, performance monitoring, analytics reports, small updates, and SEO support.",
     sections: [
       {
-        title: "Hosting with maintenance built in",
+        title: "Maintenance is part of the deal",
         body:
-          "Managed hosting keeps the technical side of the site from becoming another task on your list. The monthly service includes monitoring, maintenance checks, and priority support for site issues."
+          "The technical side of your site shouldn't become one more thing on your list. Every month includes monitoring, maintenance checks, and priority support if something goes wrong."
       },
       {
-        title: "SEO and reporting continue after launch",
+        title: "The work doesn't stop at launch",
         body:
-          "A website should not be ignored after it goes live. Monthly reports and SEO support help identify search and conversion opportunities as the site starts collecting real visitor data."
+          "A site that gets ignored after launch slowly falls behind. Monthly reports and ongoing SEO show you what's working once real visitors start showing up, and where there's room to do better."
       },
       {
-        title: "Support for practical content updates",
+        title: "Small changes, handled",
         body:
-          "Small updates can be handled as your offer, hours, services, or contact details change, which helps the site stay accurate for customers and search engines."
+          "Prices change, hours change, you add a service, you switch phone numbers. Send it over and I'll update it, so what people read is what's actually true."
       }
     ],
     deliverables: [
@@ -249,17 +249,17 @@ export const seoServicePages: Record<string, SeoPage> = {
       {
         question: "How much is managed website hosting?",
         answer:
-          "Managed hosting is $150 CAD per month and includes hosting, maintenance checks, SEO support, analytics reports, SSL, backups, uptime checks, and priority support."
+          "$150 CAD a month. That covers hosting, maintenance checks, SEO work, analytics reports, SSL, backups, uptime checks, and priority support."
       },
       {
         question: "Is hosting required with the website build?",
         answer:
-          "No. Managed hosting is an optional monthly add-on for business owners who want maintenance, support, reporting, and ongoing improvements handled for them."
+          "No. It's completely optional, for owners who'd rather have the maintenance, support, reporting, and improvements handled for them."
       },
       {
         question: "Can you host a website you already built?",
         answer:
-          "Yes. Managed hosting is designed for websites built by Polidori Dev, with support for maintenance, reporting, small updates, and launch checks."
+          "Yes. Managed hosting is meant for sites I've built, and it covers maintenance, reporting, small updates, and launch checks."
       }
     ]
   }

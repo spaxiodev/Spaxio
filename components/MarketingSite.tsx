@@ -40,42 +40,42 @@ const copy = {
     },
     hero: {
       eyebrow: "Web design and development",
-      title: "Websites built like business tools.",
+      title: "Websites that actually bring you work.",
       lead:
-        "Custom websites for small businesses that need to look credible, rank locally, and turn visitors into booked calls.",
+        "I build custom websites for small businesses. The kind that look the part, show up in local searches, and get the phone ringing.",
       reserve: "Contact",
       services: "View services",
       contact: "Talk on WhatsApp"
     },
     proof: [
-      ["$1000 CAD", "one-time professional website build"],
-      ["3 rounds", "of design and content revisions"],
-      ["Launch support", "from planning call to published site"]
+      ["$1000 CAD", "one-time, for the whole website"],
+      ["3 rounds", "of revisions on design and copy"],
+      ["Launch support", "from our first call to going live"]
     ],
     intro: {
-      kicker: "No template churn",
-      title: "A lean process for businesses that need a serious web presence.",
+      kicker: "No templates",
+      title: "A simple process for businesses that need to be taken seriously online.",
       body:
-        "The work starts with a real conversation about your offer, audience, and local market. From there, the site is designed around the way your customers decide, not around generic web trends."
+        "We start with a real conversation about what you sell, who buys it, and who you're up against locally. Then I design the site around how your customers actually make up their minds, not around whatever looks trendy this year."
     },
-    processTitle: "How the build works",
+    processTitle: "How it works",
     process: [
-      ["Discovery call", "We use Zoom to learn your business, customers, goals, and the pages your site needs."],
-      ["Custom design", "Your site is planned and designed from scratch around your brand, services, and conversion goals."],
-      ["Revisions", "You get 3 rounds of revisions so the final site feels aligned before launch."],
-      ["SEO and launch", "Technical SEO, page structure, ranking basics, analytics setup, and launch support are handled with the build."]
+      ["We talk", "A quick Zoom call to get to know your business, your customers, your goals, and what pages you actually need."],
+      ["I design it", "Your site gets planned and built from scratch around your brand, your services, and the calls you want coming in."],
+      ["You give notes", "Three rounds of revisions, so nothing goes live until it feels right to you."],
+      ["SEO and launch", "Technical SEO, page structure, ranking basics, analytics, and help getting it live. All part of the build."]
     ],
     work: {
-      eyebrow: "Selected work",
+      eyebrow: "Recent work",
       title: "Sites I've built.",
-      lead: "Real businesses now running on websites I designed and developed from scratch. Tap any one to see it live.",
+      lead: "Real businesses running on sites I designed and built from scratch. Tap any of them to see it live.",
       visit: "Visit site"
     },
     servicesPage: {
       eyebrow: "Services",
-      title: "Website services with clear pricing and a clean scope.",
+      title: "Clear pricing, no surprises.",
       lead:
-        "Start with a professional website build, then add managed hosting when you want maintenance, reporting, and ongoing search improvements handled for you."
+        "Start with the website. Add managed hosting later if you'd rather not think about maintenance, reports, and ongoing SEO yourself."
     },
     services: [
       {
@@ -84,15 +84,15 @@ const copy = {
         price: "$1000 CAD",
         cadence: "one-time payment",
         description:
-          "A custom business website built to present your offer clearly, earn trust quickly, and support local search visibility.",
+          "A custom site built to explain what you do, make people trust you fast, and show up when they search for you locally.",
         features: [
-          "Zoom calls to learn about your business",
-          "Full custom design",
+          "Zoom calls to get to know your business",
+          "Fully custom design",
           "3 rounds of revisions",
-          "Full SEO and ranking setup",
-          "Mobile responsive development",
-          "Contact paths for WhatsApp, Messenger, email, and forms",
-          "Support to launch the website"
+          "SEO and ranking setup",
+          "Works properly on phones",
+          "WhatsApp, Messenger, email, and form contact",
+          "Help getting the site live"
         ]
       },
       {
@@ -101,24 +101,24 @@ const copy = {
         price: "$150 CAD",
         cadence: "per month",
         description:
-          "Hosting and care for business owners who want the site monitored, maintained, and improved without dealing with the technical side.",
+          "For owners who want the site looked after and improved without ever touching the technical side of it.",
         features: [
-          "Secure monthly hosting",
+          "Secure hosting, month to month",
           "Monthly maintenance checks",
-          "Full SEO and ranking support",
+          "Ongoing SEO and ranking work",
           "Monthly analytics reports",
-          "SSL, backups, uptime checks, and performance monitoring",
-          "Small content updates when needed",
-          "Priority support for site issues"
+          "SSL, backups, uptime and speed monitoring",
+          "Small content updates when you need them",
+          "Priority support if something breaks"
         ]
       }
     ],
     serviceAreas: {
-      title: "Service pages for local search",
-      lead: "Focused pages help customers and search engines understand the exact web services available."
+      title: "Looking for something specific?",
+      lead: "Each service has its own page, so you and Google both know exactly what's on offer."
     },
     contactMethods: {
-      title: "Reach out directly",
+      title: "Reach me directly",
       whatsapp: "WhatsApp",
       messenger: "Messenger",
       email: "Email",
@@ -127,30 +127,30 @@ const copy = {
     },
     form: {
       eyebrow: "Contact",
-      title: "Tell me what you need built.",
+      title: "Tell me what you need.",
       lead:
-        "Share the basics and I will follow up with next steps. If you already have a website, include it so I can review what should stay, change, or be rebuilt.",
+        "Give me the basics and I'll get back to you with the next steps. Already have a site? Drop the link in and I'll tell you what's worth keeping and what isn't.",
       name: "Name",
       email: "Email",
       phone: "Phone number",
-      industry: "Business industry",
+      industry: "What kind of business",
       website: "Current website, if you have one",
-      message: "Project info",
-      messagePlaceholder: "Tell me about the business, pages needed, timeline, and what the website should help you achieve.",
-      submit: "Send request",
+      message: "About the project",
+      messagePlaceholder: "Tell me about your business, what pages you think you need, when you'd like it live, and what you want the site to do for you.",
+      submit: "Send it",
       sending: "Sending...",
-      success: "Request sent. I will follow up soon.",
-      error: "Something went wrong. Please try email or WhatsApp."
+      success: "Got it. I'll be in touch shortly.",
+      error: "Something went wrong on my end. Try email or WhatsApp instead."
     },
     reels: {
       eyebrow: "Instagram",
       title: "Watch the builds.",
-      lead: "Short breakdowns of real client sites, design decisions, and the work behind the launches. Follow along on Instagram.",
+      lead: "Short videos on real client sites, the design calls I make, and what goes into a launch. Come follow along.",
       views: "views",
       follow: "Follow on Instagram"
     },
     footer: {
-      line: "Custom websites, SEO, hosting, and launch support.",
+      line: "Custom websites, SEO, hosting, and a hand getting it all live.",
       privacy: "Privacy"
     }
   },
@@ -159,47 +159,47 @@ const copy = {
       home: "Accueil",
       work: "Portfolio",
       services: "Services",
-      reserve: "Reserver une place",
+      reserve: "Contact",
       lang: "EN"
     },
     hero: {
       eyebrow: "Conception et developpement web",
-      title: "Des sites web concus comme de vrais outils d'affaires.",
+      title: "Des sites web qui vous amenent des clients.",
       lead:
-        "Des sites personnalises pour les petites entreprises qui veulent paraitre credibles, etre visibles localement et transformer les visiteurs en appels reserves.",
-      reserve: "Reserver une place",
+        "Je cree des sites sur mesure pour les petites entreprises. Le genre de site qui inspire confiance, qui sort dans les recherches locales et qui fait sonner le telephone.",
+      reserve: "Contact",
       services: "Voir les services",
       contact: "Parler sur WhatsApp"
     },
     proof: [
-      ["1000 $ CAD", "creation de site professionnel en paiement unique"],
-      ["3 rondes", "de revisions du design et du contenu"],
-      ["Soutien au lancement", "de l'appel de planification jusqu'a la mise en ligne"]
+      ["1000 $ CAD", "un seul paiement, pour tout le site"],
+      ["3 rondes", "de revisions sur le design et les textes"],
+      ["Soutien au lancement", "du premier appel jusqu'a la mise en ligne"]
     ],
     intro: {
-      kicker: "Pas de modele generique",
-      title: "Un processus clair pour les entreprises qui ont besoin d'une presence web serieuse.",
+      kicker: "Aucun modele generique",
+      title: "Une facon de travailler simple, pour les entreprises qui veulent etre prises au serieux en ligne.",
       body:
-        "Le travail commence par une vraie conversation sur votre offre, votre clientele et votre marche local. Ensuite, le site est concu selon la facon dont vos clients prennent une decision, pas selon des tendances web generiques."
+        "On commence par une vraie conversation sur ce que vous vendez, a qui vous le vendez et contre qui vous vous battez dans votre coin. Ensuite, je concois le site selon la facon dont vos clients decident vraiment, pas selon la tendance du moment."
     },
-    processTitle: "Comment se deroule le projet",
+    processTitle: "Comment ca se passe",
     process: [
-      ["Appel decouverte", "Nous utilisons Zoom pour comprendre votre entreprise, vos clients, vos objectifs et les pages necessaires."],
-      ["Design sur mesure", "Votre site est planifie et concu a partir de zero autour de votre marque, vos services et vos objectifs de conversion."],
-      ["Revisions", "Vous avez 3 rondes de revisions pour que le resultat final soit bien aligne avant le lancement."],
-      ["SEO et lancement", "Le SEO technique, la structure des pages, les bases de classement, les analytiques et le soutien au lancement sont inclus."]
+      ["On se parle", "Un appel Zoom pour bien comprendre votre entreprise, vos clients, vos objectifs et les pages dont vous avez vraiment besoin."],
+      ["Je concois le site", "Tout est planifie et cree a partir de zero autour de votre marque, vos services et les appels que vous voulez recevoir."],
+      ["Vous commentez", "Trois rondes de revisions. Rien ne part en ligne tant que ce n'est pas a votre gout."],
+      ["SEO et lancement", "SEO technique, structure des pages, bases du classement, analytiques et aide a la mise en ligne. Tout est inclus."]
     ],
     work: {
-      eyebrow: "Projets realises",
+      eyebrow: "Projets recents",
       title: "Des sites que j'ai crees.",
-      lead: "De vraies entreprises propulsees par des sites que j'ai concus et developpes a partir de zero. Touchez-en un pour le voir en ligne.",
+      lead: "De vraies entreprises qui roulent sur des sites que j'ai concus et developpes a partir de zero. Touchez-en un pour le voir en ligne.",
       visit: "Voir le site"
     },
     servicesPage: {
       eyebrow: "Services",
-      title: "Des services web avec des prix clairs et une portee precise.",
+      title: "Des prix clairs, aucune surprise.",
       lead:
-        "Commencez avec un site web professionnel, puis ajoutez l'hebergement gere si vous voulez que la maintenance, les rapports et l'amelioration SEO continue soient pris en charge."
+        "Commencez par le site. Ajoutez l'hebergement gere plus tard si vous preferez ne pas vous occuper vous-meme de la maintenance, des rapports et du SEO."
     },
     services: [
       {
@@ -208,15 +208,15 @@ const copy = {
         price: "1000 $ CAD",
         cadence: "paiement unique",
         description:
-          "Un site web d'entreprise sur mesure concu pour presenter votre offre clairement, inspirer confiance rapidement et soutenir votre visibilite locale.",
+          "Un site sur mesure qui explique ce que vous faites, qui inspire confiance rapidement et qui sort quand on vous cherche dans votre region.",
         features: [
-          "Appels Zoom pour comprendre votre entreprise",
-          "Design complet sur mesure",
+          "Appels Zoom pour bien comprendre votre entreprise",
+          "Design entierement sur mesure",
           "3 rondes de revisions",
-          "SEO complet et configuration pour le classement",
-          "Developpement adapte aux mobiles",
-          "Contacts via WhatsApp, Messenger, courriel et formulaire",
-          "Soutien pour mettre le site en ligne"
+          "SEO et configuration pour le classement",
+          "Fonctionne comme il faut sur mobile",
+          "Contact par WhatsApp, Messenger, courriel et formulaire",
+          "Aide a mettre le site en ligne"
         ]
       },
       {
@@ -225,21 +225,21 @@ const copy = {
         price: "150 $ CAD",
         cadence: "par mois",
         description:
-          "Hebergement et suivi pour les entrepreneurs qui veulent que le site soit surveille, maintenu et ameliore sans gerer la partie technique.",
+          "Pour les proprietaires qui veulent que leur site soit suivi et ameliore sans jamais toucher au cote technique.",
         features: [
-          "Hebergement mensuel securise",
-          "Verifications mensuelles de maintenance",
-          "SEO complet et soutien au classement",
+          "Hebergement securise, mois par mois",
+          "Verifications de maintenance chaque mois",
+          "Travail SEO continu",
           "Rapports analytiques mensuels",
-          "SSL, sauvegardes, verifications de disponibilite et performance",
-          "Petites mises a jour de contenu au besoin",
-          "Soutien prioritaire en cas de probleme"
+          "SSL, sauvegardes, surveillance de la disponibilite et de la vitesse",
+          "Petites mises a jour de contenu quand vous en avez besoin",
+          "Soutien prioritaire si quelque chose brise"
         ]
       }
     ],
     serviceAreas: {
-      title: "Pages de services pour la recherche locale",
-      lead: "Des pages ciblees aident les clients et les moteurs de recherche a comprendre les services web offerts."
+      title: "Vous cherchez quelque chose de precis ?",
+      lead: "Chaque service a sa propre page, comme ca vous et Google savez exactement ce qui est offert."
     },
     contactMethods: {
       title: "Me joindre directement",
@@ -250,31 +250,31 @@ const copy = {
       instagram: "Instagram"
     },
     form: {
-      eyebrow: "Reserver une place",
-      title: "Dites-moi ce qu'il faut creer.",
+      eyebrow: "Contact",
+      title: "Dites-moi ce dont vous avez besoin.",
       lead:
-        "Partagez les informations de base et je vous repondrai avec les prochaines etapes. Si vous avez deja un site, ajoutez-le pour que je puisse voir ce qui doit rester, changer ou etre reconstruit.",
+        "Donnez-moi les grandes lignes et je reviens vers vous avec les prochaines etapes. Vous avez deja un site ? Mettez le lien et je vous dirai ce qui vaut la peine d'etre garde.",
       name: "Nom",
       email: "Courriel",
       phone: "Numero de telephone",
-      industry: "Secteur d'activite",
+      industry: "Votre domaine",
       website: "Site actuel, si vous en avez un",
-      message: "Infos sur le projet",
-      messagePlaceholder: "Parlez-moi de l'entreprise, des pages necessaires, du delai et de ce que le site doit vous aider a accomplir.",
-      submit: "Envoyer la demande",
+      message: "A propos du projet",
+      messagePlaceholder: "Parlez-moi de votre entreprise, des pages que vous pensez avoir besoin, du moment ou vous voulez etre en ligne et de ce que le site doit vous rapporter.",
+      submit: "Envoyer",
       sending: "Envoi...",
-      success: "Demande envoyee. Je vous repondrai bientot.",
-      error: "Un probleme est survenu. Essayez par courriel ou WhatsApp."
+      success: "C'est recu. Je vous reviens sous peu.",
+      error: "Un probleme de mon cote. Essayez par courriel ou WhatsApp."
     },
     reels: {
       eyebrow: "Instagram",
       title: "Voir les projets en video.",
-      lead: "De courtes videos sur de vrais sites clients, les choix de design et le travail derriere chaque lancement. Suivez le tout sur Instagram.",
+      lead: "De courtes videos sur de vrais sites clients, les choix de design que je fais et ce qu'implique un lancement. Venez suivre ca.",
       views: "vues",
       follow: "Suivre sur Instagram"
     },
     footer: {
-      line: "Sites web sur mesure, SEO, hebergement et soutien au lancement.",
+      line: "Sites web sur mesure, SEO, hebergement et un coup de main pour tout mettre en ligne.",
       privacy: "Confidentialite"
     }
   }
@@ -287,8 +287,8 @@ const portfolio = [
     url: "https://vastojewelery.com",
     tag: { en: "Jewelery", fr: "Bijouterie" },
     blurb: {
-      en: "An elegant storefront built to showcase fine jewelery and turn browsers into buyers.",
-      fr: "Une vitrine elegante concue pour mettre en valeur la bijouterie fine et convertir les visiteurs en clients."
+      en: "An elegant storefront that lets the jewelery do the talking and turns browsers into buyers.",
+      fr: "Une vitrine elegante qui laisse parler les bijoux et transforme les curieux en clients."
     }
   },
   {
@@ -297,8 +297,8 @@ const portfolio = [
     url: "https://ciavagliatimepieces.ca",
     tag: { en: "Watchmaking", fr: "Horlogerie" },
     blurb: {
-      en: "A refined site for a watchmaker, framing craftsmanship and heritage with quiet confidence.",
-      fr: "Un site raffine pour un horloger, mettant en scene le savoir-faire et l'heritage avec elegance."
+      en: "A quiet, refined site for a watchmaker, built around craftsmanship and family history.",
+      fr: "Un site sobre et raffine pour un horloger, bati autour du savoir-faire et de l'histoire de famille."
     }
   },
   {
@@ -307,15 +307,15 @@ const portfolio = [
     url: "https://toothdoctorpatel.com",
     tag: { en: "Dental practice", fr: "Clinique dentaire" },
     blurb: {
-      en: "A trustworthy, easy-to-navigate site that helps a dental practice fill its appointment book.",
-      fr: "Un site fiable et facile a parcourir qui aide une clinique dentaire a remplir son agenda."
+      en: "A clear, reassuring site that makes booking easy and keeps the appointment book full.",
+      fr: "Un site clair et rassurant qui rend la prise de rendez-vous facile et garde l'agenda plein."
     }
   }
 ];
 
 const whatsappText = {
-  en: "Hi, I want to Contact for a professional website.",
-  fr: "Bonjour, je veux reserver une place pour un site web professionnel."
+  en: "Hi Stefano, I'm interested in getting a website built.",
+  fr: "Bonjour Stefano, je suis interesse par la creation d'un site web."
 };
 
 const serviceAreaLinks = {
@@ -495,7 +495,7 @@ export default function MarketingSite({ variant }: { variant: Variant }) {
               target="_blank"
               rel="noreferrer"
             >
-              <img src="/whop-course.png" alt="Polidori Dev web development course — Learn. Build. Launch." loading="lazy" />
+              <img src="/whop-course.png" alt="Polidori Dev web development course: learn, build, launch." loading="lazy" />
             </a>
             <a
               className="mk-promo-card"

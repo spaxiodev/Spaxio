@@ -152,8 +152,8 @@ export default function SeoServicePage({ content }: { content: SeoServicePageCon
 
       <section className="seo-deliverables" aria-labelledby="seo-deliverables-title">
         <div className="mk-section-head">
-          <p className="mk-eyebrow">What is included</p>
-          <h2 id="seo-deliverables-title">Built to support search visibility and conversions.</h2>
+          <p className="mk-eyebrow">What you get</p>
+          <h2 id="seo-deliverables-title">Everything that comes with it.</h2>
         </div>
         <div>
           {content.deliverables.map((deliverable) => (
@@ -175,7 +175,7 @@ export default function SeoServicePage({ content }: { content: SeoServicePageCon
       </section>
 
       <section className="mk-contact-methods" aria-labelledby="seo-contact-title">
-        <h2 id="seo-contact-title">Ready to improve your website?</h2>
+        <h2 id="seo-contact-title">Want to talk about your site?</h2>
         <div>
           <a href={whatsappUrl} target="_blank" rel="noreferrer">WhatsApp</a>
           <a href={`mailto:${EMAIL}`}>Email</a>
@@ -184,7 +184,7 @@ export default function SeoServicePage({ content }: { content: SeoServicePageCon
       </section>
 
       <footer className="mk-footer">
-        <p>Custom websites, SEO, hosting, and launch support.</p>
+        <p>Custom websites, SEO, hosting, and a hand getting it all live.</p>
         <div>
           <Link href="/">Home</Link>
           <Link href="/services">Services</Link>

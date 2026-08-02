@@ -17,10 +17,10 @@ const content = {
         heading: "1. Information We Collect",
         body: `When you use our contact form, we collect the following personal information:
 
-• **Name** — to address you properly in our response.
-• **Email address** — to reply to your inquiry.
-• **Project type and budget** — to understand the scope of your request.
-• **Message content** — the details of your inquiry.
+• **Name**: to address you properly in our response.
+• **Email address**: to reply to your inquiry.
+• **Project type and budget**: to understand the scope of your request.
+• **Message content**: the details of your inquiry.
 
 We do not collect any information beyond what you voluntarily submit through the contact form.`,
       },
@@ -42,9 +42,9 @@ We will never use your information for unsolicited marketing or sell it to third
         heading: "4. Third-Party Services",
         body: `We use the following third-party services that may process your data:
 
-• **Formspree** — Our contact form submissions are processed through Formspree. Their privacy policy is available at [formspree.io/legal/privacy-policy](https://formspree.io/legal/privacy-policy).
-• **Google Analytics** — We use Google Analytics to understand how visitors interact with our website. This service collects anonymized usage data such as pages visited, session duration, and general geographic location. No personally identifiable information is shared with Google Analytics. You can opt out using the [Google Analytics Opt-out Browser Add-on](https://tools.google.com/dlpage/gaoptout).
-• **Vercel** — Our website is hosted on Vercel. Vercel may collect standard server logs including IP addresses. See [vercel.com/legal/privacy-policy](https://vercel.com/legal/privacy-policy).
+• **Formspree**: Our contact form submissions are processed through Formspree. Their privacy policy is available at [formspree.io/legal/privacy-policy](https://formspree.io/legal/privacy-policy).
+• **Google Analytics**: We use Google Analytics to understand how visitors interact with our website. This service collects anonymized usage data such as pages visited, session duration, and general geographic location. No personally identifiable information is shared with Google Analytics. You can opt out using the [Google Analytics Opt-out Browser Add-on](https://tools.google.com/dlpage/gaoptout).
+• **Vercel**: Our website is hosted on Vercel. Vercel may collect standard server logs including IP addresses. See [vercel.com/legal/privacy-policy](https://vercel.com/legal/privacy-policy).
 
 We do not sell, rent, or trade your personal information to any other third party.`,
       },
@@ -64,7 +64,7 @@ We do not sell, rent, or trade your personal information to any other third part
 To exercise any of these rights, please contact us using the information below. We will respond to your request within **30 days**.`,
       },
       {
-        heading: "7. Contact — Privacy Officer",
+        heading: "7. Contact: Privacy Officer",
         body: `If you have any questions about this privacy policy or wish to make a data-related request, please contact:
 
 **Stefano Polidori**
@@ -87,10 +87,10 @@ Website: [polidori.dev](https://polidori.dev)`,
         heading: "1. Informations collectées",
         body: `Lorsque vous utilisez notre formulaire de contact, nous recueillons les informations personnelles suivantes :
 
-• **Nom** — pour vous adresser correctement dans notre réponse.
-• **Adresse courriel** — pour répondre à votre demande.
-• **Type de projet et budget** — pour comprendre la portée de votre demande.
-• **Contenu du message** — les détails de votre demande.
+• **Nom** : pour vous adresser correctement dans notre réponse.
+• **Adresse courriel** : pour répondre à votre demande.
+• **Type de projet et budget** : pour comprendre la portée de votre demande.
+• **Contenu du message** : les détails de votre demande.
 
 Nous ne collectons aucune information au-delà de ce que vous soumettez volontairement via le formulaire de contact.`,
       },
@@ -112,9 +112,9 @@ Nous n'utiliserons jamais vos informations pour du marketing non sollicité et n
         heading: "4. Services tiers",
         body: `Nous utilisons les services tiers suivants qui peuvent traiter vos données :
 
-• **Formspree** — Les soumissions de notre formulaire de contact sont traitées par Formspree. Leur politique de confidentialité est disponible à [formspree.io/legal/privacy-policy](https://formspree.io/legal/privacy-policy).
-• **Google Analytics** — Nous utilisons Google Analytics pour comprendre comment les visiteurs interagissent avec notre site. Ce service collecte des données d'utilisation anonymisées telles que les pages visitées, la durée des sessions et la localisation géographique générale. Aucune information personnellement identifiable n'est partagée avec Google Analytics. Vous pouvez vous désinscrire via le [module complémentaire de navigateur pour la désactivation de Google Analytics](https://tools.google.com/dlpage/gaoptout).
-• **Vercel** — Notre site est hébergé sur Vercel. Vercel peut collecter des journaux serveur standard incluant les adresses IP. Voir [vercel.com/legal/privacy-policy](https://vercel.com/legal/privacy-policy).
+• **Formspree** : Les soumissions de notre formulaire de contact sont traitées par Formspree. Leur politique de confidentialité est disponible à [formspree.io/legal/privacy-policy](https://formspree.io/legal/privacy-policy).
+• **Google Analytics** : Nous utilisons Google Analytics pour comprendre comment les visiteurs interagissent avec notre site. Ce service collecte des données d'utilisation anonymisées telles que les pages visitées, la durée des sessions et la localisation géographique générale. Aucune information personnellement identifiable n'est partagée avec Google Analytics. Vous pouvez vous désinscrire via le [module complémentaire de navigateur pour la désactivation de Google Analytics](https://tools.google.com/dlpage/gaoptout).
+• **Vercel** : Notre site est hébergé sur Vercel. Vercel peut collecter des journaux serveur standard incluant les adresses IP. Voir [vercel.com/legal/privacy-policy](https://vercel.com/legal/privacy-policy).
 
 Nous ne vendons, ne louons et n'échangeons vos informations personnelles avec aucun autre tiers.`,
       },
@@ -134,7 +134,7 @@ Nous ne vendons, ne louons et n'échangeons vos informations personnelles avec a
 Pour exercer l'un de ces droits, veuillez nous contacter en utilisant les coordonnées ci-dessous. Nous répondrons à votre demande dans un délai de **30 jours**.`,
       },
       {
-        heading: "7. Contact — Responsable de la confidentialité",
+        heading: "7. Contact : Responsable de la confidentialité",
         body: `Si vous avez des questions concernant cette politique de confidentialité ou souhaitez faire une demande relative à vos données, veuillez contacter :
 
 **Stefano Polidori**

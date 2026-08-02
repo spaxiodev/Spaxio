@@ -11,7 +11,7 @@ const SITE_URL = "https://polidori.dev";
 const SITE_NAME = "Polidori Dev";
 const SITE_TAGLINE = "Build Websites with AI & Land Clients on Social Media";
 const SITE_DESCRIPTION =
-  "The Polidori Dev course teaches you to build websites with AI — prompting Claude Code and connectors — and land clients through social media. No coding degree required. Lifetime access and a private community.";
+  "The Polidori Dev course teaches you to build websites with AI, using Claude Code and connectors, then find clients through social media. No coding degree required. Lifetime access and a private community.";
 const SITE_DESCRIPTION_SHORT =
   "Learn to build websites with AI (Claude Code + connectors) and get clients on social media. Lifetime access plus a private Discord community.";
 const PHONE = "+1-514-516-0515";

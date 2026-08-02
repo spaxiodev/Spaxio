@@ -54,7 +54,7 @@ const copy = {
       eyebrow: "The Polidori Dev course",
       title: "Build something real from nothing.",
       lead:
-        "Learn to build websites with AI and land clients on social media — the exact system I use to run a profitable web business. No coding degree required.",
+        "Learn to build websites with AI and find clients on social media. It's the same system I use to run a profitable web business, and you don't need a coding degree for any of it.",
       enroll: "Get instant access",
       discord: "Join the Discord"
     },
@@ -63,16 +63,16 @@ const copy = {
       title: "From empty lot to finished build."
     },
     pillars: [
-      ["Build with AI, not code", "Use Claude Code and connectors to turn a simple brief into a finished, client-ready website — without hand-writing it all."],
-      ["Prompt like a pro", "The exact prompts and workflows that get AI to produce real, polished work fast — and how to fix it when it gets things wrong."],
-      ["Get clients on social media", "Turn content, posts, and DMs into a steady flow of paying clients — the outreach system that actually fills your pipeline."],
-      ["Close deals & get paid", "How I price the work, run the call, send the proposal, and deliver — the business side most people never figure out."]
+      ["Build with AI, not code", "Use Claude Code and connectors to turn a simple brief into a finished website you can hand to a client, without writing it all by hand."],
+      ["Prompt like a pro", "The prompts and workflows that get AI to produce polished work fast, plus how to pull it back when it goes sideways."],
+      ["Get clients on social media", "Turn content, posts, and DMs into a steady flow of paying clients. This is the outreach that actually fills a pipeline."],
+      ["Close deals and get paid", "How I price the work, run the call, send the proposal, and deliver. The business side nobody teaches you."]
     ],
     instructor: {
       eyebrow: "Your instructor",
       title: "I built this from the ground up. I'll show you how.",
       body:
-        "I'm Stefano — I run Polidori Dev, building custom websites for real businesses. This course is everything I wish I'd had when I started, condensed into a path you can actually follow.",
+        "I'm Stefano. I run Polidori Dev, building custom websites for real businesses. This course is everything I wish someone had handed me when I started, cut down to a path you can actually follow.",
       placeholder: "Instructor video coming soon"
     },
     curriculumHead: {
@@ -80,12 +80,12 @@ const copy = {
       title: "Everything, in the order it actually matters."
     },
     curriculum: [
-      ["01", "Your AI toolkit", "Set up Claude Code and the connectors you'll use to build, plus the mindset that separates earners from dabblers."],
-      ["02", "Prompting Claude Code", "Turn a plain-English brief into a finished website — the prompts, the workflow, and how to course-correct the AI."],
-      ["03", "Connectors & automation", "Wire up connectors to ship faster, handle the boring parts, and deliver more without more hours."],
-      ["04", "Packaging your offer", "Decide what you sell and price it so it's an easy yes — productized services that scale."],
-      ["05", "Clients from social media", "Content, posts, and DMs that pull in leads — the exact outreach system that fills your pipeline."],
-      ["06", "Closing & getting paid", "Running the call, sending proposals, handling objections, and collecting payment with confidence."]
+      ["01", "Your AI toolkit", "Set up Claude Code and the connectors you'll build with, plus the mindset that separates earners from dabblers."],
+      ["02", "Prompting Claude Code", "Turn a plain-English brief into a finished website. The prompts, the workflow, and how to steer the AI back on track."],
+      ["03", "Connectors and automation", "Wire up connectors to ship faster, hand off the boring parts, and deliver more without working more hours."],
+      ["04", "Packaging your offer", "Decide what you sell and price it so saying yes is easy. Productized services that scale."],
+      ["05", "Clients from social media", "Content, posts, and DMs that pull in leads. The exact outreach system that fills your pipeline."],
+      ["06", "Closing and getting paid", "Running the call, sending proposals, handling objections, and collecting payment without flinching."]
     ],
     pricing: {
       eyebrow: "Pricing",
@@ -93,7 +93,7 @@ const copy = {
       price: "One-time",
       cadence: "lifetime access + community",
       features: [
-        "Full course — every module, start to finish",
+        "The full course, every module, start to finish",
         "Lifetime access, including future updates",
         "Private Discord community",
         "Real project walkthroughs",
@@ -118,10 +118,10 @@ const copy = {
     },
     faqHead: { eyebrow: "FAQ", title: "Questions, answered." },
     faq: [
-      ["Do I need to know how to code?", "No. The whole point is that AI does the building — you learn to direct Claude Code and connectors. If you can write a clear brief, you can do this."],
-      ["How long do I have access?", "Forever. One payment gets you lifetime access, including any updates I add later."],
-      ["What will I be able to do after?", "Use AI to build real websites for clients, and consistently find those clients through social media."],
-      ["Is there support?", "Yes — the private Discord community is included so you can get help and feedback as you build and sell."]
+      ["Do I need to know how to code?", "No. That's the whole point. The AI does the building and you learn to direct Claude Code and connectors. If you can write a clear brief, you can do this."],
+      ["How long do I have access?", "Forever. One payment gets you lifetime access, including anything I add later."],
+      ["What will I be able to do after?", "Use AI to build real websites for clients, and keep finding those clients through social media."],
+      ["Is there support?", "Yes. The private Discord community is included, so you can get help and feedback while you build and sell."]
     ],
     finalCta: {
       title: "Ready to start building?",
@@ -144,7 +144,7 @@ const copy = {
       eyebrow: "Le cours Polidori Dev",
       title: "Construis quelque chose de réel, à partir de rien.",
       lead:
-        "Apprends à créer des sites web avec l'IA et à trouver des clients sur les réseaux sociaux — le système exact que j'utilise pour faire vivre une vraie entreprise web. Aucun diplôme en programmation requis.",
+        "Apprends à créer des sites web avec l'IA et à trouver des clients sur les réseaux sociaux. C'est le système que j'utilise pour faire vivre une vraie entreprise web, et tu n'as besoin d'aucun diplôme en programmation.",
       enroll: "Accès immédiat",
       discord: "Rejoindre le Discord"
     },
@@ -153,16 +153,16 @@ const copy = {
       title: "Du terrain vide au projet fini."
     },
     pillars: [
-      ["Créer avec l'IA, pas du code", "Utilise Claude Code et des connecteurs pour transformer un simple brief en site web fini, prêt pour le client — sans tout écrire à la main."],
-      ["Prompter comme un pro", "Les prompts et les méthodes exactes pour faire produire à l'IA un travail soigné et rapide — et comment corriger quand elle se trompe."],
-      ["Trouver des clients sur les réseaux", "Transforme ton contenu, tes publications et tes DM en flux constant de clients payants — le système qui remplit vraiment ton pipeline."],
-      ["Conclure et être payé", "Comment je fixe les prix, mène l'appel, envoie l'offre et livre — le côté business que la plupart des gens ne maîtrisent jamais."]
+      ["Créer avec l'IA, pas du code", "Utilise Claude Code et des connecteurs pour transformer un simple brief en site web fini, prêt à remettre au client, sans tout écrire à la main."],
+      ["Prompter comme un pro", "Les prompts et les méthodes qui font produire à l'IA un travail soigné et rapide, et comment la remettre sur les rails quand elle déraille."],
+      ["Trouver des clients sur les réseaux", "Transforme ton contenu, tes publications et tes DM en flux constant de clients payants. C'est l'approche qui remplit vraiment un pipeline."],
+      ["Conclure et être payé", "Comment je fixe les prix, mène l'appel, envoie l'offre et livre. Le côté business que personne ne t'enseigne."]
     ],
     instructor: {
       eyebrow: "Ton formateur",
       title: "J'ai tout bâti à partir de zéro. Je vais te montrer comment.",
       body:
-        "Je suis Stefano — je dirige Polidori Dev et je crée des sites sur mesure pour de vraies entreprises. Ce cours, c'est tout ce que j'aurais voulu avoir au départ, condensé en un parcours que tu peux suivre.",
+        "Je suis Stefano. Je dirige Polidori Dev et je crée des sites sur mesure pour de vraies entreprises. Ce cours, c'est tout ce que j'aurais voulu qu'on me donne au départ, ramené à un parcours que tu peux vraiment suivre.",
       placeholder: "Vidéo du formateur à venir"
     },
     curriculumHead: {
@@ -171,10 +171,10 @@ const copy = {
     },
     curriculum: [
       ["01", "Ta boîte à outils IA", "Installe Claude Code et les connecteurs que tu utiliseras, plus l'état d'esprit qui distingue ceux qui gagnent des amateurs."],
-      ["02", "Prompter Claude Code", "Transforme un brief en français simple en site web fini — les prompts, la méthode et comment corriger l'IA."],
+      ["02", "Prompter Claude Code", "Transforme un brief en français simple en site web fini. Les prompts, la méthode et comment remettre l'IA sur les rails."],
       ["03", "Connecteurs et automatisation", "Branche des connecteurs pour livrer plus vite, gérer les tâches ennuyeuses et produire plus sans plus d'heures."],
-      ["04", "Emballer ton offre", "Décide quoi vendre et fixe un prix qui rend le oui facile — des services productisés qui passent à l'échelle."],
-      ["05", "Des clients via les réseaux", "Contenu, publications et DM qui attirent des prospects — le système d'approche qui remplit ton pipeline."],
+      ["04", "Emballer ton offre", "Décide quoi vendre et fixe un prix qui rend le oui facile. Des services productisés qui passent à l'échelle."],
+      ["05", "Des clients via les réseaux", "Contenu, publications et DM qui attirent des prospects. Le système d'approche exact qui remplit ton pipeline."],
       ["06", "Conclure et être payé", "Mener l'appel, envoyer les offres, gérer les objections et encaisser avec confiance."]
     ],
     pricing: {
@@ -183,7 +183,7 @@ const copy = {
       price: "Paiement unique",
       cadence: "accès à vie + communauté",
       features: [
-        "Cours complet — chaque module, du début à la fin",
+        "Le cours complet, chaque module, du début à la fin",
         "Accès à vie, mises à jour futures incluses",
         "Communauté Discord privée",
         "Démonstrations de vrais projets",
@@ -208,10 +208,10 @@ const copy = {
     },
     faqHead: { eyebrow: "FAQ", title: "Tes questions, nos réponses." },
     faq: [
-      ["Faut-il savoir coder ?", "Non. Tout l'intérêt, c'est que l'IA construit — tu apprends à diriger Claude Code et les connecteurs. Si tu sais écrire un brief clair, tu peux le faire."],
+      ["Faut-il savoir coder ?", "Non, c'est tout l'intérêt. L'IA construit et toi tu apprends à diriger Claude Code et les connecteurs. Si tu sais écrire un brief clair, tu peux le faire."],
       ["Combien de temps ai-je accès ?", "Pour toujours. Un paiement te donne un accès à vie, mises à jour incluses."],
       ["Que serai-je capable de faire après ?", "Utiliser l'IA pour créer de vrais sites pour des clients, et trouver ces clients de façon constante sur les réseaux sociaux."],
-      ["Y a-t-il du soutien ?", "Oui — la communauté Discord privée est incluse pour obtenir de l'aide et des retours pendant que tu crées et vends."]
+      ["Y a-t-il du soutien ?", "Oui. La communauté Discord privée est incluse, pour obtenir de l'aide et des retours pendant que tu crées et que tu vends."]
     ],
     finalCta: {
       title: "Prêt à commencer à bâtir ?",
@@ -302,8 +302,8 @@ export default function CourseHome() {
             <h2>{lang === "fr" ? "Tu ne codes pas. Tu diriges l'IA." : "You don't code. You direct the AI."}</h2>
             <p>
               {lang === "fr"
-                ? "Apprends à prompter Claude Code et à brancher des connecteurs pour livrer de vrais sites pour tes clients — sans diplôme en programmation."
-                : "Learn to prompt Claude Code and wire up connectors to ship real, client-ready websites — no coding degree required."}
+                ? "Apprends à prompter Claude Code et à brancher des connecteurs pour livrer de vrais sites à tes clients, sans diplôme en programmation."
+                : "Learn to prompt Claude Code and wire up connectors to ship real websites for real clients. No coding degree required."}
             </p>
           </div>
           <div className="cs-code-window">

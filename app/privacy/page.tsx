@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Polidori Dev privacy policy — how we handle your data.",
+  description: "Polidori Dev privacy policy: how we handle your data.",
 };
 
 export default function PrivacyPage() {
@@ -71,7 +71,7 @@ export default function PrivacyPage() {
             Privacy Officer
           </h2>
           <p>
-            Privacy Officer: Stefano Polidori —{" "}
+            Privacy Officer: Stefano Polidori,{" "}
             <a href="mailto:contact@polidori.dev" style={{ color: "var(--warm)" }}>
               contact@polidori.dev
             </a>
