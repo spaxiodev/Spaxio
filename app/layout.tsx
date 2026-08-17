@@ -9,11 +9,11 @@ const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 const SITE_URL = "https://polidori.dev";
 const SITE_NAME = "Polidori Dev";
-const SITE_TAGLINE = "Build Websites with AI & Land Clients on Social Media";
+const SITE_TAGLINE = "Prompt Claude to Make AI Video with Higgsfield & Viewmax";
 const SITE_DESCRIPTION =
-  "The Polidori Dev course teaches you to build websites with AI, using Claude Code and connectors, then find clients through social media. No coding degree required. Lifetime access and a private community.";
+  "The Polidori Dev course teaches you to prompt Claude to drive Higgsfield and Viewmax: AI images, video, voiceovers, and captions from plain English. No editing background required. Lifetime access and a private community.";
 const SITE_DESCRIPTION_SHORT =
-  "Learn to build websites with AI (Claude Code + connectors) and get clients on social media. Lifetime access plus a private Discord community.";
+  "Learn to prompt Claude to make AI images and video with Higgsfield and Viewmax. Lifetime access plus a private Discord community.";
 const PHONE = "+1-514-516-0515";
 
 export const metadata: Metadata = {
@@ -24,17 +24,17 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   keywords: [
-    "build websites with AI",
-    "Claude Code course",
-    "AI web design course",
-    "make websites without coding",
-    "get clients on social media",
-    "freelance clients social media",
-    "AI agency course",
-    "prompt engineering for websites",
-    "no-code AI websites",
-    "web design business",
-    "make money with AI",
+    "Higgsfield course",
+    "Viewmax course",
+    "Claude course",
+    "AI video course",
+    "prompt Claude for video",
+    "AI video generation",
+    "make AI videos without editing",
+    "Higgsfield prompts",
+    "Viewmax prompts",
+    "AI voiceover and captions",
+    "prompt engineering for video",
     "online course",
     "Polidori Dev",
     "Polidori Dev course",
@@ -134,12 +134,12 @@ const jsonLd = {
       provider: { "@id": `${SITE_URL}#organization` },
       instructor: { "@type": "Person", name: "Stefano Polidori" },
       teaches: [
-        "Building websites with AI",
-        "Prompting Claude Code",
-        "Using AI connectors and automation",
-        "Packaging and pricing web services",
-        "Getting clients on social media",
-        "Closing deals and getting paid"
+        "Prompting Claude for AI media generation",
+        "Using the Higgsfield connector",
+        "Using the Viewmax connector",
+        "Generating AI images and video from prompts",
+        "AI voiceovers and captions",
+        "Choosing the right AI model for a shot"
       ],
       offers: {
         "@type": "Offer",

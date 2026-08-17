@@ -11,17 +11,17 @@ type MotionStyle = CSSProperties & { "--i"?: number; "--cs-glow-color"?: string 
 const COURSE_URL = "https://whop.com/polidori-dev-3c24/polidori-dev-full-guide/";
 const DISCORD_URL = "https://discord.gg/kQhZgkDT8";
 
-const CODE_SNIPPET = `<span class="c">~/clients/dental-clinic</span>
+const CODE_SNIPPET = `<span class="c">~/projects/sneaker-ad</span>
 <span class="k">$</span> claude
 
-<span class="f">&rsaquo;</span> Build a landing page for a dental clinic with
-  online booking and local SEO. Match the brand
-  colors from their logo.
+<span class="f">&rsaquo;</span> Make a 9:16 product shot of the sneaker on wet
+  asphalt at night, then animate it with a slow
+  push-in. Add a voiceover and captions.
 
-<span class="s">✓</span> Created the site &amp; booking form
-<span class="s">✓</span> Wrote the local SEO + copy
-<span class="s">✓</span> Connected the calendar &amp; email
-<span class="s">✓</span> Deployed to production
+<span class="s">✓</span> Higgsfield: generated the still
+<span class="s">✓</span> Higgsfield: animated the push-in
+<span class="s">✓</span> Viewmax: voiceover + captions
+<span class="s">✓</span> Exported 9:16, ready to post
 
 <span class="k">$</span> <span class="c">_</span>`;
 
@@ -52,27 +52,27 @@ const copy = {
     },
     hero: {
       eyebrow: "The Polidori Dev course",
-      title: "Build something real from nothing.",
+      title: "Make something real from a sentence.",
       lead:
-        "Learn to build websites with AI and find clients on social media. It's the same system I use to run a profitable web business, and you don't need a coding degree for any of it.",
+        "Learn to prompt Claude to drive Higgsfield and Viewmax, so a plain-English idea comes back as a finished image, video, voiceover, or captioned cut. No editing background required.",
       enroll: "Get instant access",
       discord: "Join the Discord"
     },
     pillarsHead: {
       eyebrow: "What you'll learn",
-      title: "From empty lot to finished build."
+      title: "From a blank prompt to a finished cut."
     },
     pillars: [
-      ["Build with AI, not code", "Use Claude Code and connectors to turn a simple brief into a finished website you can hand to a client, without writing it all by hand."],
-      ["Prompt like a pro", "The prompts and workflows that get AI to produce polished work fast, plus how to pull it back when it goes sideways."],
-      ["Get clients on social media", "Turn content, posts, and DMs into a steady flow of paying clients. This is the outreach that actually fills a pipeline."],
-      ["Close deals and get paid", "How I price the work, run the call, send the proposal, and deliver. The business side nobody teaches you."]
+      ["Set up the connectors", "Get Higgsfield and Viewmax connected to Claude so you can generate images, video, and audio straight from a conversation."],
+      ["Prompt like a pro", "The prompts and workflows that get usable shots on the first few tries, plus how to pull it back when it goes sideways."],
+      ["Pick the right model", "Which tool handles what: stills, animation, voice, captions, upscaling. Stop guessing and stop burning credits."],
+      ["Finish the video", "Voiceovers, captions, aspect ratios, and exports, so what you make is ready to post instead of almost ready."]
     ],
     instructor: {
       eyebrow: "Your instructor",
       title: "I built this from the ground up. I'll show you how.",
       body:
-        "I'm Stefano. I run Polidori Dev, building custom websites for real businesses. This course is everything I wish someone had handed me when I started, cut down to a path you can actually follow.",
+        "I'm Stefano. I run Polidori Dev and I make AI video every week for my own channels. This course is everything I wish someone had handed me when I started, cut down to a path you can actually follow.",
       placeholder: "Instructor video coming soon"
     },
     curriculumHead: {
@@ -80,12 +80,12 @@ const copy = {
       title: "Everything, in the order it actually matters."
     },
     curriculum: [
-      ["01", "Your AI toolkit", "Set up Claude Code and the connectors you'll build with, plus the mindset that separates earners from dabblers."],
-      ["02", "Prompting Claude Code", "Turn a plain-English brief into a finished website. The prompts, the workflow, and how to steer the AI back on track."],
-      ["03", "Connectors and automation", "Wire up connectors to ship faster, hand off the boring parts, and deliver more without working more hours."],
-      ["04", "Packaging your offer", "Decide what you sell and price it so saying yes is easy. Productized services that scale."],
-      ["05", "Clients from social media", "Content, posts, and DMs that pull in leads. The exact outreach system that fills your pipeline."],
-      ["06", "Closing and getting paid", "Running the call, sending proposals, handling objections, and collecting payment without flinching."]
+      ["01", "Your setup", "Get Claude running and connect Higgsfield and Viewmax, so everything happens in one place."],
+      ["02", "Prompting for images", "Turn a plain-English idea into the still you actually pictured. Framing, lighting, references, and fixing a shot that came back wrong."],
+      ["03", "Prompting for video", "Animate a still or generate from scratch. Camera moves, motion control, and keeping a look consistent across shots."],
+      ["04", "Voice and captions", "Voiceovers, voice changes, caption styles, and getting timing that doesn't feel robotic."],
+      ["05", "Higgsfield vs Viewmax", "Which one to reach for, model by model, and how to hand work from one to the other mid-project."],
+      ["06", "Full builds, start to finish", "Real walkthroughs: a product ad, a short-form story, a talking-head clip, prompt by prompt."]
     ],
     pricing: {
       eyebrow: "Pricing",
@@ -97,7 +97,7 @@ const copy = {
         "Lifetime access, including future updates",
         "Private Discord community",
         "Real project walkthroughs",
-        "The business playbook to land paid work"
+        "A prompt library you can copy and reuse"
       ],
       cta: "Get instant access",
       note: "Secure checkout on Whop."
@@ -110,26 +110,27 @@ const copy = {
     },
     reels: {
       eyebrow: "Instagram",
-      title: "Millions of views. Same playbook.",
+      title: "Millions of views. Same tools.",
       body:
-        "The system in this course is the one I post about every week. Here are some of the reels that got the most attention.",
+        "The prompts and tools in this course are the ones behind what I post every week. Here are some of the reels that got the most attention.",
       views: "views",
       cta: "Follow on Instagram"
     },
     faqHead: { eyebrow: "FAQ", title: "Questions, answered." },
     faq: [
-      ["Do I need to know how to code?", "No. That's the whole point. The AI does the building and you learn to direct Claude Code and connectors. If you can write a clear brief, you can do this."],
+      ["Do I need to know how to edit or code?", "No. That's the whole point. The AI does the making and you learn to direct it. If you can describe what you want, you can do this."],
       ["How long do I have access?", "Forever. One payment gets you lifetime access, including anything I add later."],
-      ["What will I be able to do after?", "Use AI to build real websites for clients, and keep finding those clients through social media."],
-      ["Is there support?", "Yes. The private Discord community is included, so you can get help and feedback while you build and sell."]
+      ["What will I be able to do after?", "Prompt Claude to generate images, video, voiceovers, and captioned cuts through Higgsfield and Viewmax, on your own, without following a tutorial every time."],
+      ["Do I need Higgsfield or Viewmax credits?", "Yes, those are separate. They're paid tools with their own plans, and this course teaches you how to use them without wasting credits."],
+      ["Is there support?", "Yes. The private Discord community is included, so you can get help and feedback while you make things."]
     ],
     finalCta: {
-      title: "Ready to start building?",
+      title: "Ready to start making?",
       lead: "Get instant access and start today.",
       enroll: "Get the course",
       discord: "Join the Discord"
     },
-    footer: { line: "Build websites with AI. Land clients on social media." }
+    footer: { line: "Prompt Claude. Make video with Higgsfield and Viewmax." }
   },
   fr: {
     nav: {
@@ -142,27 +143,27 @@ const copy = {
     },
     hero: {
       eyebrow: "Le cours Polidori Dev",
-      title: "Construis quelque chose de réel, à partir de rien.",
+      title: "Crée quelque chose de réel, à partir d'une phrase.",
       lead:
-        "Apprends à créer des sites web avec l'IA et à trouver des clients sur les réseaux sociaux. C'est le système que j'utilise pour faire vivre une vraie entreprise web, et tu n'as besoin d'aucun diplôme en programmation.",
+        "Apprends à prompter Claude pour piloter Higgsfield et Viewmax : une idée en français simple revient en image, en vidéo, en voix off ou en montage sous-titré. Aucune expérience en montage requise.",
       enroll: "Accès immédiat",
       discord: "Rejoindre le Discord"
     },
     pillarsHead: {
       eyebrow: "Ce que tu apprends",
-      title: "Du terrain vide au projet fini."
+      title: "D'un prompt vide au montage fini."
     },
     pillars: [
-      ["Créer avec l'IA, pas du code", "Utilise Claude Code et des connecteurs pour transformer un simple brief en site web fini, prêt à remettre au client, sans tout écrire à la main."],
-      ["Prompter comme un pro", "Les prompts et les méthodes qui font produire à l'IA un travail soigné et rapide, et comment la remettre sur les rails quand elle déraille."],
-      ["Trouver des clients sur les réseaux", "Transforme ton contenu, tes publications et tes DM en flux constant de clients payants. C'est l'approche qui remplit vraiment un pipeline."],
-      ["Conclure et être payé", "Comment je fixe les prix, mène l'appel, envoie l'offre et livre. Le côté business que personne ne t'enseigne."]
+      ["Brancher les connecteurs", "Connecte Higgsfield et Viewmax à Claude pour générer images, vidéos et audio directement dans une conversation."],
+      ["Prompter comme un pro", "Les prompts et les méthodes qui donnent des plans utilisables dès les premiers essais, et comment remettre l'IA sur les rails quand elle déraille."],
+      ["Choisir le bon modèle", "Quel outil pour quoi : images fixes, animation, voix, sous-titres, upscaling. Fini les devinettes et les crédits gaspillés."],
+      ["Finir la vidéo", "Voix off, sous-titres, formats et exports, pour que ce que tu crées soit prêt à publier au lieu de presque prêt."]
     ],
     instructor: {
       eyebrow: "Ton formateur",
       title: "J'ai tout bâti à partir de zéro. Je vais te montrer comment.",
       body:
-        "Je suis Stefano. Je dirige Polidori Dev et je crée des sites sur mesure pour de vraies entreprises. Ce cours, c'est tout ce que j'aurais voulu qu'on me donne au départ, ramené à un parcours que tu peux vraiment suivre.",
+        "Je suis Stefano. Je dirige Polidori Dev et je crée de la vidéo IA chaque semaine pour mes propres comptes. Ce cours, c'est tout ce que j'aurais voulu qu'on me donne au départ, ramené à un parcours que tu peux vraiment suivre.",
       placeholder: "Vidéo du formateur à venir"
     },
     curriculumHead: {
@@ -170,12 +171,12 @@ const copy = {
       title: "Tout, dans l'ordre qui compte vraiment."
     },
     curriculum: [
-      ["01", "Ta boîte à outils IA", "Installe Claude Code et les connecteurs que tu utiliseras, plus l'état d'esprit qui distingue ceux qui gagnent des amateurs."],
-      ["02", "Prompter Claude Code", "Transforme un brief en français simple en site web fini. Les prompts, la méthode et comment remettre l'IA sur les rails."],
-      ["03", "Connecteurs et automatisation", "Branche des connecteurs pour livrer plus vite, gérer les tâches ennuyeuses et produire plus sans plus d'heures."],
-      ["04", "Emballer ton offre", "Décide quoi vendre et fixe un prix qui rend le oui facile. Des services productisés qui passent à l'échelle."],
-      ["05", "Des clients via les réseaux", "Contenu, publications et DM qui attirent des prospects. Le système d'approche exact qui remplit ton pipeline."],
-      ["06", "Conclure et être payé", "Mener l'appel, envoyer les offres, gérer les objections et encaisser avec confiance."]
+      ["01", "Ton installation", "Lance Claude et branche Higgsfield et Viewmax, pour que tout se passe au même endroit."],
+      ["02", "Prompter des images", "Transforme une idée en français simple en l'image que tu avais en tête. Cadrage, lumière, références, et comment corriger un plan raté."],
+      ["03", "Prompter des vidéos", "Anime une image ou génère à partir de zéro. Mouvements de caméra, contrôle du mouvement et cohérence d'un plan à l'autre."],
+      ["04", "Voix et sous-titres", "Voix off, changement de voix, styles de sous-titres et un timing qui ne sonne pas robotique."],
+      ["05", "Higgsfield ou Viewmax", "Lequel utiliser, modèle par modèle, et comment passer le travail de l'un à l'autre en cours de projet."],
+      ["06", "Des projets complets", "Des démonstrations réelles : une pub produit, une histoire courte, un plan face caméra, prompt par prompt."]
     ],
     pricing: {
       eyebrow: "Prix",
@@ -187,7 +188,7 @@ const copy = {
         "Accès à vie, mises à jour futures incluses",
         "Communauté Discord privée",
         "Démonstrations de vrais projets",
-        "Le plan d'affaires pour décrocher des contrats"
+        "Une bibliothèque de prompts à copier et réutiliser"
       ],
       cta: "Accès immédiat",
       note: "Paiement sécurisé sur Whop."
@@ -200,26 +201,27 @@ const copy = {
     },
     reels: {
       eyebrow: "Instagram",
-      title: "Des millions de vues. La même méthode.",
+      title: "Des millions de vues. Les mêmes outils.",
       body:
-        "Le système enseigné dans ce cours, c'est celui dont je parle chaque semaine. Voici quelques-uns des reels les plus vus.",
+        "Les prompts et les outils de ce cours sont ceux derrière ce que je publie chaque semaine. Voici quelques-uns des reels les plus vus.",
       views: "vues",
       cta: "Suivre sur Instagram"
     },
     faqHead: { eyebrow: "FAQ", title: "Tes questions, nos réponses." },
     faq: [
-      ["Faut-il savoir coder ?", "Non, c'est tout l'intérêt. L'IA construit et toi tu apprends à diriger Claude Code et les connecteurs. Si tu sais écrire un brief clair, tu peux le faire."],
+      ["Faut-il savoir monter ou coder ?", "Non, c'est tout l'intérêt. L'IA crée et toi tu apprends à la diriger. Si tu sais décrire ce que tu veux, tu peux le faire."],
       ["Combien de temps ai-je accès ?", "Pour toujours. Un paiement te donne un accès à vie, mises à jour incluses."],
-      ["Que serai-je capable de faire après ?", "Utiliser l'IA pour créer de vrais sites pour des clients, et trouver ces clients de façon constante sur les réseaux sociaux."],
-      ["Y a-t-il du soutien ?", "Oui. La communauté Discord privée est incluse, pour obtenir de l'aide et des retours pendant que tu crées et que tu vends."]
+      ["Que serai-je capable de faire après ?", "Prompter Claude pour générer des images, des vidéos, des voix off et des montages sous-titrés avec Higgsfield et Viewmax, tout seul, sans suivre un tutoriel chaque fois."],
+      ["Faut-il des crédits Higgsfield ou Viewmax ?", "Oui, ils sont à part. Ce sont des outils payants avec leurs propres forfaits, et ce cours t'apprend à les utiliser sans gaspiller de crédits."],
+      ["Y a-t-il du soutien ?", "Oui. La communauté Discord privée est incluse, pour obtenir de l'aide et des retours pendant que tu crées."]
     ],
     finalCta: {
-      title: "Prêt à commencer à bâtir ?",
+      title: "Prêt à commencer à créer ?",
       lead: "Obtiens un accès immédiat et commence aujourd'hui.",
       enroll: "Obtenir le cours",
       discord: "Rejoindre le Discord"
     },
-    footer: { line: "Crée des sites avec l'IA. Trouve des clients sur les réseaux." }
+    footer: { line: "Prompte Claude. Crée de la vidéo avec Higgsfield et Viewmax." }
   }
 } as const;
 
@@ -298,12 +300,12 @@ export default function CourseHome() {
           style={{ "--cs-glow-color": "var(--cs-blue-glow)" } as MotionStyle}
         >
           <div className="cs-codestory-copy">
-            <p className="cs-eyebrow">{lang === "fr" ? "Construire avec l'IA" : "Build with AI"}</p>
-            <h2>{lang === "fr" ? "Tu ne codes pas. Tu diriges l'IA." : "You don't code. You direct the AI."}</h2>
+            <p className="cs-eyebrow">{lang === "fr" ? "Créer avec l'IA" : "Make it with AI"}</p>
+            <h2>{lang === "fr" ? "Tu ne montes pas. Tu diriges l'IA." : "You don't edit. You direct the AI."}</h2>
             <p>
               {lang === "fr"
-                ? "Apprends à prompter Claude Code et à brancher des connecteurs pour livrer de vrais sites à tes clients, sans diplôme en programmation."
-                : "Learn to prompt Claude Code and wire up connectors to ship real websites for real clients. No coding degree required."}
+                ? "Apprends à prompter Claude et à brancher Higgsfield et Viewmax pour sortir des images, des vidéos et des voix off finies, sans jamais ouvrir un logiciel de montage."
+                : "Learn to prompt Claude and wire up Higgsfield and Viewmax to turn out finished images, video, and voiceovers without ever opening an editor."}
             </p>
           </div>
           <div className="cs-code-window">
